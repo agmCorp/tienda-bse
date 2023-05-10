@@ -26,8 +26,6 @@ function App() {
 
   // Keycloak ready
   const onKeycloakEvent = (event, error) => {
-    console.log("****EVENTO ", event);
-    console.log("****ERROR ", error);
     if (event && event === "onReady") {
       setKeycloakReady(true);
     }
