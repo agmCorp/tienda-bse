@@ -22,11 +22,8 @@ This project uses the following technologies:
   npm install @react-keycloak/web@^3.4.0
 
 - primeReact: collection of open source UI components and icons for React.
-
   npm install primereact
-
   npm install primeicons
-
   npm install primeflex
 
 - redux-persist: library that allows saving a Redux store in the local storage.  
