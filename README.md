@@ -17,13 +17,13 @@ This project uses the following technologies:
 - react-hook-form: forms library with easy-to-use validation.  
   npm install react-hook-form
 
-- keycloak-js: Open Source Identity and Access Management solution.
-  npm install keycloak-js@^9.0.2
+- keycloak-js: Open Source Identity and Access Management solution.  
+  npm install keycloak-js@^9.0.2  
   npm install @react-keycloak/web@^3.4.0
 
-- primeReact: collection of open source UI components and icons for React.
-  npm install primereact
-  npm install primeicons
+- primeReact: collection of open source UI components and icons for React.  
+  npm install primereact  
+  npm install primeicons  
   npm install primeflex
 
 - redux-persist: library that allows saving a Redux store in the local storage.  
