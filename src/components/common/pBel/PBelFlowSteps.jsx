@@ -9,8 +9,7 @@ import {
 import { getAllPBelFlowStepsConfig } from "../../../utils/pBelFlowStepsConfig";
 
 function PBelFlowSteps() {
-  //const step = useSelector(selectPBelFlowStep);
-  const step = 3;
+  const step = useSelector(selectPBelFlowStep);
   const dispatch = useDispatch();
 
   const handleClick = (stepValue) => {
