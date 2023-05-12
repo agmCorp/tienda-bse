@@ -1,8 +1,7 @@
-// TODO ALVARO PrimeReact
-//import "primereact/resources/themes/saga-orange/theme.css";
-//import "primereact/resources/primereact.min.css";
-//import "primeicons/primeicons.css";
-//import "primeflex/primeflex.css";
+import "./primereact-theme/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
 
 // ReduxTookit
 import store from "./reduxToolkit/store";
@@ -17,7 +16,7 @@ import keycloak from "./utils/keycloak";
 import { BrowserRouter } from "react-router-dom";
 import { StrictMode, useState } from "react";
 
-import Main from "./components/persBelongInsQuote/Main";
+import Main from "./components/pBelInsQuote/Main";
 import SplashScreen from "./components/common/SplashScreen";
 
 function App() {

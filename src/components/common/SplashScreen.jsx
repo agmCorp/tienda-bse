@@ -1,4 +1,4 @@
-import bike from "../../images/spinner.gif";
+import spinner from "../../images/spinner.gif";
 
 function SplashScreen() {
   return (
@@ -10,7 +10,7 @@ function SplashScreen() {
       }}
     >
       <img
-        src={bike}
+        src={spinner}
         style={{
           position: "fixed",
           top: "50%",

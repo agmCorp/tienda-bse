@@ -3,14 +3,16 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import rolReducer from "./rolSlice";
+import pBelFlowReducer from "./pBelFlowSlice";
+import pBelPaymentFlowReducer from "./pBelPaymentFlowSlice";
 
 const rootReducer = combineReducers({
-  rol: rolReducer, // TODO ALVARO, NO NECESITO ESTO, ERA PARA ESCRIBIR UN ROL POR PANTALLA.
+  pBelFlow: pBelFlowReducer,
+  pBelPaymentFlow: pBelPaymentFlowReducer,
 });
 
 const persistConfig = {
-  key: "PersBelongInsQuoteRoot",
+  key: "PBelRoot",
   storage,
 };
 
