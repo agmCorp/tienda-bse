@@ -5,8 +5,8 @@ import styles from "./PBelFlowSteps.module.css";
 import {
   selectPBelFlowStep,
   pBelFlowGoToStep,
-} from "../../../reduxToolkit/pBelFlowSlice";
-import { getAllPBelFlowStepsConfig } from "../../../utils/pBelFlowStepsConfig";
+} from "../../../reduxToolkit/pBel/pBelFlowSlice";
+import { getAllPBelFlowStepsConfig } from "../../../utils/pBel/pBelFlowStepsConfig";
 
 function PBelFlowSteps() {
   const step = useSelector(selectPBelFlowStep);

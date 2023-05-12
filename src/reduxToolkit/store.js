@@ -1,10 +1,11 @@
+// AGM 05/23
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import pBelFlowReducer from "./pBelFlowSlice";
-import pBelPaymentFlowReducer from "./pBelPaymentFlowSlice";
+import pBelFlowReducer from "./pBel/pBelFlowSlice";
+import pBelPaymentFlowReducer from "./pBel/pBelPaymentFlowSlice";
 
 const rootReducer = combineReducers({
   pBelFlow: pBelFlowReducer,
@@ -12,7 +13,7 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: "PBelRoot",
+  key: "TiendaBSERoot",
   storage,
 };
 

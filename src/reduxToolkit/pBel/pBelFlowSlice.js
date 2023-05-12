@@ -1,13 +1,14 @@
+// AGM 05/23
 import { createSlice } from "@reduxjs/toolkit";
 
-import { P_BEL_FLOW_ROUTE_BASIC_DATA } from "../routes/routes";
-import { getAllPBelFlowStepsConfig } from "../utils/pBelFlowStepsConfig";
+import { P_BEL_FLOW_ROUTE_BASIC_DATA } from "../../routes/pBel/pBelRoutes";
+import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
 import {
   getFirstRoute,
   getFirstStep,
   getLastStep,
   stepToRoute,
-} from "../utils/stepsHelper";
+} from "../../utils/stepsHelper";
 import { pBelPaymentFlowStepCompleted } from "./pBelPaymentFlowSlice";
 
 const initialState = {
@@ -63,10 +64,10 @@ const pBelFlowSlice = createSlice({
         ? action.payload.navigateTo
         : "";
     },
-    addQuoteInfo: (state, action) => {
+    pBelAddQuoteInfo: (state, action) => {
       state.quoteInfo = { ...state.quoteInfo, ...action.payload };
     },
-    addSelectedData: (state, action) => {
+    pBelAddSelectedData: (state, action) => {
       state.selectedData = { ...state.selectedData, ...action.payload };
     },
   },
@@ -78,15 +79,15 @@ const {
   pBelFlowGoToFirstStep,
   pBelFlowInit,
   pBelFlowNavigate,
-  addQuoteInfo,
-  addSelectedData,
+  pBelAddQuoteInfo,
+  pBelAddSelectedData,
 } = pBelFlowSlice.actions;
 
 const pBelFlowStepCompletedThunk = (data) => (dispatch, getState) => {
   const { pBelFlow } = getState();
 
   if (pBelFlow.step === getLastStep(getAllPBelFlowStepsConfig())) {
-    dispatch(addSelectedData(data));
+    dispatch(pBelAddSelectedData(data));
     dispatch(pBelPaymentFlowStepCompleted());
   } else {
     dispatch(pBelFlowStepCompleted(data));
@@ -116,5 +117,5 @@ export {
   pBelFlowGoToFirstStep,
   pBelFlowInit,
   pBelFlowNavigate,
-  addQuoteInfo,
+  pBelAddQuoteInfo,
 };

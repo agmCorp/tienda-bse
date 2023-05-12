@@ -1,3 +1,4 @@
+// AGM 05/23
 // import UserAvatar from "./UserAvatar";
 
 function Header({ bgColor, logo, heightLogo, title }) {

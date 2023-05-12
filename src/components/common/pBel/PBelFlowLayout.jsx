@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import PBelFlowSteps from "./PBelFlowSteps";
-import useAppFlowController from "../../../hooks/useAppFlowController";
+import usePBelAppFlowController from "../../../hooks/pBel/usePBelAppFlowController";
+//import useKK from "../../../hooks/pBel/useKK";
 // import Detail from "../../pBelInsQuote/Detail";
 import PBelFlowHeader from "./PBelFlowHeader";
 import PBelFlowFooter from "./PBelFlowFooter";
 import {
   pBelFlowGoToFirstStep,
   selectPBelFlowStep,
-} from "../../../reduxToolkit/pBelFlowSlice";
+} from "../../../reduxToolkit/pBel/pBelFlowSlice";
 import { getFirstStep } from "../../../utils/stepsHelper";
 
 function PBelFlowLayout({ children }) {
-  const accessGranted = useAppFlowController();
+  const accessGranted = usePBelAppFlowController();
+  //const accessGranted = useKK();
 
   const dispatch = useDispatch();
   const pBelFlowStep = useSelector(selectPBelFlowStep);

@@ -5,8 +5,8 @@ import styles from "./PBelPaymentFlowSteps.module.css";
 import {
   selectPBelPaymentFlowStep,
   pBelPaymentFlowGoToStep,
-} from "../../../reduxToolkit/pBelPaymentFlowSlice";
-import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBelPaymentFlowStepsConfig";
+} from "../../../reduxToolkit/pBel/pBelPaymentFlowSlice";
+import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBel/pBelPaymentFlowStepsConfig";
 
 function PBelPaymentFlowSteps() {
   const step = useSelector(selectPBelPaymentFlowStep);

@@ -1,7 +1,8 @@
+// AGM 05/23
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAllPBelPaymentFlowStepsConfig } from "../utils/pBelPaymentFlowStepsConfig";
-import { stepToRoute } from "../utils/stepsHelper";
+import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";
+import { stepToRoute } from "../../utils/stepsHelper";
 
 const initialState = {
   step: 0,
@@ -55,10 +56,10 @@ const pBelPaymentFlowSlice = createSlice({
         ? action.payload.navigateTo
         : "";
     },
-    addIssueInfo: (state, action) => {
+    pBelAddIssueInfo: (state, action) => {
       state.issueInfo = action.payload;
     },
-    addInvoiceInfo: (state, action) => {
+    pBelAddInvoiceInfo: (state, action) => {
       state.invoiceInfo = action.payload;
     },
     setComeFromSpe: (state, action) => {
@@ -72,8 +73,8 @@ const {
   pBelPaymentFlowGoToStep,
   pBelPaymentFlowInit,
   pBelPaymentFlowNavigate,
-  addIssueInfo,
-  addInvoiceInfo,
+  pBelAddIssueInfo,
+  pBelAddInvoiceInfo,
   setComeFromSpe,
 } = pBelPaymentFlowSlice.actions;
 
@@ -106,7 +107,7 @@ export {
   pBelPaymentFlowGoToStep,
   pBelPaymentFlowInit,
   pBelPaymentFlowNavigate,
-  addIssueInfo,
-  addInvoiceInfo,
+  pBelAddIssueInfo,
+  pBelAddInvoiceInfo,
   setComeFromSpe,
 };

@@ -1,95 +1,82 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {
-  pBelFlowGoToStep,
-  selectPBelFlowStep,
-  selectPBelFlowNavigate,
-  pBelFlowNavigate,
-  pBelFlowInit,
-  pBelFlowGoToFirstStep,
-} from "../reduxToolkit/pBelFlowSlice";
-import {
-  pBelPaymentFlowGoToStep,
-  pBelPaymentFlowInit,
-  pBelPaymentFlowNavigate,
-  selectPBelPaymentFlowNavigate,
-  selectPBelPaymentFlowStep,
-} from "../reduxToolkit/pBelPaymentFlowSlice";
-import { getAllPBelFlowStepsConfig } from "../utils/pBelFlowStepsConfig";
 import { routeToStep } from "../utils/stepsHelper";
-import { getAllPBelPaymentFlowStepsConfig } from "../utils/pBelPaymentFlowStepsConfig";
 
-function useAppFlowController() {
-  const pBelFlowSteps = getAllPBelFlowStepsConfig();
-  const pBelPaymentFlowSteps = getAllPBelPaymentFlowStepsConfig();
-
+function useAppFlowController(
+  flowNavigation,
+  paymentFlowNavigation,
+  flowStep,
+  flowSteps,
+  flowGoToStep,
+  flowGoToFirstStep,
+  flowInit,
+  paymentFlowStep,
+  paymentFlowSteps,
+  paymentFlowGoToStep,
+  paymentFlowInit,
+  flowNavigate,
+  paymentFlowNavigate
+) {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const [accessGranted, setAccessGranted] = useState(false);
 
-  const pBelFlowStep = useSelector(selectPBelFlowStep);
-  const pBelFlowNavigation = useSelector(selectPBelFlowNavigate);
-
-  const pBelPaymentFlowStep = useSelector(selectPBelPaymentFlowStep);
-  const pBelPaymentFlowNavigation = useSelector(selectPBelPaymentFlowNavigate);
-
   // The pBelFlowStep only changes if a dispatch was executed before.
   // If there is a pending navigation, we navigate to the indicated route.
   useEffect(() => {
-    if (pBelFlowNavigation.navigate) {
-      navigate(pBelFlowNavigation.navigateTo);
-      dispatch(pBelFlowNavigate({ navigate: false }));
+    if (flowNavigation.navigate) {
+      navigate(flowNavigation.navigateTo);
+      dispatch(flowNavigate({ navigate: false }));
     }
   }, [
-    pBelFlowStep,
+    flowStep,
     navigate,
     dispatch,
-    pBelFlowNavigation.navigate,
-    pBelFlowNavigation.navigateTo,
+    flowNavigation.navigate,
+    flowNavigation.navigateTo,
+    flowNavigate,
   ]);
 
   // The pBelPaymentFlowStep only changes if a dispatch was executed before.
   // If there is a pending navigation, we navigate to the indicated route.
   useEffect(() => {
-    if (pBelPaymentFlowNavigation.navigate) {
-      navigate(pBelPaymentFlowNavigation.navigateTo);
-      dispatch(pBelPaymentFlowNavigate({ navigate: false }));
+    if (paymentFlowNavigation.navigate) {
+      navigate(paymentFlowNavigation.navigateTo);
+      dispatch(paymentFlowNavigate({ navigate: false }));
     }
   }, [
-    pBelPaymentFlowStep,
+    paymentFlowStep,
     navigate,
     dispatch,
-    pBelPaymentFlowNavigation.navigate,
-    pBelPaymentFlowNavigation.navigateTo,
+    paymentFlowNavigation.navigate,
+    paymentFlowNavigation.navigateTo,
+    paymentFlowNavigate,
   ]);
 
   useEffect(() => {
-    if (!pBelFlowNavigation.navigate && !pBelPaymentFlowNavigation.navigate) {
+    if (!flowNavigation.navigate && !paymentFlowNavigation.navigate) {
       // Steps that correspond to the current url
       const currentUrl = location.pathname;
-      const urlPBelFlowStep = routeToStep(pBelFlowSteps, currentUrl);
-      const urlPBelPPaymentFlowStep = routeToStep(
-        pBelPaymentFlowSteps,
-        currentUrl
-      );
+      const urlPBelFlowStep = routeToStep(flowSteps, currentUrl);
+      const urlPBelPPaymentFlowStep = routeToStep(paymentFlowSteps, currentUrl);
 
       if (urlPBelFlowStep > 0 || urlPBelPPaymentFlowStep > 0) {
         // The current url is inside the payment flow
         if (urlPBelPPaymentFlowStep > 0) {
-          if (pBelPaymentFlowStep > urlPBelPPaymentFlowStep) {
+          if (paymentFlowStep > urlPBelPPaymentFlowStep) {
             console.log("*** ACCESS GRANTED TO", currentUrl);
-            dispatch(pBelPaymentFlowGoToStep(urlPBelPPaymentFlowStep));
+            dispatch(paymentFlowGoToStep(urlPBelPPaymentFlowStep));
             setAccessGranted(true);
           } else {
-            if (pBelPaymentFlowStep < urlPBelPPaymentFlowStep) {
+            if (paymentFlowStep < urlPBelPPaymentFlowStep) {
               console.log("*** ACCESS DENIED TO", currentUrl);
-              dispatch(pBelFlowInit());
-              dispatch(pBelPaymentFlowInit());
-              dispatch(pBelFlowGoToFirstStep());
+              dispatch(flowInit());
+              dispatch(paymentFlowInit());
+              dispatch(flowGoToFirstStep());
               setAccessGranted(false);
             } else {
               // We are already there
@@ -99,16 +86,16 @@ function useAppFlowController() {
           }
         } else {
           // The current url is inside the pBel flow
-          dispatch(pBelPaymentFlowInit());
-          if (pBelFlowStep > urlPBelFlowStep) {
+          dispatch(paymentFlowInit());
+          if (flowStep > urlPBelFlowStep) {
             console.log("*** ACCESS GRANTED TO", currentUrl);
-            dispatch(pBelFlowGoToStep(urlPBelFlowStep));
+            dispatch(flowGoToStep(urlPBelFlowStep));
             setAccessGranted(true);
           } else {
-            if (pBelFlowStep < urlPBelFlowStep) {
+            if (flowStep < urlPBelFlowStep) {
               console.log("*** ACCESS DENIED TO", currentUrl);
-              dispatch(pBelFlowInit());
-              dispatch(pBelFlowGoToFirstStep());
+              dispatch(flowInit());
+              dispatch(flowGoToFirstStep());
               setAccessGranted(false);
             } else {
               // We are already there
@@ -124,14 +111,19 @@ function useAppFlowController() {
       }
     }
   }, [
-    pBelFlowSteps,
-    pBelPaymentFlowSteps,
-    pBelFlowNavigation.navigate,
-    pBelFlowStep,
+    flowSteps,
+    paymentFlowSteps,
+    flowNavigation.navigate,
+    flowStep,
     dispatch,
-    location.pathname,
-    pBelPaymentFlowNavigation.navigate,
-    pBelPaymentFlowStep,
+    location,
+    paymentFlowNavigation.navigate,
+    paymentFlowStep,
+    flowGoToFirstStep,
+    flowGoToStep,
+    flowInit,
+    paymentFlowGoToStep,
+    paymentFlowInit,
   ]);
 
   return accessGranted;

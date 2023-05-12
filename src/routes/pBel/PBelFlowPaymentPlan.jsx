@@ -1,9 +1,10 @@
+// AGM 05/23
 import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
 
 function PBelFlowPaymentPlan() {
   return (
     <PBelFlowLayout>
-      PAGOS
+      <>PAGOS</>
       {/* <PaymentPlan /> */}
     </PBelFlowLayout>
   );

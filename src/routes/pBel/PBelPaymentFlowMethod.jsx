@@ -1,3 +1,4 @@
+// AGM 05/23
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
 
 function PBelPaymentFlowMethod() {
@@ -5,7 +6,7 @@ function PBelPaymentFlowMethod() {
     // <Protected>
     <PBelPaymentFlowLayout>
       {/* <PaymentMethod /> */}
-      METODO DE PAGO
+      <>METODO DE PAGO</>
     </PBelPaymentFlowLayout>
     // </Protected>
   );

@@ -1,3 +1,4 @@
+// AGM 05/23
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
 
 function PBelPaymentFlowPolicyDetail() {
@@ -5,7 +6,7 @@ function PBelPaymentFlowPolicyDetail() {
     // <Protected>
     <PBelPaymentFlowLayout>
       {/* <PolicyDetail /> */}
-      DETALLE POLIZA
+      <>DETALLE POLIZA</>
     </PBelPaymentFlowLayout>
     // </Protected>
   );

@@ -1,10 +1,11 @@
+// AGM 05/23
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
 
 function PBelPaymentFlowInsurance() {
   return (
     // <Protected>
     <PBelPaymentFlowLayout>
-      pago seguro
+      <>pago seguro</>
       {/* <Insurance /> */}
     </PBelPaymentFlowLayout>
     // </Protected>
