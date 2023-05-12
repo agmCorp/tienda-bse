@@ -9,7 +9,8 @@ import {
 import { getAllPBelFlowStepsConfig } from "../../../utils/pBelFlowStepsConfig";
 
 function PBelFlowSteps() {
-  const step = useSelector(selectPBelFlowStep);
+  //const step = useSelector(selectPBelFlowStep);
+  const step = 3;
   const dispatch = useDispatch();
 
   const handleClick = (stepValue) => {
@@ -20,10 +21,13 @@ function PBelFlowSteps() {
     return (
       <>
         <Button
-          icon="pi pi-check"
           className="p-button-rounded p-button-outlined p-button-secondary bg-white hover:text-white hover:bg-primary"
           onClick={() => handleClick(stepValue)}
-        />
+        >
+          <span className="h-2rem w-2rem line-height-4">
+            <i className="pi pi-check font-bold" />
+          </span>
+        </Button>
         <span
           className="text-secondary mx-2 cursor-pointer hover:text-primary"
           onClick={() => handleClick(stepValue)}
@@ -37,11 +41,9 @@ function PBelFlowSteps() {
   const currentStepButton = (label, description) => {
     return (
       <>
-        <Button
-          disabled
-          label={label}
-          className="p-button-rounded opacity-100"
-        />
+        <Button disabled className="p-button-rounded opacity-100">
+          <span className="h-2rem w-2rem line-height-4 font-bold">{label}</span>
+        </Button>
         <span className="text-primary mx-2">{description}</span>
       </>
     );
@@ -53,15 +55,21 @@ function PBelFlowSteps() {
         {secured ? (
           <Button
             disabled
-            icon="pi pi-lock"
             className="p-button-rounded p-button-outlined bg-white opacity-100"
-          />
+          >
+            <span className="h-2rem w-2rem line-height-4">
+              <i className="pi pi-lock font-bold" />
+            </span>
+          </Button>
         ) : (
           <Button
             disabled
-            label={label}
             className="p-button-rounded p-button-outlined bg-white opacity-100"
-          />
+          >
+            <span className="h-2rem w-2rem line-height-4 font-bold">
+              {label}
+            </span>
+          </Button>
         )}
         <span className="text-primary mx-2">{description}</span>
       </>
