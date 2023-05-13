@@ -5,7 +5,7 @@ function PBelFlowQuote() {
   return (
     <PBelFlowLayout>
       {/* <Quote /> */}
-      <>COTIZACION</>
+      COTIZACION
     </PBelFlowLayout>
   );
 }

@@ -1,14 +1,15 @@
 // AGM 05/23
+import Protected from "../../utils/Protected";
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
 
 function PBelPaymentFlowInsurance() {
   return (
-    // <Protected>
-    <PBelPaymentFlowLayout>
-      <>pago seguro</>
-      {/* <Insurance /> */}
-    </PBelPaymentFlowLayout>
-    // </Protected>
+    <Protected>
+      <PBelPaymentFlowLayout>
+        SEGURO
+        {/* <Insurance /> */}
+      </PBelPaymentFlowLayout>
+    </Protected>
   );
 }
 

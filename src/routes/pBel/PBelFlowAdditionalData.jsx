@@ -5,7 +5,7 @@ function PBelFlowAdditionalData() {
   return (
     <PBelFlowLayout>
       {/* <AdditionalData /> */}
-      <>DATOS ADICIONALES</>
+      DATOS ADICIONALES
     </PBelFlowLayout>
   );
 }

@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import PBelFlowSteps from "./PBelFlowSteps";
 import usePBelAppFlowController from "../../../hooks/pBel/usePBelAppFlowController";
-//import useKK from "../../../hooks/pBel/useKK";
 // import Detail from "../../pBelInsQuote/Detail";
 import PBelFlowHeader from "./PBelFlowHeader";
 import PBelFlowFooter from "./PBelFlowFooter";
@@ -14,7 +13,6 @@ import { getFirstStep } from "../../../utils/stepsHelper";
 
 function PBelFlowLayout({ children }) {
   const accessGranted = usePBelAppFlowController();
-  //const accessGranted = useKK();
 
   const dispatch = useDispatch();
   const pBelFlowStep = useSelector(selectPBelFlowStep);
@@ -26,12 +24,12 @@ function PBelFlowLayout({ children }) {
   return (
     <>
       {accessGranted && (
-        <div className="bg-green-50">
+        <div className="bg-blue-50">
           <PBelFlowHeader />
           <div className="mx-auto my-5 shadow-4 p-4 w-11 md:w-6 border-round bg-white">
             <PBelFlowSteps />
             <div className="mt-3">
-              DETAIL FIGURABA ACA, NO SE QUE ES
+              DETALLE
               {/* <Detail /> */}
             </div>
             <div className="mt-3">{children}</div>

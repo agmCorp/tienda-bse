@@ -1,15 +1,15 @@
-// import logoBikeBSE from "../../images/bike-bse-logo.png";
-// import Header from "./Header";
+// AGM 05/23
+import logoBSE from "../../../images/bse-logo.png";
+import Header from "../../common/Header";
 
 function PBelFlowHeader() {
   return (
-    <>PBelFlowHeader</>
-    // <Header
-    //   bgColor="bg-cyan-900"
-    //   logo={logoBikeBSE}
-    //   heightLogo="h-8rem"
-    //   title="COTIZÁ EL SEGURO DE TU BICI"
-    // />
+    <Header
+      bgColor="bg-blue-800"
+      logo={logoBSE}
+      heightLogo="h-4rem"
+      title="NOTEBOOKS Y CÁMARAS FOTOGRÁFICAS"
+    />
   );
 }
 

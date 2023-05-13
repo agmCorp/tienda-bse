@@ -4,7 +4,7 @@ import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
 function PBelFlowBasicData() {
   return (
     <PBelFlowLayout>
-      <>DATOS BASICOS</>
+      DATOS BASICOS
       {/* <BasicData /> */}
     </PBelFlowLayout>
   );

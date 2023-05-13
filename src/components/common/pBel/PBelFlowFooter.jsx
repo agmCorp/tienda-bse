@@ -12,6 +12,7 @@ function PBelFlowFooter() {
 
   return (
     <>
+      PBelFlowFooter
       <input type="button" onClick={handle} value="siguiente" />
     </>
   );
