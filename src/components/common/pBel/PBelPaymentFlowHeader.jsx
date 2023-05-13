@@ -4,7 +4,7 @@ import Header from "../Header";
 function PBelPaymentFlowHeader() {
   return (
     <Header
-      bgColor="bg-indigo-900"
+      bgColor="bg-blue-800"
       logo={logoBSE}
       heightLogo="h-4rem"
       title="PAGO ELECTRÓNICO"
