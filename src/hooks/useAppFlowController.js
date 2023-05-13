@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,11 +20,10 @@ function useAppFlowController(
   paymentFlowNavigate
 ) {
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
   const [accessGranted, setAccessGranted] = useState(false);
 
-  // The pBelFlowStep only changes if a dispatch was executed before.
+  // The flowStep only changes if a dispatch was executed before.
   // If there is a pending navigation, we navigate to the indicated route.
   useEffect(() => {
     if (flowNavigation.navigate) {
@@ -41,7 +39,7 @@ function useAppFlowController(
     flowNavigate,
   ]);
 
-  // The pBelPaymentFlowStep only changes if a dispatch was executed before.
+  // The paymentFlowStep only changes if a dispatch was executed before.
   // If there is a pending navigation, we navigate to the indicated route.
   useEffect(() => {
     if (paymentFlowNavigation.navigate) {
@@ -60,22 +58,31 @@ function useAppFlowController(
   useEffect(() => {
     if (!flowNavigation.navigate && !paymentFlowNavigation.navigate) {
       // Steps that correspond to the current url
-      const currentUrl = location.pathname;
-      const urlPBelFlowStep = routeToStep(flowSteps, currentUrl);
-      const urlPBelPPaymentFlowStep = routeToStep(paymentFlowSteps, currentUrl);
+      let currentUrl = window.location.href;
+      let urlFlowStep = 0;
+      let urlPaymentFlowStep = 0;
 
-      if (urlPBelFlowStep > 0 || urlPBelPPaymentFlowStep > 0) {
-        // The current url is inside the payment flow
-        if (urlPBelPPaymentFlowStep > 0) {
-          if (paymentFlowStep > urlPBelPPaymentFlowStep) {
+      const searchString = process.env.PUBLIC_URL;
+      const index = currentUrl.indexOf(searchString);
+
+      if (index !== -1) {
+        currentUrl = currentUrl.substring(index + searchString.length);
+        urlFlowStep = routeToStep(flowSteps, currentUrl);
+        urlPaymentFlowStep = routeToStep(paymentFlowSteps, currentUrl);
+      }
+
+      if (urlFlowStep > 0 || urlPaymentFlowStep > 0) {
+        if (urlFlowStep > 0) {
+          // The current url is inside the normal flow
+          dispatch(paymentFlowInit()); // Resets payment flow
+          if (flowStep > urlFlowStep) {
             console.log("*** ACCESS GRANTED TO", currentUrl);
-            dispatch(paymentFlowGoToStep(urlPBelPPaymentFlowStep));
+            dispatch(flowGoToStep(urlFlowStep));
             setAccessGranted(true);
           } else {
-            if (paymentFlowStep < urlPBelPPaymentFlowStep) {
+            if (flowStep < urlFlowStep) {
               console.log("*** ACCESS DENIED TO", currentUrl);
               dispatch(flowInit());
-              dispatch(paymentFlowInit());
               dispatch(flowGoToFirstStep());
               setAccessGranted(false);
             } else {
@@ -85,16 +92,16 @@ function useAppFlowController(
             }
           }
         } else {
-          // The current url is inside the pBel flow
-          dispatch(paymentFlowInit());
-          if (flowStep > urlPBelFlowStep) {
+          // The current url is inside the payment flow
+          if (paymentFlowStep > urlPaymentFlowStep) {
             console.log("*** ACCESS GRANTED TO", currentUrl);
-            dispatch(flowGoToStep(urlPBelFlowStep));
+            dispatch(paymentFlowGoToStep(urlPaymentFlowStep));
             setAccessGranted(true);
           } else {
-            if (flowStep < urlPBelFlowStep) {
+            if (paymentFlowStep < urlPaymentFlowStep) {
               console.log("*** ACCESS DENIED TO", currentUrl);
               dispatch(flowInit());
+              dispatch(paymentFlowInit());
               dispatch(flowGoToFirstStep());
               setAccessGranted(false);
             } else {
@@ -116,7 +123,6 @@ function useAppFlowController(
     flowNavigation.navigate,
     flowStep,
     dispatch,
-    location.pathname,
     paymentFlowNavigation.navigate,
     paymentFlowStep,
     flowGoToFirstStep,
