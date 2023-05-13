@@ -1,5 +1,5 @@
 // AGM 05/23
-import logoBSE from "../../../images/bse-logo.png";
+import logoBSE from "../../../images/bse-logo-negative.png";
 import Header from "../../common/Header";
 
 function PBelFlowHeader() {
