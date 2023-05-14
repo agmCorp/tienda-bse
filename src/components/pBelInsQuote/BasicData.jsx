@@ -172,7 +172,6 @@ function BasicData() {
                     render={({ field, fieldState }) => (
                       <InputNumber
                         id={field.name}
-                        autoFocus
                         value={field.value}
                         onValueChange={(e) => field.onChange(e.value)}
                         showButtons
