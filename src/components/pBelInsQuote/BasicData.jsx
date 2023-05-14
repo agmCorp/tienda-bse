@@ -109,7 +109,10 @@ function BasicData() {
                           <div className="flex justify-content-left">
                             <div className="flex flex-column md:flex-row md:align-items-center">
                               {objectTypes.map((objectType) => (
-                                <div key={objectType.id}>
+                                <div
+                                  key={objectType.id}
+                                  className="flex flex-row align-items-center"
+                                >
                                   <RadioButton
                                     inputId={objectType.item}
                                     {...field}
@@ -122,7 +125,7 @@ function BasicData() {
                                   />
                                   <label
                                     htmlFor={objectType.item}
-                                    className={`ml-1 mr-3 text-base vertical-align-bottom ${classNames(
+                                    className={`ml-1 mr-3 text-base ${classNames(
                                       {
                                         "p-error": errors[P_BEL_OBJECT_TYPE_ID],
                                       }
@@ -242,7 +245,10 @@ function BasicData() {
                           <div className="flex justify-content-left">
                             <div className="flex flex-column md:flex-row md:align-items-center">
                               {mobilityTypes.map((mobilityType) => (
-                                <div key={mobilityType.id}>
+                                <div
+                                  key={mobilityType.id}
+                                  className="flex flex-row align-items-center"
+                                >
                                   <RadioButton
                                     inputId={mobilityType.item}
                                     {...field}
@@ -255,7 +261,7 @@ function BasicData() {
                                   />
                                   <label
                                     htmlFor={mobilityType.item}
-                                    className={`ml-1 mr-3 text-base vertical-align-bottom ${classNames(
+                                    className={`ml-1 mr-3 text-base ${classNames(
                                       {
                                         "p-error":
                                           errors[P_BEL_MOBILITY_TYPE_ID],
