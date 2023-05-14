@@ -1,11 +1,11 @@
 // AGM 05/23
 import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
+import BasicData from "../../components/pBelInsQuote/BasicData";
 
 function PBelFlowBasicData() {
   return (
     <PBelFlowLayout>
-      DATOS BASICOS
-      {/* <BasicData /> */}
+      <BasicData />
     </PBelFlowLayout>
   );
 }

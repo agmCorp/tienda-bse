@@ -29,6 +29,9 @@ This project uses the following technologies:
 - redux-persist: library that allows saving a Redux store in the local storage.  
   npm install redux-persist
 
+- react-google-recaptcha: react component for Google reCAPTCHA v2.  
+  npm install redux-persist
+
 The API Rest apiTiendaWS must be running beforehand.
 
 _For running execute the following command: npm start_

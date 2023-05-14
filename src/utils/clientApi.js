@@ -1,6 +1,10 @@
 // AGM 05/23
 import axios from "axios";
-import { API_BASE_URL, SECURE_SUBDIRECTORY } from "./constants";
+import {
+  API_BASE_URL,
+  PUBLIC_SUBDIRECTORY,
+  SECURE_SUBDIRECTORY,
+} from "./constants";
 
 import {
   logAxiosError,
@@ -29,7 +33,7 @@ const clientApi = async (
   try {
     const url = secure
       ? `${API_BASE_URL}/${SECURE_SUBDIRECTORY}/${apiUrl}`
-      : `${API_BASE_URL}/${apiUrl}`;
+      : `${API_BASE_URL}/${PUBLIC_SUBDIRECTORY}/${apiUrl}`;
     logAxiosRequest({
       method,
       url,
