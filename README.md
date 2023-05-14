@@ -30,7 +30,7 @@ This project uses the following technologies:
   npm install redux-persist
 
 - react-google-recaptcha: react component for Google reCAPTCHA v2.  
-  npm install redux-persist
+  npm install react-google-recaptcha
 
 The API Rest apiTiendaWS must be running beforehand.
 
