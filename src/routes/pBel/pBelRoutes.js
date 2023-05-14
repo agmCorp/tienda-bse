@@ -9,7 +9,6 @@ const P_BEL_PAYMENT_FLOW_ROUTE_METHOD = "/objPersonal/metodoDePago";
 const P_BEL_PAYMENT_FLOW_ROUTE_POLICY_DETAIL = "/objPersonal/detalleDePoliza";
 const P_BEL_PAYMENT_FLOW_ROUTE_INSURANCE = "/objPersonal/seguroContratado";
 
-const P_BEL_ROUTE_NOT_FOUND = "/objPersonal/*";
 const ROUTE_NOT_FOUND = "*";
 
 export {
@@ -21,6 +20,5 @@ export {
   P_BEL_PAYMENT_FLOW_ROUTE_METHOD,
   P_BEL_PAYMENT_FLOW_ROUTE_POLICY_DETAIL,
   P_BEL_PAYMENT_FLOW_ROUTE_INSURANCE,
-  P_BEL_ROUTE_NOT_FOUND,
   ROUTE_NOT_FOUND,
 };

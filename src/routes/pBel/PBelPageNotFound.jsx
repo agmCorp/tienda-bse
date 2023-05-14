@@ -7,7 +7,6 @@ import {
   pBelFlowInit,
 } from "../../reduxToolkit/pBel/pBelFlowSlice";
 import usePBelAppFlowController from "../../hooks/pBel/usePBelAppFlowController";
-//import useKK from "../../hooks/pBel/useKK";
 import { pBelPaymentFlowInit } from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";
 
 function PBelPageNotFound() {
@@ -16,11 +15,10 @@ function PBelPageNotFound() {
 
   // Needed to navigate to home
   usePBelAppFlowController();
-  //useKK();
 
   useEffect(() => {
-    console.error("*** PAGE NOT FOUND", location.pathname);
-    console.error("*** REDIRECTING TO FIRST STEP");
+    console.log("*** PAGE NOT FOUND", location.pathname);
+    console.log("*** REDIRECTING TO FIRST STEP");
     dispatch(pBelFlowInit());
     dispatch(pBelPaymentFlowInit());
     dispatch(pBelFlowGoToFirstStep());
