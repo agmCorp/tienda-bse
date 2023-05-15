@@ -10,13 +10,20 @@ import { RadioButton } from "primereact/radiobutton";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import useDataCollection from "../../hooks/useDataCollection";
-import { WHATSAPP, CONTACT_FORM } from "../../utils/constants";
+import {
+  RECAPTCHA_SITE_KEY,
+  WHATSAPP,
+  CONTACT_FORM,
+} from "../../utils/constants";
 import Spinner from "../../utils/Spinner";
 import {
+  API_P_BEL_SITE_VERIFY,
   API_P_BEL_OBJECT_TYPES,
   API_P_BEL_MOBILITY_TYPES,
 } from "../../utils/apiUrls";
 import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import styles from "./BasicData.module.css";
+import { clientApi } from "../../utils/clientApi";
 
 function BasicData() {
   // Constants
@@ -24,12 +31,14 @@ function BasicData() {
     min: 300,
     max: 4500,
   };
+  const WIDTH_THRESHOLD = 400;
   const P_BEL_COST_ID = "pBelCost";
   const P_BEL_OBJECT_TYPE_ID = "pBelObjectType";
   const P_BEL_MOBILITY_TYPE_ID = "pBelMobilityType";
-  const CAPTCHA_ID = "captcha";
+  const INPUT_CAPTCHA_ID = "inputCaptcha";
 
   const overlayPanel = useRef(null);
+  const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
   const [loadingObjectType, objectTypes] = useDataCollection(
     API_P_BEL_OBJECT_TYPES
@@ -44,7 +53,7 @@ function BasicData() {
   };
 
   const defaultValues = JSON.parse(
-    `{"${P_BEL_COST_ID}":${P_BEL_COST_VALIDATION.min}, "${P_BEL_MOBILITY_TYPE_ID}":"", "${CAPTCHA_ID}":""}`
+    `{"${P_BEL_COST_ID}":${P_BEL_COST_VALIDATION.min}, "${P_BEL_MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
   );
 
   const {
@@ -58,7 +67,56 @@ function BasicData() {
     setFocus,
   } = useForm({ defaultValues });
 
+  // Verify against recaptcha with private key
+  const siteVerify = async (recaptchaToken) => {
+    const response = await clientApi(
+      "post",
+      API_P_BEL_SITE_VERIFY,
+      false,
+      {},
+      {
+        response: recaptchaToken,
+      }
+    );
+    if (response.ok) {
+      setValue(INPUT_CAPTCHA_ID, recaptchaToken, {
+        shouldValidate: true,
+      });
+    } else {
+      setError(INPUT_CAPTCHA_ID, {
+        type: "manual",
+        message:
+          "La verificación ha fallado, por favor vuelva a cargar la página.",
+      });
+      setValue(INPUT_CAPTCHA_ID, "", {
+        shouldValidate: false,
+      });
+    }
+  };
+
+  const handleOnChangeCaptcha = (token) => {
+    siteVerify(token);
+  };
+
+  const handleOnExpiredCaptcha = () => {
+    setValue(INPUT_CAPTCHA_ID, "", {
+      shouldValidate: true,
+    });
+  };
+
+  const getWindowDimensions = () => {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  };
+
   const onSubmit = (data) => {
+    console.log("todavia lo tiene: ", recaptchaRef.current.getValue());
+    recaptchaRef.current.reset();
+    console.log("todavia lo tiene: ", recaptchaRef.current.getValue());
+
     console.log("hola", data);
     // coverageTypes.forEach((coverageType) => {
     //   const quoteInfo = {
@@ -278,6 +336,39 @@ function BasicData() {
                       )}
                     />
                   )}
+                </div>
+
+                <div className="mb-4">
+                  <input
+                    type="hidden"
+                    {...register(INPUT_CAPTCHA_ID, {
+                      required: "Debe seleccionar la casilla de verificación.",
+                    })}
+                  />
+                  <div
+                    className={`text-center m-auto max-w-min ${
+                      getWindowDimensions().width <= WIDTH_THRESHOLD
+                        ? styles["recaptcha-compact"]
+                        : styles["recaptcha-normal"]
+                    } ${classNames({
+                      "border-solid border-1 p-error": errors[INPUT_CAPTCHA_ID],
+                    })}`}
+                  >
+                    <ReCAPTCHA
+                      id="recaptcha"
+                      sitekey={RECAPTCHA_SITE_KEY}
+                      onChange={handleOnChangeCaptcha}
+                      onExpired={handleOnExpiredCaptcha}
+                      size={
+                        getWindowDimensions().width <= WIDTH_THRESHOLD
+                          ? "compact"
+                          : "normal"
+                      }
+                      ref={recaptchaRef}
+                      hl="es"
+                    />
+                  </div>
+                  {getFormErrorMessage(INPUT_CAPTCHA_ID)}
                 </div>
 
                 {loadingObjectType || loadingMobilityType ? (
