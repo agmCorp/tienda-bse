@@ -170,7 +170,7 @@ function BasicData() {
                                     inputId={objectType.item}
                                     {...field}
                                     inputRef={field.ref}
-                                    value={objectType.value}
+                                    value={objectType.item}
                                     checked={field.value === objectType.item}
                                     className={`mr-1 ${classNames({
                                       "p-invalid": errors[P_BEL_OBJECT_TYPE_ID],
