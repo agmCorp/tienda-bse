@@ -14,14 +14,20 @@ import {
   RECAPTCHA_SITE_KEY,
   WHATSAPP,
   CONTACT_FORM,
+  MUST_QUOTE_PREFIX,
+  QUOTATION_PREFIX,
 } from "../../utils/constants";
 import Spinner from "../../utils/Spinner";
 import {
   API_P_BEL_SITE_VERIFY,
   API_P_BEL_OBJECT_TYPES,
   API_P_BEL_MOBILITY_TYPES,
+  API_P_BEL_COVERAGE_TYPES,
 } from "../../utils/apiUrls";
-import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import {
+  pBelAddQuoteInfo,
+  pBelFlowStepCompletedThunk,
+} from "../../reduxToolkit/pBel/pBelFlowSlice";
 import styles from "./BasicData.module.css";
 import { clientApi } from "../../utils/clientApi";
 
@@ -45,6 +51,9 @@ function BasicData() {
   );
   const [loadingMobilityType, mobilityTypes] = useDataCollection(
     API_P_BEL_MOBILITY_TYPES
+  );
+  const [loadingCoverageTypes, coverageTypes] = useDataCollection(
+    API_P_BEL_COVERAGE_TYPES
   );
 
   const defaultValues = JSON.parse(
@@ -113,13 +122,13 @@ function BasicData() {
   };
 
   const onSubmit = (data) => {
-    // coverageTypes.forEach((coverageType) => {
-    //   const quoteInfo = {
-    //     [MUST_QUOTE_PREFIX + coverageType.item]: true,
-    //     [QUOTATION_PREFIX + coverageType.item]: {},
-    //   };
-    //   dispatch(addQuoteInfo(quoteInfo));
-    // });
+    coverageTypes.forEach((coverageType) => {
+      const quoteInfo = {
+        [MUST_QUOTE_PREFIX + coverageType.item]: true,
+        [QUOTATION_PREFIX + coverageType.item]: {},
+      };
+      dispatch(pBelAddQuoteInfo(quoteInfo));
+    });
     dispatch(pBelFlowStepCompletedThunk(data));
     reset();
   };
@@ -170,8 +179,10 @@ function BasicData() {
                                     inputId={objectType.item}
                                     {...field}
                                     inputRef={field.ref}
-                                    value={objectType.item}
-                                    checked={field.value === objectType.item}
+                                    value={objectType}
+                                    checked={
+                                      field.value.item === objectType.item
+                                    }
                                     className={`mr-1 ${classNames({
                                       "p-invalid": errors[P_BEL_OBJECT_TYPE_ID],
                                     })}`}
@@ -304,8 +315,10 @@ function BasicData() {
                                     inputId={mobilityType.item}
                                     {...field}
                                     inputRef={field.ref}
-                                    value={mobilityType.item}
-                                    checked={field.value === mobilityType.item}
+                                    value={mobilityType}
+                                    checked={
+                                      field.value.item === mobilityType.item
+                                    }
                                     className={`mr-1 ${classNames({
                                       "p-invalid": errors[P_BEL_OBJECT_TYPE_ID],
                                     })}`}
@@ -365,7 +378,9 @@ function BasicData() {
                   {getFormErrorMessage(INPUT_CAPTCHA_ID)}
                 </div>
 
-                {loadingObjectType || loadingMobilityType ? (
+                {loadingObjectType ||
+                loadingMobilityType ||
+                loadingCoverageTypes ? (
                   <Spinner size="small" />
                 ) : (
                   <Button
