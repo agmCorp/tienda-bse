@@ -14,7 +14,7 @@ function FlowSteps({ step, flowGoToStep, getAllFlowStepsConfig }) {
     return (
       <>
         <Button
-          className="p-button-rounded p-button-outlined p-button-secondary bg-white hover:text-white hover:bg-primary"
+          className="p-button-rounded p-button-outlined p-button-secondary bg-white hover:text-white hover:bg-primary tienda-button"
           onClick={() => handleClick(stepValue)}
         >
           <span className="h-2rem w-2rem line-height-4">

@@ -286,7 +286,7 @@ function BasicData() {
                   <Button
                     type="submit"
                     label="Cotizar"
-                    className="my-2"
+                    className="my-2 tienda-button"
                     icon="pi pi-check"
                   />
                 )}
