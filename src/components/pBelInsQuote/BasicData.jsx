@@ -32,10 +32,10 @@ function BasicData() {
     max: 4500,
   };
   const WIDTH_THRESHOLD = 400;
-  const P_BEL_COST_ID = "pBelCost";
   const P_BEL_OBJECT_TYPE_ID = "pBelObjectType";
+  const P_BEL_COST_ID = "pBelCost";
   const P_BEL_MOBILITY_TYPE_ID = "pBelMobilityType";
-  const INPUT_CAPTCHA_ID = "inputCaptcha";
+  const INPUT_CAPTCHA_ID = "pBelInputCaptcha";
 
   const overlayPanel = useRef(null);
   const recaptchaRef = useRef(null);
@@ -46,14 +46,9 @@ function BasicData() {
   const [loadingMobilityType, mobilityTypes] = useDataCollection(
     API_P_BEL_MOBILITY_TYPES
   );
-  const getFormErrorMessage = (name) => {
-    return (
-      errors[name] && <Message severity="error" text={errors[name].message} />
-    );
-  };
 
   const defaultValues = JSON.parse(
-    `{"${P_BEL_COST_ID}":${P_BEL_COST_VALIDATION.min}, "${P_BEL_MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
+    `{"${P_BEL_OBJECT_TYPE_ID}":"", "${P_BEL_COST_ID}":${P_BEL_COST_VALIDATION.min}, "${P_BEL_MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
   );
 
   const {
@@ -64,8 +59,13 @@ function BasicData() {
     formState: { errors },
     handleSubmit,
     reset,
-    setFocus,
   } = useForm({ defaultValues });
+
+  const getFormErrorMessage = (name) => {
+    return (
+      errors[name] && <Message severity="error" text={errors[name].message} />
+    );
+  };
 
   // Verify against recaptcha with private key
   const siteVerify = async (recaptchaToken) => {
@@ -113,11 +113,6 @@ function BasicData() {
   };
 
   const onSubmit = (data) => {
-    console.log("todavia lo tiene: ", recaptchaRef.current.getValue());
-    recaptchaRef.current.reset();
-    console.log("todavia lo tiene: ", recaptchaRef.current.getValue());
-
-    console.log("hola", data);
     // coverageTypes.forEach((coverageType) => {
     //   const quoteInfo = {
     //     [MUST_QUOTE_PREFIX + coverageType.item]: true,
@@ -175,7 +170,7 @@ function BasicData() {
                                     inputId={objectType.item}
                                     {...field}
                                     inputRef={field.ref}
-                                    value={objectType.item}
+                                    value={objectType.value}
                                     checked={field.value === objectType.item}
                                     className={`mr-1 ${classNames({
                                       "p-invalid": errors[P_BEL_OBJECT_TYPE_ID],
@@ -224,8 +219,7 @@ function BasicData() {
                     name={P_BEL_COST_ID}
                     control={control}
                     rules={{
-                      required:
-                        "Debe ingresar el valor del objeto personal en dólares.",
+                      required: "Debe ingresar el valor del objeto en dólares.",
                     }}
                     render={({ field, fieldState }) => (
                       <InputNumber
