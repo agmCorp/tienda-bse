@@ -5,7 +5,7 @@ import { RadioButton } from "primereact/radiobutton";
 import { Button } from "primereact/button";
 import Spinner from "../../utils/Spinner";
 import warning from "../../images/warning.png";
-import "./PaymentPlan.css";
+import { MI_BSE } from "../../utils/constants";
 
 function PaymentPlan() {
   const {
@@ -53,6 +53,7 @@ function PaymentPlan() {
 
   const warningX = (
     <div
+      className="my-2"
       style={{
         width: "100%",
         borderRadius: "10px",
@@ -60,27 +61,22 @@ function PaymentPlan() {
         backgroundColor: "#F7E4C0",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "20%",
-            textAlign: "center",
-            margin: "0.35em",
-          }}
-        >
-          <img src={warning} alt="" style={{ height: "30px" }} />
+      <div className="flex flex-row align-items-center justify-content-center">
+        <div className="w-2 text-center m-2">
+          <img src={warning} alt="Atención" className="h-2rem" />
         </div>
-        <div style={{ width: "80%", margin: "0.35em" }}>
-          Pagas la primera cuota ahora, las restantes facturas le llegarán a su
+        <div className="w-10 m-2">
+          Pagás la primera cuota ahora, las restantes facturas te llegarán a tu
           dirección de correo electrónico y podrán ser abonadas ingresando a
-          MiBSE o en las redes de cobranza.
+          <a
+            href={MI_BSE}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
+          >
+            MiBSE
+          </a>
+          o en las redes de cobranza.
         </div>
       </div>
     </div>
@@ -97,10 +93,13 @@ function PaymentPlan() {
         render={({ field }) => (
           <>
             {planDeCuotasList.map((planDeCuotas) => (
-              <div key={planDeCuotas.id} className="optionscont col">
-                <div className="option">
-                  <div className="row">
-                    <div className="radio">
+              <div
+                key={planDeCuotas.id}
+                className="flex flex-column justify-content-center align-items-center gap-3 w-full py-2"
+              >
+                <div className="w-full flex flex-row align-items-center border-round-md border-solid border-1 border-400">
+                  <div className="flex flex-row align-items-center justify-content-center w-full">
+                    <div className="align-self-center p-3">
                       <RadioButton
                         inputId={planDeCuotas.cantCuotas}
                         {...field}
@@ -112,13 +111,14 @@ function PaymentPlan() {
                         })}`}
                       />
                     </div>
-
-                    <div className="row">
-                      <div className="col">
-                        <p className="cuotas">3 cuotas</p>
-                        <p className="ptf">P.T.F $ 38.000</p>
+                    <div className="flex flex-row align-items-center justify-content-center w-full">
+                      <div className="flex flex-column w-full">
+                        <p className="mr-1 mb-1 mt-0">3 cuotas</p>
+                        <p className="text-xs line-height-1 m-0">
+                          P.T.F $ 38.000
+                        </p>
                       </div>
-                      <div className="col total">
+                      <div className="flex flex-column w-full text-right text-lg font-bold line-height-2 mr-4">
                         <p>$33.000</p>
                       </div>
                     </div>
@@ -142,134 +142,6 @@ function PaymentPlan() {
           icon="pi pi-check"
         />
       )}
-
-      {/* <div className="optionscont col">
-        <div className="option">
-          <div className="row">
-            <div className="radio">
-              <input type="radio" name="cuotassel" />
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <p className="cuotas">3 cuotas</p>
-                <p className="ptf">P.T.F $ 38.000</p>
-              </div>
-              <div className="col total">
-                <p>$33.000</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style={{
-            width: "100%",
-            borderRadius: "10px",
-            border: "1px solid #E4A630",
-            backgroundColor: "#F7E4C0",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                width: "20%",
-                textAlign: "center",
-                margin: "0.35em",
-              }}
-            >
-              <img src={warning} alt="" style={{ height: "30px" }} />
-            </div>
-            <div style={{ width: "80%", margin: "0.35em" }}>
-              Pagas la primera cuota ahora, las restantes facturas le llegarán a
-              su dirección de correo electrónico y podrán ser abonadas
-              ingresando a MiBSE o en las redes de cobranza.
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* division */}
-      {/* <div className="container m-auto">
-        <div className="cardx">
-          <div className="colx">
-            <p>Elige con que opción pagar tu plan/seguro</p>
-            <p className="subtitle">¿En cuántas cuotas quieres pagar?</p>
-            <div className="optionscont colx">
-              <div className="option">
-                <div className="row">
-                  <div className="radio">
-                    <input type="radio" name="cuotassel" />
-                  </div>
-                  <div className="row">
-                    <div className="col">
-                      <p className="cuotas">3 cuotas</p>
-                      <p className="ptf">P.T.F $ 38.000</p>
-                    </div>
-                    <div className="col total">
-                      <p>$33.000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="option">
-                <div className="row">
-                  <div className="radio">
-                    <input type="radio" name="cuotassel" />
-                  </div>
-                  <div className="row">
-                    <div className="col">
-                      <p className="cuotas">6 cuotas</p>
-                      <p className="ptf">P.T.F $ 38.000</p>
-                    </div>
-                    <div className="col total">
-                      <p>$33.000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  border: "1px solid #E4A630",
-                  backgroundColor: "#F7E4C0",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "20%",
-                      textAlign: "center",
-                      margin: "0.35em",
-                    }}
-                  >
-                    <img src="warning.png" alt="" style={{ height: "30px" }} />
-                  </div>
-                  <div style={{ width: "80%", margin: "0.35em" }}>
-                    Pagas la primera cuota ahora, las restantes facturas le
-                    llegarán a su dirección de correo electrónico y podrán ser
-                    abonadas ingresando a MiBSE o en las redes de cobranza.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </form>
   );
 }
