@@ -1,11 +1,11 @@
 import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
 
-import { MUST_QUOTE_PREFIX, QUOTATION_PREFIX } from "../../../utils/constants";
-import { getPBelCoverageInfo } from "../../../utils/pBel/pBelCoverageInfo";
-import { pBelFlowStepCompletedThunk } from "../../../reduxToolkit/pBel/pBelFlowSlice";
-import recommended from "../../../images/recommended.png";
-import Spinner from "../../../utils/Spinner";
+import { MUST_QUOTE_PREFIX, QUOTATION_PREFIX } from "../../utils/constants";
+import { getPBelCoverageInfo } from "../../utils/pBel/pBelCoverageInfo";
+import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import recommended from "../../images/recommended.png";
+import Spinner from "../../utils/Spinner";
 import "./PBelQuoteInfo.css";
 
 function PBelQuoteInfo({ coverageType }) {
@@ -25,7 +25,7 @@ function PBelQuoteInfo({ coverageType }) {
 
   return (
     <>
-      {!mustQuote ? (
+      {mustQuote ? (
         <Spinner size="medium" />
       ) : (
         <div id="content" className="col-12 md:col-6">
@@ -50,8 +50,8 @@ function PBelQuoteInfo({ coverageType }) {
               <hr className="my-3 mx-0 border-top-1 border-bottom-none border-400 border-primary" />
               <div className="flex align-items-center">
                 <span className="font-bold text-2xl text-primary">
-                  {`${insurance.currencySymbol} ${parseFloat(
-                    insurance.premium
+                  {`${insurance.simboloMoneda} ${parseFloat(
+                    insurance.premioFacturar
                   ).toLocaleString("es-ES", {
                     style: "decimal",
                     maximumFractionDigits: 2,
