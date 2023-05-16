@@ -1,0 +1,56 @@
+.optionscont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.col {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.option .radio {
+  align-self: center;
+  padding: 1em;
+}
+
+.cuotas {
+  margin: 0 0.5em 0.5em 0;
+}
+
+.total {
+  width: 100%;
+  text-align: end;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 27px;
+  margin-right: 1.5em;
+}
+
+.ptf {
+  font-size: 10px;
+  line-height: 14px;
+  margin: 0%;
+}
+
+/* ------------- */
