@@ -29,7 +29,7 @@ function PBelFlowLayout({ children }) {
           <div className="mx-auto my-5 shadow-4 p-4 w-11 md:w-6 border-round bg-white">
             <PBelFlowSteps />
             <div className="mt-3">
-              DETALLE
+              *** AGREGAR DETALLE ***
               {/* <Detail /> */}
             </div>
             <div className="mt-3">{children}</div>
