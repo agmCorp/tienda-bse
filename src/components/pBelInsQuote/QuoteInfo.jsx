@@ -6,9 +6,9 @@ import { getPBelCoverageInfo } from "../../utils/pBel/pBelCoverageInfo";
 import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
 import recommended from "../../images/recommended.png";
 import Spinner from "../../utils/Spinner";
-import "./PBelQuoteInfo.css";
+import "./QuoteInfo.css";
 
-function PBelQuoteInfo({ coverageType }) {
+function QuoteInfo({ coverageType }) {
   const mustQuote = useSelector(
     (state) => state.pBelFlow.quoteInfo[MUST_QUOTE_PREFIX + coverageType.item]
   );
@@ -90,4 +90,4 @@ function PBelQuoteInfo({ coverageType }) {
   );
 }
 
-export default PBelQuoteInfo;
+export default QuoteInfo;

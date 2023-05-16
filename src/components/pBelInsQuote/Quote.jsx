@@ -11,7 +11,7 @@ import useDataCollection from "../../hooks/useDataCollection";
 import { clientApi } from "../../utils/clientApi";
 import { MUST_QUOTE_PREFIX, QUOTATION_PREFIX } from "../../utils/constants";
 import Spinner from "../../utils/Spinner";
-import PBelQuoteInfo from "./PBelQuoteInfo";
+import QuoteInfo from "./QuoteInfo";
 
 function Quote() {
   const [loadingCoverageTypes, coverageTypes] = useDataCollection(
@@ -89,10 +89,7 @@ function Quote() {
           <>
             {coverageTypes.map((coverageType) => {
               return (
-                <PBelQuoteInfo
-                  key={coverageType.id}
-                  coverageType={coverageType}
-                />
+                <QuoteInfo key={coverageType.id} coverageType={coverageType} />
               );
             })}
           </>
