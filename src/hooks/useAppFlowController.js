@@ -58,7 +58,8 @@ function useAppFlowController(
   useEffect(() => {
     if (!flowNavigation.navigate && !paymentFlowNavigation.navigate) {
       // Steps that correspond to the current url
-      let currentUrl = window.location.href;
+      const url = new URL(window.location.href);
+      let currentUrl = url.pathname;
       let urlFlowStep = 0;
       let urlPaymentFlowStep = 0;
 

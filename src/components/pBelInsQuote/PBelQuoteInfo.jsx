@@ -43,12 +43,12 @@ function PBelQuoteInfo({ coverageType }) {
                   />
                 </>
               )}
-              <div className="font-bold text-2xl mb-2 text-primary">
+              <div className="font-bold text-2xl mb-2 text-primary text-center">
                 {coverageType.label}
               </div>
               <div>{coverageItem.planDescription}</div>
               <hr className="my-3 mx-0 border-top-1 border-bottom-none border-400 border-primary" />
-              <div className="flex align-items-center">
+              <div className="flex align-items-center m-auto">
                 <span className="font-bold text-2xl text-primary">
                   {`${insurance.simboloMoneda} ${parseFloat(
                     insurance.premioFacturar
