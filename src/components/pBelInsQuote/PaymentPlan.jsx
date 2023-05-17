@@ -78,21 +78,23 @@ function PaymentPlan() {
           <div className="flex justify-content-center">
             <div className="card">
               <form onSubmit={handleSubmit(onSubmit)} className="p-fluid mt-2">
-                <Message
-                  severity="warn"
-                  className="mt-1 mb-2"
-                  content={
-                    <>
-                      <img
-                        alt="atención"
-                        src={warning}
-                        className="ml-4 h-2rem"
-                      />
-                      <div className="ml-4">{warningMessage}</div>
-                    </>
-                  }
-                />
-
+                {selectedData.insurance.planDeCuotasList.length >
+                  SEE_ALL_THRESHOLD && (
+                  <Message
+                    severity="warn"
+                    className="mt-1 mb-2"
+                    content={
+                      <>
+                        <img
+                          alt="atención"
+                          src={warning}
+                          className="ml-4 h-2rem"
+                        />
+                        <div className="ml-4">{warningMessage}</div>
+                      </>
+                    }
+                  />
+                )}
                 <Controller
                   name={P_BEL_PAYMENT_PLAN_ID}
                   control={control}
@@ -110,7 +112,7 @@ function PaymentPlan() {
                               style={{ display: "none" }}
                             >
                               <div
-                                className={`flex flex-row align-items-center border-round-md border-solid border-1 border-400 w-full ${classNames(
+                                className={`flex flex-row align-items-center border-round-lg border-solid border-1 border-400 w-full ${classNames(
                                   {
                                     "border-solid border-1 border-red-500 p-error":
                                       errors[P_BEL_PAYMENT_PLAN_ID],
@@ -118,7 +120,7 @@ function PaymentPlan() {
                                 )}`}
                               >
                                 <div className="flex flex-row align-items-center justify-content-center w-full">
-                                  <div className="align-self-center p-3">
+                                  <div className="align-self-center p-3 mb-2">
                                     <RadioButton
                                       inputId={planDeCuotas.cantCuotas}
                                       {...field}
@@ -134,7 +136,7 @@ function PaymentPlan() {
                                       })}`}
                                     />
                                   </div>
-                                  <div className="flex flex-row align-items-center justify-content-center w-full">
+                                  <div className="flex flex-row align-items-center justify-content-center w-full mb-1">
                                     <div className="flex flex-column w-full">
                                       <p className="mr-1 mb-1 mt-0 font-semibold">
                                         {planDeCuotas.cantCuotas >
@@ -156,7 +158,7 @@ function PaymentPlan() {
                                         })}`}
                                       </p>
                                     </div>
-                                    <div className="flex flex-column w-full text-right text-lg font-semibold line-height-2 mr-4">
+                                    <div className="flex flex-column w-full text-right text-lg font-semibold line-height-2 mr-4 mt-1">
                                       <p>{`${
                                         selectedData.insurance.simboloMoneda
                                       } ${parseFloat(
