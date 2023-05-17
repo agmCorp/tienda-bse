@@ -136,13 +136,13 @@ function BasicData() {
   return (
     <>
       <div className="text-900 font-bold text-3xl text-center text-primary mb-4 mt-5">
-        DESCUBRÍ UN SEGURO PENSADO PARA TI
+        DESCUBRE UN SEGURO PENSADO PARA TI
       </div>
       <div className="flex flex-column text-700 text-xl text-center line-height-3 mb-4">
         <span>Contratar tu seguro es muy fácil.</span>
         <span>
-          Ingresa los datos básicos, selecciona tu plan de cobertura y paga en
-          línea!
+          Ingresa los datos básicos, selecciona tu plan de cobertura, forma de
+          pago y paga en línea!
         </span>
 
         <div className="form-data text-left mt-4">

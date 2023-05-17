@@ -80,7 +80,7 @@ function Quote() {
         PLANES DE COBERTURA
       </div>
       <div className="text-700 text-xl mb-4 text-center line-height-3">
-        Elegí la cobertura que mejor se adapta a tus necesidades
+        Elige la cobertura que mejor se adapta a tus necesidades
       </div>
       <div className="grid grid-nogutter justify-content-center">
         {loadingCoverageTypes ? (
