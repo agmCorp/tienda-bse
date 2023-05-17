@@ -1,4 +1,3 @@
-// AGM 05/23
 import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
 
 function PBelFlowAdditionalData() {

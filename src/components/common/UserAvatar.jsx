@@ -1,4 +1,3 @@
-// AGM 05/23
 import { useRef } from "react";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { Menu } from "primereact/menu";

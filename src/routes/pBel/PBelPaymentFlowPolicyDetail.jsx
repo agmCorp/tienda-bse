@@ -1,4 +1,3 @@
-// AGM 05/23
 import Protected from "../../utils/Protected";
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
 

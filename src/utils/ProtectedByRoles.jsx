@@ -1,4 +1,3 @@
-// AGM 05/23
 import { useKeycloak } from "@react-keycloak/web";
 
 function ProtectedByRoles({ roles, children }) {

@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import PBelPaymentFlowSteps from "./PBelPaymentFlowSteps";
 import usePBelAppFlowController from "../../../hooks/pBel/usePBelAppFlowController";
-//import useKK from "../../../hooks/pBel/useKK";
 import PBelPaymentFlowHeader from "./PBelPaymentFlowHeader";
 import PBelPaymentFlowFooter from "./PBelPaymentFlowFooter";
 import { pBelFlowGoToFirstStep } from "../../../reduxToolkit/pBel/pBelFlowSlice";
@@ -12,7 +11,6 @@ import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBel/pBelPaymen
 
 function PBelPaymentFlowLayout({ children }) {
   const accessGranted = usePBelAppFlowController();
-  //const accessGranted = useKK();
 
   const dispatch = useDispatch();
   const pBelPaymentFlowStep = useSelector(selectPBelPaymentFlowStep);

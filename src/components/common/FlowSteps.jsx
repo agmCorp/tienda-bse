@@ -1,4 +1,3 @@
-// AGM 05/23
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import styles from "./FlowSteps.module.css";

@@ -34,4 +34,5 @@ This project uses the following technologies:
 
 The API Rest apiTiendaWS must be running beforehand.
 
-_For running execute the following command: npm start_
+_For running execute the following command: npm start_  
+_amorales@bse.com.uy April 2023\_

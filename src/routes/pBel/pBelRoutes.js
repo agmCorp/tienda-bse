@@ -1,4 +1,3 @@
-// AGM 05/23
 const P_BEL_FLOW_ROUTE_BASIC_DATA = "/objPersonal/datosBasicos";
 const P_BEL_FLOW_ROUTE_QUOTE = "/objPersonal/cotizacion";
 const P_BEL_FLOW_ROUTE_PAYMENT_PLAN = "/objPersonal/planDePagos";

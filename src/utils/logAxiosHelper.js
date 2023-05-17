@@ -1,4 +1,3 @@
-// AGM 05/23
 const logAxiosError = (axios, axiosError) => {
   let errorMessage;
 

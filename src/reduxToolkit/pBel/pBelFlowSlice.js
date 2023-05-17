@@ -1,4 +1,3 @@
-// AGM 05/23
 import { createSlice } from "@reduxjs/toolkit";
 
 import { P_BEL_FLOW_ROUTE_BASIC_DATA } from "../../routes/pBel/pBelRoutes";

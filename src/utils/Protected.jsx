@@ -1,4 +1,3 @@
-// AGM 05/23
 import { useKeycloak } from "@react-keycloak/web";
 
 import Login from "../routes/Login";

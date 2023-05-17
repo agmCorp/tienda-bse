@@ -1,4 +1,3 @@
-// AGM 05/23
 import spinner from "../../images/spinner.gif";
 
 function SplashScreen() {

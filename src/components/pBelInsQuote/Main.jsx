@@ -1,4 +1,3 @@
-// AGM 05/23
 import { useRoutes } from "react-router-dom";
 
 import PBelPageNotFound from "../../routes/pBel/PBelPageNotFound";

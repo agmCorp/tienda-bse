@@ -1,4 +1,3 @@
-// AGM 05/23
 import {
   CONTACT_FORM,
   FACEBOOK_LINK,

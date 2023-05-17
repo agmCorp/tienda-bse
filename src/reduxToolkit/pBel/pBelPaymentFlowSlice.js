@@ -1,4 +1,3 @@
-// AGM 05/23
 import { createSlice } from "@reduxjs/toolkit";
 
 import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";

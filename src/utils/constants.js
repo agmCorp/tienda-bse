@@ -1,4 +1,3 @@
-// AGM 05/23
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "";
 const SECURE_SUBDIRECTORY = "secure";
 const PUBLIC_SUBDIRECTORY = "public";

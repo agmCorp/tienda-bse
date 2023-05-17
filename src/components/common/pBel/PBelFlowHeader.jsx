@@ -1,4 +1,3 @@
-// AGM 05/23
 import logoBSE from "../../../images/bse-logo-negative.png";
 import Header from "../../common/Header";
 import styles from "./PBelFlowHeader.module.css";

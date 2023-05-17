@@ -1,4 +1,3 @@
-// AGM 05/23
 import Keycloak from "keycloak-js";
 
 // BSE configuration
