@@ -8,15 +8,15 @@ import warning from "../../images/warning.png";
 import { MI_BSE } from "../../utils/constants";
 
 function PaymentPlan() {
+  const P_BEL_PAYMENT_PLAN_ID = "pBelPaymentPlan";
+  const defaultValues = JSON.parse(`{"${P_BEL_PAYMENT_PLAN_ID}":""}`);
+
   const {
-    register,
     control,
-    setValue,
-    setError,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({});
+  } = useForm({ defaultValues });
 
   const getFormErrorMessage = (name) => {
     return (
@@ -51,53 +51,47 @@ function PaymentPlan() {
     reset();
   };
 
-  const warningX = (
-    <div
-      className="my-2"
-      style={{
-        width: "100%",
-        borderRadius: "10px",
-        border: "1px solid #E4A630",
-        backgroundColor: "#F7E4C0",
-      }}
-    >
-      <div className="flex flex-row align-items-center justify-content-center">
-        <div className="w-2 text-center m-2">
-          <img src={warning} alt="Atención" className="h-2rem" />
-        </div>
-        <div className="w-10 m-2">
-          Pagás la primera cuota ahora, las restantes facturas te llegarán a tu
-          dirección de correo electrónico y podrán ser abonadas ingresando a
-          <a
-            href={MI_BSE}
-            target="_blank"
-            rel="noreferrer"
-            className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
-          >
-            MiBSE
-          </a>
-          o en las redes de cobranza.
-        </div>
-      </div>
-    </div>
+  const warningMessage = (
+    <>
+      <span>
+        Pagás la primera cuota ahora, las restantes facturas te llegarán a tu
+        dirección de correo electrónico y podrán ser abonadas ingresando a
+      </span>
+      <a
+        href={MI_BSE}
+        target="_blank"
+        rel="noreferrer"
+        className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
+      >
+        MiBSE
+      </a>
+      <span>o en las redes de cobranza.</span>
+    </>
   );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid mt-2">
       <Controller
-        name={"AGM_CUOTAS"}
+        name={P_BEL_PAYMENT_PLAN_ID}
         control={control}
         rules={{
-          required: "Debe seleccionar UNA CUOTA.",
+          required: "Debe seleccionar un plan de pago.",
         }}
         render={({ field }) => (
           <>
             {planDeCuotasList.map((planDeCuotas) => (
               <div
                 key={planDeCuotas.id}
-                className="flex flex-column justify-content-center align-items-center gap-3 w-full py-2"
+                className="flex flex-column justify-content-center align-items-center gap-3 py-2 w-full text-primary"
               >
-                <div className="w-full flex flex-row align-items-center border-round-md border-solid border-1 border-400">
+                <div
+                  className={`flex flex-row align-items-center border-round-md border-solid border-1 border-400 w-full ${classNames(
+                    {
+                      "border-solid border-1 border-red-500 p-error":
+                        errors[P_BEL_PAYMENT_PLAN_ID],
+                    }
+                  )}`}
+                >
                   <div className="flex flex-row align-items-center justify-content-center w-full">
                     <div className="align-self-center p-3">
                       <RadioButton
@@ -107,18 +101,18 @@ function PaymentPlan() {
                         value={planDeCuotas.cantCuotas}
                         checked={field.value === planDeCuotas.cantCuotas}
                         className={`${classNames({
-                          "p-invalid": errors["AGM_CUOTAS"],
+                          "p-invalid": errors[P_BEL_PAYMENT_PLAN_ID],
                         })}`}
                       />
                     </div>
                     <div className="flex flex-row align-items-center justify-content-center w-full">
                       <div className="flex flex-column w-full">
-                        <p className="mr-1 mb-1 mt-0">3 cuotas</p>
-                        <p className="text-xs line-height-1 m-0">
+                        <p className="mr-1 mb-1 mt-0 font-semibold">3 cuotas</p>
+                        <p className="text-xs text-600 line-height-1 m-0">
                           P.T.F $ 38.000
                         </p>
                       </div>
-                      <div className="flex flex-column w-full text-right text-lg font-bold line-height-2 mr-4">
+                      <div className="flex flex-column w-full text-right text-lg font-semibold line-height-2 mr-4">
                         <p>$33.000</p>
                       </div>
                     </div>
@@ -126,7 +120,16 @@ function PaymentPlan() {
                 </div>
               </div>
             ))}
-            {warningX}
+            <Message
+              severity="warn"
+              className="mt-1 mb-2"
+              content={
+                <>
+                  <img alt="atención" src={warning} className="ml-4 h-2rem" />
+                  <div className="ml-4">{warningMessage}</div>
+                </>
+              }
+            />
             {getFormErrorMessage(field.name)}
           </>
         )}
