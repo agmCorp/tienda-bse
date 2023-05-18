@@ -1,11 +1,14 @@
+import Protected from "../../utils/Protected";
 import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
+import AdditionalData from "../../components/pBelInsQuote/AdditionalData";
 
 function PBelFlowAdditionalData() {
   return (
-    <PBelFlowLayout>
-      {/* <AdditionalData /> */}
-      DATOS ADICIONALES
-    </PBelFlowLayout>
+    <Protected>
+      <PBelFlowLayout>
+        <AdditionalData />
+      </PBelFlowLayout>
+    </Protected>
   );
 }
 

@@ -79,6 +79,7 @@ function QuoteInfo({ coverageType }) {
               <hr className="mb-3 mx-0 border-top-1 border-bottom-none border-400 border-primary" />
               <Button
                 label="Contratar"
+                icon="pi pi-check"
                 className={`p-3 w-full ${coverageItem.buttonType} tienda-button`}
                 onClick={handleClick}
               />

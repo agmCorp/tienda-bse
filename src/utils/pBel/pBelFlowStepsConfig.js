@@ -38,7 +38,7 @@ const pBelFlowStepsConfig = [
     description: "Datos adicionales",
     route: P_BEL_FLOW_ROUTE_ADD_DATA,
     element: <PBelFlowAdditionalData />,
-    secured: false,
+    secured: true,
   },
   {
     label: "5",

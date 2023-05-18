@@ -20,3 +20,36 @@
   transition: 0.3s all;
   transform: translateY(15px);
 }
+
+/* ----------------------- */
+
+.p-datepicker-today > span {
+  background: red;
+}
+.p-datepicker-header {
+  background: var(--primary-color) !important;
+}
+.p-datepicker-year {
+  color: white !important;
+}
+.p-datepicker-month {
+  color: white !important;
+}
+.p-datepicker-title {
+  color: white !important;
+}
+.p-datepicker-next {
+  color: white !important;
+}
+
+.p-datepicker-prev {
+  color: white !important;
+}
+
+.p-datepicker-today {
+  color: white !important;
+}
+
+.p-datepicker-current-day {
+  color: red !important;
+}
