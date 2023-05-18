@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { Message } from "primereact/message";
 import { useForm, Controller } from "react-hook-form";
 import { InputNumber } from "primereact/inputnumber";
@@ -8,7 +8,6 @@ import { classNames } from "primereact/utils";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { RadioButton } from "primereact/radiobutton";
 import ReCAPTCHA from "react-google-recaptcha";
-
 import useDataCollection from "../../hooks/useDataCollection";
 import {
   RECAPTCHA_SITE_KEY,
@@ -30,8 +29,35 @@ import {
 } from "../../reduxToolkit/pBel/pBelFlowSlice";
 import styles from "./BasicData.module.css";
 import { clientApi } from "../../utils/clientApi";
+import lapTabIpadBlue from "../../images/lap-tab-ipad-blue.png";
+import lapTabIpadOrange from "../../images/lap-tab-ipad-orange.png";
+import lapTabIpadRed from "../../images/lap-tab-ipad-red.png";
+import photoFilmCopBlue from "../../images/photo-film-cop-blue.png";
+import photoFilmCopOrange from "../../images/photo-film-cop-orange.png";
+import photoFilmCopRed from "../../images/photo-film-cop-red.png";
 
 function BasicData() {
+  const ObjectTypeImages = [
+    {
+      id: 1,
+      item: "1",
+      imgBase: lapTabIpadBlue,
+      imgSelected: lapTabIpadOrange,
+      imgError: lapTabIpadRed,
+    },
+    {
+      id: 2,
+      item: "2",
+      imgBase: photoFilmCopBlue,
+      imgSelected: photoFilmCopOrange,
+      imgError: photoFilmCopRed,
+    },
+  ];
+
+  const getOjbectTypeImage = (objectTypeItem) => {
+    return ObjectTypeImages.find((element) => element.item === objectTypeItem);
+  };
+
   // Constants
   const P_BEL_COST_VALIDATION = {
     min: 300,
@@ -43,6 +69,7 @@ function BasicData() {
   const P_BEL_MOBILITY_TYPE_ID = "pBelMobilityType";
   const INPUT_CAPTCHA_ID = "pBelInputCaptcha";
 
+  const [objectTypeSelectedId, setObjectTypeSelectedId] = useState("");
   const overlayPanel = useRef(null);
   const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
@@ -183,20 +210,47 @@ function BasicData() {
                                     checked={
                                       field.value.item === objectType.item
                                     }
-                                    className={`mr-1 ${classNames({
-                                      "p-invalid": errors[P_BEL_OBJECT_TYPE_ID],
-                                    })}`}
+                                    className="hidden"
                                   />
-                                  <label
-                                    htmlFor={objectType.item}
-                                    className={`ml-1 mr-3 text-base ${classNames(
-                                      {
-                                        "p-error": errors[P_BEL_OBJECT_TYPE_ID],
-                                      }
-                                    )}`}
+                                  <div
+                                    className="flex flex-column align-items-left md:align-items-center cursor-pointer"
+                                    onClick={(e) => {
+                                      setObjectTypeSelectedId(objectType.item);
+                                      setValue(
+                                        P_BEL_OBJECT_TYPE_ID,
+                                        objectType,
+                                        {
+                                          shouldValidate: true,
+                                        }
+                                      );
+                                    }}
                                   >
-                                    {objectType.label}
-                                  </label>
+                                    <img
+                                      src={
+                                        errors[P_BEL_OBJECT_TYPE_ID]
+                                          ? getOjbectTypeImage(objectType.item)
+                                              .imgError
+                                          : objectTypeSelectedId ===
+                                            objectType.item
+                                          ? getOjbectTypeImage(objectType.item)
+                                              .imgSelected
+                                          : getOjbectTypeImage(objectType.item)
+                                              .imgBase
+                                      }
+                                      alt="Tipo de objeto"
+                                      className="max-w-max h-4rem"
+                                    />
+                                    <span
+                                      className={`${
+                                        objectTypeSelectedId ===
+                                          objectType.item && "text-primary"
+                                      } ml-1 mr-3 text-base ${classNames({
+                                        "p-error": errors[P_BEL_OBJECT_TYPE_ID],
+                                      })}`}
+                                    >
+                                      {objectType.label}
+                                    </span>
+                                  </div>
                                 </div>
                               ))}
                             </div>
@@ -209,16 +263,18 @@ function BasicData() {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor={P_BEL_COST_ID}>
+                  <label
+                    htmlFor={P_BEL_COST_ID}
+                    className="cursor-pointer text-primary hover:text-color-secondary"
+                    onClick={(e) => overlayPanel.current.toggle(e)}
+                  >
                     <i
-                      className="pi pi-bell cursor-pointer text-primary hover:text-color-secondary mr-2"
-                      onClick={(e) => overlayPanel.current.toggle(e)}
+                      className="pi pi-bell mr-2"
                       aria-haspopup
                       aria-controls="overlayPanel"
                     ></i>
                     <span
-                      className="text-xs cursor-pointer text-primary hover:text-color-secondary"
-                      onClick={(e) => overlayPanel.current.toggle(e)}
+                      className="text-xs"
                       aria-haspopup
                       aria-controls="overlayPanel"
                     >

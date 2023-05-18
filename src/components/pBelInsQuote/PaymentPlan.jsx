@@ -137,8 +137,8 @@ function PaymentPlan() {
                                   </div>
                                   <div className="flex flex-row align-items-center justify-content-center w-full mb-1">
                                     <div className="flex flex-column w-full">
-                                      <p className="mr-1 mb-1 mt-0 font-semibold">
-                                        {planDeCuotas.descripcion.toLowerCase()}
+                                      <p className="mr-1 mb-1 mt-0 font-semibold text-sm">
+                                        {planDeCuotas.descripcion}
                                       </p>
                                       <p className="text-xs text-600 line-height-1 m-0">
                                         {`P.T.F ${
