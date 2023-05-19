@@ -16,8 +16,8 @@ import {
 
 function PaymentPlan() {
   const SEE_ALL_THRESHOLD = 4;
-  const P_BEL_PAYMENT_PLAN_ID = "pBelPaymentPlan";
-  const defaultValues = JSON.parse(`{"${P_BEL_PAYMENT_PLAN_ID}":""}`);
+  const PAYMENT_PLAN_ID = "paymentPlan";
+  const defaultValues = JSON.parse(`{"${PAYMENT_PLAN_ID}":""}`);
 
   const selectedData = useSelector(selectPBelFlowSelectedData);
   const dispatch = useDispatch();
@@ -95,7 +95,7 @@ function PaymentPlan() {
                   />
                 )}
                 <Controller
-                  name={P_BEL_PAYMENT_PLAN_ID}
+                  name={PAYMENT_PLAN_ID}
                   control={control}
                   rules={{
                     required: "Debe seleccionar un plan de pago.",
@@ -114,7 +114,7 @@ function PaymentPlan() {
                                 className={`flex flex-row align-items-center border-round-lg border-solid border-1 border-400 w-full ${classNames(
                                   {
                                     "border-solid border-1 border-red-500 p-error":
-                                      errors[P_BEL_PAYMENT_PLAN_ID],
+                                      errors[PAYMENT_PLAN_ID],
                                   }
                                 )}`}
                               >
@@ -130,8 +130,7 @@ function PaymentPlan() {
                                         planDeCuotas.cantCuotas
                                       }
                                       className={`${classNames({
-                                        "p-invalid":
-                                          errors[P_BEL_PAYMENT_PLAN_ID],
+                                        "p-invalid": errors[PAYMENT_PLAN_ID],
                                       })}`}
                                     />
                                   </div>

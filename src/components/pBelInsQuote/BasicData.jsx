@@ -64,10 +64,11 @@ function BasicData() {
     max: 4500,
   };
   const WIDTH_THRESHOLD = 400;
-  const P_BEL_OBJECT_TYPE_ID = "pBelObjectType";
-  const P_BEL_COST_ID = "pBelCost";
-  const P_BEL_MOBILITY_TYPE_ID = "pBelMobilityType";
-  const INPUT_CAPTCHA_ID = "pBelInputCaptcha";
+  const OBJECT_TYPE_ID = "objectType";
+  const COST_ID = "cost";
+  const MOBILITY_TYPE_ID = "mobilityType";
+  const INPUT_CAPTCHA_ID = "inputCaptcha";
+  const CAPTCHA_ID = "recaptcha";
 
   const [objectTypeSelectedId, setObjectTypeSelectedId] = useState("");
   const overlayPanel = useRef(null);
@@ -84,7 +85,7 @@ function BasicData() {
   );
 
   const defaultValues = JSON.parse(
-    `{"${P_BEL_OBJECT_TYPE_ID}":"", "${P_BEL_COST_ID}":${P_BEL_COST_VALIDATION.min}, "${P_BEL_MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
+    `{"${OBJECT_TYPE_ID}":"", "${COST_ID}":${P_BEL_COST_VALIDATION.min}, "${MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
   );
 
   const {
@@ -181,7 +182,7 @@ function BasicData() {
                     <Spinner size="small" />
                   ) : (
                     <Controller
-                      name={P_BEL_OBJECT_TYPE_ID}
+                      name={OBJECT_TYPE_ID}
                       control={control}
                       rules={{
                         required: "Debe seleccionar un tipo de objeto.",
@@ -216,18 +217,14 @@ function BasicData() {
                                     className="flex flex-column align-items-left md:align-items-center cursor-pointer"
                                     onClick={(e) => {
                                       setObjectTypeSelectedId(objectType.item);
-                                      setValue(
-                                        P_BEL_OBJECT_TYPE_ID,
-                                        objectType,
-                                        {
-                                          shouldValidate: true,
-                                        }
-                                      );
+                                      setValue(OBJECT_TYPE_ID, objectType, {
+                                        shouldValidate: true,
+                                      });
                                     }}
                                   >
                                     <img
                                       src={
-                                        errors[P_BEL_OBJECT_TYPE_ID]
+                                        errors[OBJECT_TYPE_ID]
                                           ? getOjbectTypeImage(objectType.item)
                                               .imgError
                                           : objectTypeSelectedId ===
@@ -245,7 +242,7 @@ function BasicData() {
                                         objectTypeSelectedId ===
                                           objectType.item && "text-primary"
                                       } ml-1 mr-3 text-base ${classNames({
-                                        "p-error": errors[P_BEL_OBJECT_TYPE_ID],
+                                        "p-error": errors[OBJECT_TYPE_ID],
                                       })}`}
                                     >
                                       {objectType.label}
@@ -264,7 +261,7 @@ function BasicData() {
 
                 <div className="mb-4">
                   <label
-                    htmlFor={P_BEL_COST_ID}
+                    htmlFor={COST_ID}
                     className="cursor-pointer text-primary hover:text-color-secondary"
                     onClick={(e) => overlayPanel.current.toggle(e)}
                   >
@@ -283,7 +280,7 @@ function BasicData() {
                     <span className="p-error font-bold ml-1">*</span>
                   </label>
                   <Controller
-                    name={P_BEL_COST_ID}
+                    name={COST_ID}
                     control={control}
                     rules={{
                       required: "Debe ingresar el valor del objeto en dólares.",
@@ -308,7 +305,7 @@ function BasicData() {
                       />
                     )}
                   />
-                  {getFormErrorMessage(P_BEL_COST_ID)}
+                  {getFormErrorMessage(COST_ID)}
                   <OverlayPanel
                     ref={overlayPanel}
                     showCloseIcon
@@ -346,7 +343,7 @@ function BasicData() {
                     <Spinner size="small" />
                   ) : (
                     <Controller
-                      name={P_BEL_MOBILITY_TYPE_ID}
+                      name={MOBILITY_TYPE_ID}
                       control={control}
                       rules={{
                         required: "Debe seleccionar el tipo de movilidad.",
@@ -376,15 +373,14 @@ function BasicData() {
                                       field.value.item === mobilityType.item
                                     }
                                     className={`mr-1 ${classNames({
-                                      "p-invalid": errors[P_BEL_OBJECT_TYPE_ID],
+                                      "p-invalid": errors[OBJECT_TYPE_ID],
                                     })}`}
                                   />
                                   <label
                                     htmlFor={mobilityType.item}
                                     className={`ml-1 mr-3 text-base ${classNames(
                                       {
-                                        "p-error":
-                                          errors[P_BEL_MOBILITY_TYPE_ID],
+                                        "p-error": errors[MOBILITY_TYPE_ID],
                                       }
                                     )}`}
                                   >
@@ -418,7 +414,7 @@ function BasicData() {
                     })}`}
                   >
                     <ReCAPTCHA
-                      id="recaptcha"
+                      id={CAPTCHA_ID}
                       sitekey={RECAPTCHA_SITE_KEY}
                       onChange={handleOnChangeCaptcha}
                       onExpired={handleOnExpiredCaptcha}

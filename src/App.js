@@ -5,6 +5,7 @@ import "./primereact-theme/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
+import { addLocale } from "primereact/api";
 
 // ReduxTookit
 import store from "./reduxToolkit/store";
@@ -23,6 +24,51 @@ import Main from "./components/pBelInsQuote/Main";
 import SplashScreen from "./components/common/SplashScreen";
 
 function App() {
+  addLocale("es", {
+    firstDayOfWeek: 1,
+    dayNames: [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+    ],
+    dayNamesShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+    dayNamesMin: ["DO", "LU", "MA", "MI", "JU", "VI", "SA"],
+    monthNames: [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ],
+    monthNamesShort: [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic",
+    ],
+    today: "Hoy",
+    clear: "Claro",
+  });
+
   let persistor = persistStore(store);
   const [keycloakReady, setKeycloakReady] = useState(false);
 
