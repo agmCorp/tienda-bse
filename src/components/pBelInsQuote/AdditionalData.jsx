@@ -73,13 +73,13 @@ function AdditionalData() {
   maxDate = today;
 
   function dateTemplate(date) {
+    console.log(date);
     let result;
-    console.log("es hoy?", date.today);
     if (date.selectable) {
       if (date.today) {
-        result = <div className="text-pink-500 font-semibold">{date.day}</div>;
+        result = <span className="text-white font-bold">{date.day}</span>;
       } else {
-        result = <div className="text-primary font-semibold">{date.day}</div>;
+        result = <span className="text-primary font-bold">{date.day}</span>;
       }
     } else {
       result = <div className="text-400">{date.day}</div>;

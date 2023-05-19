@@ -23,33 +23,49 @@
 
 /* ----------------------- */
 
-.p-datepicker-today > span {
-  background: red;
-}
-.p-datepicker-header {
+/* .p-datepicker {
+  color: red !important;
+} */
+
+/* .p-datepicker table td.p-datepicker-today > span {
+  background: black !important;
+} */
+
+/* .p-datepicker table td > span.p-highlight {
   background: var(--primary-color) !important;
-}
+} */
+
+/* .p-datepicker-today > span {
+  background: red;
+} */
+
+/* .p-datepicker-header {
+  background: var(--primary-color) !important;
+  border-bottom: 1px solid red !important;
+} */
+/*
 .p-datepicker-year {
-  color: white !important;
+  color: var(--orange-500) !important;
 }
 .p-datepicker-month {
-  color: white !important;
+  color: var(--orange-500) !important;
 }
 .p-datepicker-title {
-  color: white !important;
+  color: var(--orange-500) !important;
 }
+*/
 .p-datepicker-next {
-  color: white !important;
+  color: var(--primary-color) !important;
 }
 
 .p-datepicker-prev {
-  color: white !important;
+  color: var(--primary-color) !important;
 }
 
-.p-datepicker-today {
+/* .p-datepicker-today {
   color: white !important;
-}
+} */
 
-.p-datepicker-current-day {
+/* .p-datepicker-current-day {
   color: red !important;
-}
+} */
