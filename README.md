@@ -32,7 +32,10 @@ This project uses the following technologies:
 - react-google-recaptcha: react component for Google reCAPTCHA v2.  
   npm install react-google-recaptcha
 
+- idleTimer: detects when you user has gone idle.  
+  npm install react-idle-timer
+
 The API Rest apiTiendaWS must be running beforehand.
 
 _For running execute the following command: npm start_  
-_amorales@bse.com.uy April 2023_
+_amorales@bse.com.uy April 2023\_
