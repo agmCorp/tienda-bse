@@ -59,7 +59,7 @@ function BasicData() {
   };
 
   // Constants
-  const P_BEL_COST_VALIDATION = {
+  const COST_VALIDATION = {
     min: 300,
     max: 4500,
   };
@@ -85,7 +85,7 @@ function BasicData() {
   );
 
   const defaultValues = JSON.parse(
-    `{"${OBJECT_TYPE_ID}":"", "${COST_ID}":${P_BEL_COST_VALIDATION.min}, "${MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
+    `{"${OBJECT_TYPE_ID}":"", "${COST_ID}":${COST_VALIDATION.min}, "${MOBILITY_TYPE_ID}":"", "${INPUT_CAPTCHA_ID}":""}`
   );
 
   const {
@@ -295,8 +295,8 @@ function BasicData() {
                         incrementButtonClassName="p-button-primary"
                         incrementButtonIcon="pi pi-plus"
                         decrementButtonIcon="pi pi-minus"
-                        min={P_BEL_COST_VALIDATION.min}
-                        max={P_BEL_COST_VALIDATION.max}
+                        min={COST_VALIDATION.min}
+                        max={COST_VALIDATION.max}
                         prefix="U$S "
                         className={classNames({
                           "p-invalid": fieldState.invalid,
@@ -314,7 +314,7 @@ function BasicData() {
                   >
                     <div className="text-sm">
                       Para valor de objeto personal superior a U$S
-                      <span className="mx-1">{P_BEL_COST_VALIDATION.max}</span>
+                      <span className="mx-1">{COST_VALIDATION.max}</span>
                       el seguro requiere cotización específica. Puede
                       solicitarlo a través del whatsapp
                       <a
@@ -373,7 +373,7 @@ function BasicData() {
                                       field.value.item === mobilityType.item
                                     }
                                     className={`mr-1 ${classNames({
-                                      "p-invalid": errors[OBJECT_TYPE_ID],
+                                      "p-invalid": errors[MOBILITY_TYPE_ID],
                                     })}`}
                                   />
                                   <label
