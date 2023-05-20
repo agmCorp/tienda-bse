@@ -15,7 +15,7 @@ function PBelPaymentFlowLayout({ children }) {
   const dispatch = useDispatch();
   const pBelPaymentFlowStep = useSelector(selectPBelPaymentFlowStep);
 
-  const handleClick = () => {
+  const handleOnClick = () => {
     dispatch(pBelFlowGoToFirstStep());
   };
 
@@ -31,7 +31,7 @@ function PBelPaymentFlowLayout({ children }) {
               getLastStep(getAllPBelPaymentFlowStepsConfig()) && (
               <div className="text-500 font-medium mt-3">
                 <span
-                  onClick={handleClick}
+                  onClick={handleOnClick}
                   className="cursor-pointer hover:text-blue-500"
                 >
                   <i className="pi pi-angle-double-left mr-2" />

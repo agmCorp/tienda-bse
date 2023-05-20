@@ -19,7 +19,7 @@ function QuoteInfo({ coverageType }) {
 
   const coverageItem = getPBelCoverageInfo(coverageType.item);
 
-  const handleClick = () => {
+  const handleOnClick = () => {
     dispatch(pBelFlowStepCompletedThunk({ insurance }));
   };
 
@@ -81,7 +81,7 @@ function QuoteInfo({ coverageType }) {
                 label="Contratar"
                 icon="pi pi-check"
                 className={`p-3 w-full ${coverageItem.buttonType} tienda-button`}
-                onClick={handleClick}
+                onClick={handleOnClick}
               />
             </div>
           </div>

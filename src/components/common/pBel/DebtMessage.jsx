@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { WHATSAPP, CONTACT_FORM } from "../../../utils/constants";
 
-function DebtMessage({ handleClick, isBikeFlow }) {
+function DebtMessage({ handleOnClick, isBikeFlow }) {
   return (
     <div className="mx-auto my-5 shadow-4 p-4 w-11 md:w-6 border-round bg-white">
       <div className="surface-section p-3 md:p-6">
@@ -40,7 +40,7 @@ function DebtMessage({ handleClick, isBikeFlow }) {
             <span
               className="inline-flex align-items-center justify-content-center ml-auto border-circle hover:bg-pink-50 no-underline cursor-pointer transition-colors transition-duration-150"
               style={{ width: "1.5rem", height: "1.5rem" }}
-              onClick={handleClick}
+              onClick={handleOnClick}
             >
               <i className="pi pi-times text-pink-900"></i>
             </span>
@@ -51,7 +51,7 @@ function DebtMessage({ handleClick, isBikeFlow }) {
           className={`p-3 w-full p-button-outlined mt-4 ${
             !isBikeFlow ? "p-button-info" : ""
           }`}
-          onClick={handleClick}
+          onClick={handleOnClick}
         />
       </div>
     </div>

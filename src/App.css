@@ -19,7 +19,7 @@
 
 .tienda-button:active {
   transition: 0.3s all;
-  transform: translateY(15px);
+  transform: translateY(10px);
 }
 
 .step-button:hover {
@@ -31,5 +31,5 @@
 
 .step-button:active {
   transition: 0.3s all;
-  transform: translateY(15px);
+  transform: translateY(10px);
 }

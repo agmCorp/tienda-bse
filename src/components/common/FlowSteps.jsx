@@ -5,7 +5,7 @@ import styles from "./FlowSteps.module.css";
 function FlowSteps({ step, flowGoToStep, getAllFlowStepsConfig }) {
   const dispatch = useDispatch();
 
-  const handleClick = (stepValue) => {
+  const handleOnClick = (stepValue) => {
     dispatch(flowGoToStep(stepValue));
   };
 
@@ -14,7 +14,7 @@ function FlowSteps({ step, flowGoToStep, getAllFlowStepsConfig }) {
       <>
         <Button
           className="p-button-rounded p-button-outlined p-button-secondary bg-white hover:text-white hover:bg-primary step-button"
-          onClick={() => handleClick(stepValue)}
+          onClick={() => handleOnClick(stepValue)}
         >
           <span className="h-2rem w-2rem line-height-4">
             <i className="pi pi-check font-bold" />
@@ -22,7 +22,7 @@ function FlowSteps({ step, flowGoToStep, getAllFlowStepsConfig }) {
         </Button>
         <span
           className="text-secondary mx-2 cursor-pointer hover:text-primary"
-          onClick={() => handleClick(stepValue)}
+          onClick={() => handleOnClick(stepValue)}
         >
           {description}
         </span>

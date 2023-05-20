@@ -17,7 +17,7 @@ function PBelFlowLayout({ children }) {
   const dispatch = useDispatch();
   const pBelFlowStep = useSelector(selectPBelFlowStep);
 
-  const handleClick = () => {
+  const handleOnClick = () => {
     dispatch(pBelFlowGoToFirstStep());
   };
 
@@ -36,7 +36,7 @@ function PBelFlowLayout({ children }) {
             {pBelFlowStep > getFirstStep() && (
               <div className="text-500 font-medium mt-3">
                 <span
-                  onClick={handleClick}
+                  onClick={handleOnClick}
                   className="cursor-pointer hover:text-primary"
                 >
                   <i className="pi pi-angle-double-left mr-2" />

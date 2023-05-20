@@ -36,9 +36,9 @@ function Quote() {
         {},
         {
           planCobertura: coverageItem,
-          tipoObjeto: basicData.pBelObjectType.item,
-          valorObjeto: basicData.pBelCost,
-          movilidad: basicData.pBelMobilityType.item,
+          tipoObjeto: basicData.objectType.item,
+          valorObjeto: basicData.cost,
+          movilidad: basicData.mobilityType.item,
         }
       );
 

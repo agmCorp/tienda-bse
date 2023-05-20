@@ -6,7 +6,7 @@ import UserAvatar from "./UserAvatar";
 function Header({ bgColor, logo, heightLogo, title }) {
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleOnClick = () => {
     dispatch(pBelFlowGoToFirstStep());
   };
 
@@ -18,7 +18,7 @@ function Header({ bgColor, logo, heightLogo, title }) {
             src={logo}
             alt="bici"
             className={`cursor-pointer ${heightLogo}`}
-            onClick={handleClick}
+            onClick={handleOnClick}
           />
         </div>
         <div className="mx-6 text-center mt-4 md:mt-auto m-auto">
