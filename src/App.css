@@ -7,6 +7,7 @@
   text-transform: uppercase;
   letter-spacing: 10px;
   text-indent: 5px;
+  height: 45px;
 }
 
 .tienda-button:hover {
@@ -17,6 +18,18 @@
 }
 
 .tienda-button:active {
+  transition: 0.3s all;
+  transform: translateY(15px);
+}
+
+.step-button:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+  transition: 0.3s all;
+  font-weight: bold;
+  transform: translateY(3px);
+}
+
+.step-button:active {
   transition: 0.3s all;
   transform: translateY(15px);
 }

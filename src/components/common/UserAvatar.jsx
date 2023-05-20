@@ -6,6 +6,7 @@ import { useKeycloak } from "@react-keycloak/web";
 
 import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
 import { getFirstRoute } from "../../utils/stepsHelper";
+import IdleMonitor from "../../utils/IdleMonitor";
 
 function UserAvatar() {
   const { keycloak } = useKeycloak();
@@ -49,6 +50,8 @@ function UserAvatar() {
     <>
       {keycloak.authenticated && (
         <div className="flex flex-column md:flex-row">
+          <IdleMonitor timesUp={handleLogout} />
+
           <Menu model={items} popup ref={menu} id="popup_menu" />
           <OverlayPanel ref={op}>{keycloak.tokenParsed?.email}</OverlayPanel>
 
