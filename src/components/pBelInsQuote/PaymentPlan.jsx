@@ -37,7 +37,9 @@ function PaymentPlan() {
   };
 
   const handleOnChangeToggle = (e) => {
-    reset();
+    if (seeAll) {
+      reset();
+    }
     setSeeAll(e.value);
   };
 
