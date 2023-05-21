@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage/session"; // sessionStorage (web)
 
 import pBelFlowReducer from "./pBel/pBelFlowSlice";
 import pBelPaymentFlowReducer from "./pBel/pBelPaymentFlowSlice";

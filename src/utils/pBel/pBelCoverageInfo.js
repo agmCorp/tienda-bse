@@ -18,27 +18,27 @@ function getPBelCoverageInfo(coverageItem) {
       benefits: [
         {
           id: 1,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Contratación inmediata</span>,
         },
         {
           id: 2,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Denuncia de siniestros 24/7</span>,
         },
         {
           id: 3,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Pérdida total por robo directo o en domicilio</span>,
         },
         {
           id: 4,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Daños por la acción directa del fuego</span>,
         },
         {
           id: 5,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Daños causados por calor excesivo</span>,
         },
       ],
@@ -58,37 +58,37 @@ function getPBelCoverageInfo(coverageItem) {
       benefits: [
         {
           id: 1,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Contratación inmediata</span>,
         },
         {
           id: 2,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Denuncia de siniestros 24/7</span>,
         },
         {
           id: 3,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Pérdida total por robo directo o en domicilio</span>,
         },
         {
           id: 4,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Daños por la acción directa del fuego</span>,
         },
         {
           id: 5,
-          checkColor: "text-primary",
+          highlight: false,
           benefit: <span>Daños causados por calor excesivo</span>,
         },
         {
           id: 6,
-          checkColor: "text-secondary",
+          highlight: true,
           benefit: <span>Daño accidental</span>,
         },
         {
           id: 7,
-          checkColor: "text-secondary",
+          highlight: true,
           benefit: <span>Cobertura de infidelidad de dependientes</span>,
         },
       ],

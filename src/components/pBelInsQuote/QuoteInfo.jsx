@@ -28,7 +28,7 @@ function QuoteInfo({ coverageType }) {
       {mustQuote ? (
         <Spinner size="medium" />
       ) : (
-        <div id="content" className="col-12 md:col-6">
+        <div id="quote-info-content" className="col-12 md:col-6">
           <div className="md:px-3 py-3 h-full">
             <div className="shadow-4 p-3 flex flex-column border-round border-primary border-2 bg-card">
               {coverageItem.isPopular && (
@@ -69,7 +69,9 @@ function QuoteInfo({ coverageType }) {
                       className="flex align-items-center mb-3"
                     >
                       <i
-                        className={`pi pi-check-circle ${benefit.checkColor} mr-2`}
+                        className={`pi pi-check-circle ${
+                          benefit.highlight ? "highlight" : "text-primary"
+                        } mr-2`}
                       ></i>
                       {benefit.benefit}
                     </li>

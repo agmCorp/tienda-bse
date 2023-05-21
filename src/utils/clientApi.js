@@ -10,7 +10,6 @@ import {
   logAxiosRequest,
   logAxiosResponse,
 } from "./logAxiosHelper";
-import { validateToken } from "./tokenHelper";
 
 const clientApi = async (
   method,
@@ -24,7 +23,7 @@ const clientApi = async (
 
   const headers = secure
     ? {
-        Authorization: `Bearer ${validateToken().token}`,
+        Authorization: `Bearer abc`,
         ...customHeaders,
       }
     : { ...customHeaders };
