@@ -76,7 +76,8 @@ function App() {
     // Token expired
     if (event && event === "onTokenExpired") {
       try {
-        const refreshed = await keycloak.updateToken();
+        // If the Access Token Lifespan on kyecloak-server is at the default value of 5 minutes, you should use a value less than 300 seconds.
+        const refreshed = await keycloak.updateToken(180); // Three minutes
         console.log(
           refreshed
             ? "Token was successfully refreshed"
