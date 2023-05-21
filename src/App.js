@@ -72,8 +72,22 @@ function App() {
   let persistor = persistStore(store);
   const [keycloakReady, setKeycloakReady] = useState(false);
 
-  // Keycloak ready
-  const onKeycloakEvent = (event, error) => {
+  const onKeycloakEvent = async (event, error) => {
+    // Token expired
+    if (event && event === "onTokenExpired") {
+      try {
+        const refreshed = await keycloak.updateToken();
+        console.log(
+          refreshed
+            ? "Token was successfully refreshed"
+            : "Token is still valid"
+        );
+      } catch (err) {
+        console.log("Failed to refresh the token, or the session has expired");
+      }
+    }
+
+    // Keycloak ready
     if (event && event === "onReady") {
       setKeycloakReady(true);
     }
