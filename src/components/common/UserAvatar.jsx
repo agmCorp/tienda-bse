@@ -2,14 +2,14 @@ import { useRef } from "react";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { Menu } from "primereact/menu";
 import { Avatar } from "primereact/avatar";
-import { useKeycloak } from "@react-keycloak/web";
+import { useAuth } from "react-oidc-context";
 
-import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
-import { getFirstRoute } from "../../utils/stepsHelper";
 import IdleMonitor from "../../utils/IdleMonitor";
+import { getFirstRoute } from "../../utils/stepsHelper";
+import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
 
 function UserAvatar() {
-  const { keycloak } = useKeycloak();
+  const auth = useAuth();
   const menu = useRef(null);
   const op = useRef(null);
 
@@ -35,7 +35,14 @@ function UserAvatar() {
     const home =
       currentUrl.substring(0, index + searchString.length) +
       getFirstRoute(getAllPBelFlowStepsConfig());
-    keycloak.logout({ redirectUri: home });
+    console.log("HOME", home);
+
+    auth.clearStaleState();
+    auth.revokeTokens();
+    // auth.signoutRedirect({ redirectUri: home });
+
+    auth.removeUser();
+    console.log("esta autenticado:", auth.isAuthenticated);
   };
 
   const handleOnMouseOver = (e) => {
@@ -48,12 +55,12 @@ function UserAvatar() {
 
   return (
     <>
-      {keycloak.authenticated && (
+      {auth.isAuthenticated && (
         <div className="flex flex-column md:flex-row">
           <IdleMonitor timesUp={handleLogout} />
 
           <Menu model={items} popup ref={menu} id="popup_menu" />
-          <OverlayPanel ref={op}>{keycloak.tokenParsed?.email}</OverlayPanel>
+          <OverlayPanel ref={op}>{auth.user?.profile.email}</OverlayPanel>
 
           <div
             onClick={(event) => menu.current.toggle(event)}
@@ -74,7 +81,7 @@ function UserAvatar() {
             onMouseOut={handleOnMouseOut}
           >
             <span className="md:ml-2 font-semibold text-white text-lg uppercase">
-              {keycloak.tokenParsed?.name}
+              {auth.user?.profile.name}
             </span>
           </div>
         </div>

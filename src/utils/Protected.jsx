@@ -1,11 +1,11 @@
-import { useKeycloak } from "@react-keycloak/web";
+import { useAuth } from "react-oidc-context";
 
 import Login from "../routes/Login";
 
 function Protected({ children }) {
-  const { keycloak } = useKeycloak();
+  const auth = useAuth();
 
-  return keycloak.authenticated ? <>{children}</> : <Login />;
+  return auth.isAuthenticated ? <>{children}</> : <Login />;
 }
 
 export default Protected;

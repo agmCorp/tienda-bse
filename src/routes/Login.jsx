@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import { useKeycloak } from "@react-keycloak/web";
+import { useAuth } from "react-oidc-context";
 
 function Login() {
-  const { keycloak } = useKeycloak();
+  const auth = useAuth();
 
   useEffect(() => {
-    if (!keycloak.authenticated) {
-      keycloak.login();
+    if (!auth.isAuthenticated) {
+      auth.signinRedirect();
     }
-  }, [keycloak]);
+  }, []);
 
   return <></>;
 }
