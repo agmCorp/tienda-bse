@@ -1,5 +1,5 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "";
-const SECURE_SUBDIRECTORY = "secure";
+const SECURE_SUBDIRECTORY = "secured";
 const PUBLIC_SUBDIRECTORY = "public";
 const RECAPTCHA_SITE_KEY = "6Ld0z8IlAAAAAPJd_DnQdxvVYor9ERjxAcRdkQNW";
 const MUST_QUOTE_PREFIX = "mustQuote_";

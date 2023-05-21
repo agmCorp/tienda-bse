@@ -17,13 +17,14 @@ const clientApi = async (
   secure = false,
   customHeaders = {},
   data = {},
-  otherOptions = {}
+  otherOptions = {},
+  token = {}
 ) => {
   let result = { ok: true, data: {} };
 
   const headers = secure
     ? {
-        Authorization: `Bearer abc`,
+        Authorization: `Bearer ${token}}`,
         ...customHeaders,
       }
     : { ...customHeaders };

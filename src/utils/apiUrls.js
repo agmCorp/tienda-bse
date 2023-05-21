@@ -3,6 +3,7 @@ const API_P_BEL_MOBILITY_TYPES = "tipos-movilidad";
 const API_P_BEL_COVERAGE_TYPES = "planes-cobertura";
 const API_P_BEL_SITE_VERIFY = "recaptcha-site-verify";
 const API_PBEL_QUOTE = "cotizacion";
+const API_PBEL_FILEUPLOAD = "upload";
 
 export {
   API_P_BEL_OBJECT_TYPES,
@@ -10,4 +11,5 @@ export {
   API_P_BEL_COVERAGE_TYPES,
   API_P_BEL_SITE_VERIFY,
   API_PBEL_QUOTE,
+  API_PBEL_FILEUPLOAD,
 };

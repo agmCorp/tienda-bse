@@ -1,12 +1,12 @@
 import Protected from "../../utils/Protected";
 import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
+import Images from "../../components/pBelInsQuote/Images";
 
 function PBelFlowImages() {
   return (
     <Protected>
       <PBelFlowLayout>
-        UPLOAD
-        {/* <Images /> */}
+        <Images />
       </PBelFlowLayout>
     </Protected>
   );

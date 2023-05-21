@@ -17,7 +17,7 @@ function Quote() {
   const [loadingCoverageTypes, coverageTypes] = useDataCollection(
     API_P_BEL_COVERAGE_TYPES
   );
-  const basicData = useSelector(selectPBelFlowSelectedData);
+  const selectedData = useSelector(selectPBelFlowSelectedData);
   const quoteInfo = useSelector(selectPBelFlowQuoteInfo);
   const dispatch = useDispatch();
   const [quoteInProgress, setQuoteInProgress] = useState(false);
@@ -36,9 +36,9 @@ function Quote() {
         {},
         {
           planCobertura: coverageItem,
-          tipoObjeto: basicData.objectType.item,
-          valorObjeto: basicData.cost,
-          movilidad: basicData.mobilityType.item,
+          tipoObjeto: selectedData.objectType.item,
+          valorObjeto: selectedData.cost,
+          movilidad: selectedData.mobilityType.item,
         }
       );
 
@@ -60,7 +60,7 @@ function Quote() {
       setQuoteInProgress(true);
     }
   }, [
-    basicData,
+    selectedData,
     coverageTypes,
     dispatch,
     loadingCoverageTypes,
