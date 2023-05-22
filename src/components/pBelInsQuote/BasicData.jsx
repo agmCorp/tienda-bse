@@ -197,11 +197,11 @@ function BasicData() {
                           </div>
 
                           <div className="flex justify-content-left">
-                            <div className="flex flex-column md:flex-row md:align-items-center">
+                            <div className="flex flex-column md:flex-row md:align-items-center w-full">
                               {objectTypes.map((objectType) => (
                                 <div
                                   key={objectType.id}
-                                  className="flex flex-row align-items-center"
+                                  className="flex flex-row align-items-center relative w-15rem h-7rem md:static md:w-full md:h-full"
                                 >
                                   <RadioButton
                                     inputId={objectType.item}
@@ -211,10 +211,10 @@ function BasicData() {
                                     checked={
                                       field.value.item === objectType.item
                                     }
-                                    className="hidden"
+                                    className="opacity-0"
                                   />
                                   <div
-                                    className="flex flex-column align-items-left md:align-items-center cursor-pointer"
+                                    className="flex flex-column align-items-left md:align-items-center cursor-pointer absolute top-0 left-0 w-full h-full md:static"
                                     onClick={(e) => {
                                       setObjectTypeSelectedId(objectType.item);
                                       setValue(OBJECT_TYPE_ID, objectType, {
