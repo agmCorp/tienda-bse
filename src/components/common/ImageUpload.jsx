@@ -174,20 +174,23 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
 
   const chooseOptions = {
     icon: <i className="pi pi-fw pi-images text-3xl" />,
-    iconOnly: true,
-    className: "custom-choose-btn p-button-rounded m-2",
+    iconOnly: false,
+    label: "Seleccionar",
+    className: "custom-choose-btn m-2",
   };
 
   const uploadOptions = {
     icon: <i className="pi pi-fw pi-cloud-upload text-3xl" />,
-    iconOnly: true,
-    className: "custom-upload-btn p-button-warning p-button-rounded m-2",
+    iconOnly: false,
+    label: "Adjuntar",
+    className: "custom-upload-btn p-button-warning m-2",
   };
 
   const cancelOptions = {
-    icon: "pi pi-fw pi-times",
-    iconOnly: true,
-    className: "custom-cancel-btn p-button-danger p-button-rounded m-2",
+    icon: "pi pi-fw pi-times text-3xl",
+    iconOnly: false,
+    label: "Cancelar",
+    className: "custom-cancel-btn p-button-danger m-2",
   };
 
   const headerTemplate = (options) => {
@@ -220,18 +223,13 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
           />
 
           {chooseButton}
-          <span className="block md:hidden">Seleccionar</span>
-
           {uploadButton}
-          <span className="block md:hidden">Adjuntar</span>
-
           {cancelButton}
-          <span className="block md:hidden">Cancelar</span>
         </div>
         <div className="w-full md:w-6  text-center">
           <ProgressBar
             value={progressBarValue}
-            className="bg-teal-100 h-2rem m-2"
+            className="bg-primary-100 h-2rem m-2"
           ></ProgressBar>
         </div>
       </div>
@@ -242,7 +240,7 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
     return (
       <div className="hidden md:block">
         <div className="flex align-items-center flex-column">
-          <i className="pi pi-image p-4 text-7xl border-circle bg-blue-50 text-teal-300 border-2"></i>
+          <i className="pi pi-image p-4 text-7xl border-circle bg-blue-50 text-primary-300 border-2"></i>
           <span className="text-lg my-3">Arrastre y suelte imagenes aquí</span>
         </div>
       </div>

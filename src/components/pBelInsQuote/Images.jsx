@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Messages } from "primereact/messages";
-import { Message } from "primereact/message";
 import { Button } from "primereact/button";
 
 import ImageUpload from "../common/ImageUpload";
@@ -22,7 +21,6 @@ function Images() {
   const msgs = useRef(null);
   const [responses, setResponses] = useState([]);
   const [filesUploaded, setFilesUploaded] = useState([]);
-  const [error, setError] = useState(false);
 
   const MAX_FILES = 3;
 
@@ -55,7 +53,6 @@ function Images() {
       }
     });
     msgs.current.replace(messages);
-    setError(false);
 
     // Functional update pattern to avoid infinit loop
     setFilesUploaded((prevFilesUploaded) => [
@@ -65,13 +62,9 @@ function Images() {
   }, [responses]);
 
   const handleClick = () => {
-    if (MAX_FILES !== filesUploaded.length) {
-      setError(true);
-    } else {
-      dispatch(pBelAddIssueInfo({ mustIssue: true, issue: {} }));
-      dispatch(pBelAddInvoiceInfo({ mustInvoice: true, invoice: {} }));
-      dispatch(pBelFlowStepCompletedThunk({ images: filesUploaded }));
-    }
+    dispatch(pBelAddIssueInfo({ mustIssue: true, issue: {} }));
+    dispatch(pBelAddInvoiceInfo({ mustInvoice: true, invoice: {} }));
+    dispatch(pBelFlowStepCompletedThunk({ images: filesUploaded }));
   };
 
   return (
@@ -138,14 +131,14 @@ function Images() {
       )}
 
       <div className="text-center mt-4">
-        {error && (
-          <Message
-            severity="error"
-            text="Faltan imágenes por adjuntar."
-            className="w-full mb-2"
+        {MAX_FILES - filesUploaded.length <= 0 && (
+          <Button
+            onClick={handleClick}
+            label="Pagar"
+            icon="pi pi-check"
+            className="w-8 tienda-button"
           />
         )}
-        <Button label="Pagar" className="w-8" onClick={handleClick} />
       </div>
     </>
   );
