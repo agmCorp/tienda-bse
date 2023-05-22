@@ -196,61 +196,57 @@ function BasicData() {
                             <span className="p-error font-bold ml-1">*</span>
                           </div>
 
-                          <div className="flex justify-content-left">
-                            <div className="flex flex-column md:flex-row md:align-items-center w-full">
-                              {objectTypes.map((objectType) => (
+                          <div className="flex flex-column md:flex-row md:align-items-center w-full">
+                            {objectTypes.map((objectType) => (
+                              <div
+                                key={objectType.id}
+                                className="flex flex-row align-items-center relative w-15rem h-7rem md:static md:w-max md:h-full"
+                              >
+                                <RadioButton
+                                  inputId={objectType.item}
+                                  {...field}
+                                  inputRef={field.ref}
+                                  value={objectType}
+                                  checked={field.value.item === objectType.item}
+                                  className="opacity-0"
+                                />
                                 <div
-                                  key={objectType.id}
-                                  className="flex flex-row align-items-center relative w-15rem h-7rem md:static md:w-full md:h-full"
+                                  className="flex flex-column align-items-left md:align-items-center cursor-pointer absolute top-0 left-0 w-full h-full md:static"
+                                  onClick={(e) => {
+                                    setObjectTypeSelectedId(objectType.item);
+                                    setValue(OBJECT_TYPE_ID, objectType, {
+                                      shouldValidate: true,
+                                    });
+                                  }}
                                 >
-                                  <RadioButton
-                                    inputId={objectType.item}
-                                    {...field}
-                                    inputRef={field.ref}
-                                    value={objectType}
-                                    checked={
-                                      field.value.item === objectType.item
+                                  <img
+                                    src={
+                                      errors[OBJECT_TYPE_ID]
+                                        ? getOjbectTypeImage(objectType.item)
+                                            .imgError
+                                        : objectTypeSelectedId ===
+                                          objectType.item
+                                        ? getOjbectTypeImage(objectType.item)
+                                            .imgSelected
+                                        : getOjbectTypeImage(objectType.item)
+                                            .imgBase
                                     }
-                                    className="opacity-0"
+                                    alt="Tipo de objeto"
+                                    className="max-w-max h-4rem"
                                   />
-                                  <div
-                                    className="flex flex-column align-items-left md:align-items-center cursor-pointer absolute top-0 left-0 w-full h-full md:static"
-                                    onClick={(e) => {
-                                      setObjectTypeSelectedId(objectType.item);
-                                      setValue(OBJECT_TYPE_ID, objectType, {
-                                        shouldValidate: true,
-                                      });
-                                    }}
+                                  <span
+                                    className={`${
+                                      objectTypeSelectedId ===
+                                        objectType.item && "text-primary"
+                                    } ml-1 mr-3 text-base ${classNames({
+                                      "p-error": errors[OBJECT_TYPE_ID],
+                                    })}`}
                                   >
-                                    <img
-                                      src={
-                                        errors[OBJECT_TYPE_ID]
-                                          ? getOjbectTypeImage(objectType.item)
-                                              .imgError
-                                          : objectTypeSelectedId ===
-                                            objectType.item
-                                          ? getOjbectTypeImage(objectType.item)
-                                              .imgSelected
-                                          : getOjbectTypeImage(objectType.item)
-                                              .imgBase
-                                      }
-                                      alt="Tipo de objeto"
-                                      className="max-w-max h-4rem"
-                                    />
-                                    <span
-                                      className={`${
-                                        objectTypeSelectedId ===
-                                          objectType.item && "text-primary"
-                                      } ml-1 mr-3 text-base ${classNames({
-                                        "p-error": errors[OBJECT_TYPE_ID],
-                                      })}`}
-                                    >
-                                      {objectType.label}
-                                    </span>
-                                  </div>
+                                    {objectType.label}
+                                  </span>
                                 </div>
-                              ))}
-                            </div>
+                              </div>
+                            ))}
                           </div>
                           {getFormErrorMessage(field.name)}
                         </>
