@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   API_BASE_URL,
   PUBLIC_SUBDIRECTORY,
-  SECURE_SUBDIRECTORY,
+  SECURED_SUBDIRECTORY,
 } from "./constants";
 
 import {
@@ -14,7 +14,7 @@ import {
 const clientApi = async (
   method,
   apiUrl,
-  secure = false,
+  secured = false,
   customHeaders = {},
   data = {},
   otherOptions = {},
@@ -22,7 +22,7 @@ const clientApi = async (
 ) => {
   let result = { ok: true, data: {} };
 
-  const headers = secure
+  const headers = secured
     ? {
         Authorization: `Bearer ${token}`,
         ...customHeaders,
@@ -30,13 +30,13 @@ const clientApi = async (
     : { ...customHeaders };
 
   try {
-    const url = secure
-      ? `${API_BASE_URL}/${SECURE_SUBDIRECTORY}/${apiUrl}`
+    const url = secured
+      ? `${API_BASE_URL}/${SECURED_SUBDIRECTORY}/${apiUrl}`
       : `${API_BASE_URL}/${PUBLIC_SUBDIRECTORY}/${apiUrl}`;
     logAxiosRequest({
       method,
       url,
-      secure,
+      secured,
       customHeaders,
       data,
       otherOptions,

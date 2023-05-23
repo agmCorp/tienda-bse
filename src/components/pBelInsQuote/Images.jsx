@@ -39,13 +39,15 @@ function Images() {
         messages.push({
           severity: "error",
           detail: `${fileReference} ${
-            response.message.error ? response.message.error : response.message
+            response.message.errorTraceNumber
+              ? response.message.message
+              : response.message
           }`,
           sticky: true,
         });
       } else {
         messages.push({
-          severity: "success",
+          severity: "info",
           detail: `${fileReference} subido exitosamente.`,
           sticky: true,
         });
@@ -66,7 +68,6 @@ function Images() {
     dispatch(pBelAddInvoiceInfo({ mustInvoice: true, invoice: {} }));
     dispatch(pBelFlowStepCompletedThunk({ images: filesUploaded }));
   };
-
   return (
     <>
       <a style={{ display: "none" }} href="#top" ref={topRef}>
@@ -74,14 +75,16 @@ function Images() {
       </a>
       <div
         id="top"
-        className="text-900 font-bold text-3xl mb-4 text-center text-primary"
+        className="text-900 font-bold text-3xl text-center text-primary mb-4 mt-5"
       >
         IMÁGENES
       </div>
 
-      <div className="flex align-items-center flex-column text-700 text-xl mb-4 text-center line-height-3">
-        Por último necesitamos que nos subas tres imágenes de un máximo de 5MB
-        cada una.
+      <div className="flex align-items-center flex-column text-700 text-xl text-center line-height-3">
+        <span>
+          Por último necesitamos que nos subas tres imágenes de un máximo de 5MB
+          cada una.
+        </span>
         <div className="text-left m-4">
           <ul className="list-none m-0 p-0">
             <li>
@@ -100,45 +103,53 @@ function Images() {
         </div>
       </div>
 
-      <Messages ref={msgs} />
-      {MAX_FILES - filesUploaded.length > 0 && (
-        <ImageUpload
-          maxFiles={MAX_FILES - filesUploaded.length}
-          onResponses={setResponses}
-          apiFileUpload={`${API_PBEL_FILEUPLOAD}/${selectedData.insurance.nroCotizacion}`}
-        />
-      )}
+      <div className="form-data text-left">
+        <div className="flex justify-content-center">
+          <div className="p-fluid card">
+            <Messages ref={msgs} />
+            {MAX_FILES - filesUploaded.length > 0 && (
+              <ImageUpload
+                maxFiles={MAX_FILES - filesUploaded.length}
+                onResponses={setResponses}
+                apiFileUpload={`${API_PBEL_FILEUPLOAD}/${selectedData.insurance.nroCotizacion}`}
+              />
+            )}
 
-      {filesUploaded.length > 0 && (
-        <div className="col-12 p-3">
-          <div className="text-500 font-medium mb-3">Imágenes adjuntas</div>
-          {filesUploaded.map((file, index) => {
-            return (
-              <div
-                key={index}
-                className={`flex md:align-items-center md:justify-content-between ${
-                  index === 0 ? "border-top-1" : ""
-                } border-bottom-1 surface-border p-3 flex-column md:flex-row`}
-              >
-                <div className="flex align-items-center">
-                  <span className="block pi pi-file mr-2" />
-                  <span className="text-900">{file}</span>
+            {filesUploaded.length > 0 && (
+              <div className="col-12">
+                <div className="text-500 font-medium mb-3">
+                  Imágenes adjuntas
                 </div>
+                {filesUploaded.map((file, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`flex md:align-items-center md:justify-content-between ${
+                        index === 0 ? "border-top-1" : ""
+                      } border-bottom-1 surface-border p-3 flex-column md:flex-row`}
+                    >
+                      <div className="flex align-items-center">
+                        <span className="block pi pi-file mr-2" />
+                        <span className="text-900">{file}</span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
-        </div>
-      )}
+            )}
 
-      <div className="text-center mt-4">
-        {MAX_FILES - filesUploaded.length <= 0 && (
-          <Button
-            onClick={handleClick}
-            label="Pagar"
-            icon="pi pi-check"
-            className="w-8 tienda-button"
-          />
-        )}
+            <div className="text-center mt-4">
+              {MAX_FILES - filesUploaded.length <= 0 && (
+                <Button
+                  onClick={handleClick}
+                  label="Pagar"
+                  icon="pi pi-check"
+                  className="my-2 tienda-button"
+                />
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

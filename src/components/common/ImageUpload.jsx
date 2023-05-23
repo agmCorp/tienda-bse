@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 import { FileUpload } from "primereact/fileupload";
 import { ProgressBar } from "primereact/progressbar";
 import { Button } from "primereact/button";
-import { Tooltip } from "primereact/tooltip";
 import { Tag } from "primereact/tag";
 import { useKeycloak } from "@react-keycloak/web";
 
 import { clientApi } from "../../utils/clientApi";
+import "./ImageUpload.css";
 
 function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
   const { keycloak } = useKeycloak();
@@ -176,21 +176,21 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
     icon: <i className="pi pi-fw pi-images text-3xl" />,
     iconOnly: false,
     label: "Seleccionar",
-    className: "custom-choose-btn m-2",
+    className: "m-2",
   };
 
   const uploadOptions = {
     icon: <i className="pi pi-fw pi-cloud-upload text-3xl" />,
     iconOnly: false,
     label: "Adjuntar",
-    className: "custom-upload-btn p-button-warning m-2",
+    className: "p-button-warning m-2",
   };
 
   const cancelOptions = {
     icon: "pi pi-fw pi-times text-3xl",
     iconOnly: false,
     label: "Cancelar",
-    className: "custom-cancel-btn p-button-danger m-2",
+    className: "p-button-danger m-2",
   };
 
   const headerTemplate = (options) => {
@@ -200,33 +200,15 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
       <div
         className={`${className} bg-blue-50 flex flex-column md:flex-row align-items-center`}
       >
-        <div className="md:w-6 text-center md:text-left">
-          <Tooltip
-            className="hidden md:block"
-            target=".custom-choose-btn"
-            content="Seleccionar"
-            position="top"
-          />
-
-          <Tooltip
-            className="hidden md:block"
-            target=".custom-upload-btn"
-            content="Adjuntar"
-            position="top"
-          />
-
-          <Tooltip
-            className="hidden md:block"
-            target=".custom-cancel-btn"
-            content="Cancelar"
-            position="top"
-          />
-
+        <div
+          id="customHeaderButtons"
+          className="flex flex-column md:flex-row md:text-left"
+        >
           {chooseButton}
           {uploadButton}
           {cancelButton}
         </div>
-        <div className="w-full md:w-6  text-center">
+        <div className="w-full md:w-6">
           <ProgressBar
             value={progressBarValue}
             className="bg-primary-100 h-2rem m-2"
@@ -240,8 +222,10 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
     return (
       <div className="hidden md:block">
         <div className="flex align-items-center flex-column">
-          <i className="pi pi-image p-4 text-7xl border-circle bg-blue-50 text-primary-300 border-2"></i>
-          <span className="text-lg my-3">Arrastre y suelte imagenes aquí</span>
+          <i className="pi pi-image p-4 text-7xl border-circle text-primary-300 border-2"></i>
+          <span className="text-primary text-lg my-3">
+            Arrastre y suelte imagenes aquí
+          </span>
         </div>
       </div>
     );
@@ -268,8 +252,8 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
         />
         <Button
           type="button"
-          icon="pi pi-times"
-          className="p-button-outlined p-button-rounded p-button-danger md:ml-auto"
+          icon="pi pi-times text-lg"
+          className="p-button-outlined p-button-rounded p-button-danger md:ml-auto h-3rem px-3"
           onClick={() => handleRemove(file, props.onRemove)}
         />
       </div>

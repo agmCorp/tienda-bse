@@ -3,7 +3,7 @@ import { useKeycloak } from "@react-keycloak/web";
 
 import { clientApi } from "../utils/clientApi";
 
-function useDataCollection(apiUrl, secure = false) {
+function useDataCollection(apiUrl, secured = false) {
   const { keycloak } = useKeycloak();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
@@ -13,11 +13,11 @@ function useDataCollection(apiUrl, secure = false) {
       const response = await clientApi(
         "get",
         apiUrl,
-        secure,
+        secured,
         {},
         {},
         {},
-        secure ? keycloak.token : {}
+        secured ? keycloak.token : {}
       );
 
       if (response.ok) {
@@ -27,7 +27,7 @@ function useDataCollection(apiUrl, secure = false) {
     };
 
     getApiData();
-  }, [apiUrl, secure, keycloak.token]);
+  }, [apiUrl, secured, keycloak.token]);
 
   return [loading, data];
 }
