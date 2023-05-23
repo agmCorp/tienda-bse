@@ -1,0 +1,4 @@
+#customHeaderButtons > .p-disabled,
+#customHeaderButtons > .p-component:disabled {
+  opacity: 0.2;
+}
