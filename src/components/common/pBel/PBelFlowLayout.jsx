@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import PBelFlowSteps from "./PBelFlowSteps";
 import usePBelAppFlowController from "../../../hooks/pBel/usePBelAppFlowController";
-// import Detail from "../../pBelInsQuote/Detail";
 import PBelFlowHeader from "./PBelFlowHeader";
 import PBelFlowFooter from "./PBelFlowFooter";
 import {
@@ -10,6 +9,7 @@ import {
   selectPBelFlowStep,
 } from "../../../reduxToolkit/pBel/pBelFlowSlice";
 import { getFirstStep } from "../../../utils/stepsHelper";
+import Detail from "../../pBelInsQuote/Detail";
 
 function PBelFlowLayout({ children }) {
   const accessGranted = usePBelAppFlowController();
@@ -29,8 +29,7 @@ function PBelFlowLayout({ children }) {
           <div className="mx-auto my-5 shadow-4 p-4 w-11 md:w-6 border-round bg-white">
             <PBelFlowSteps />
             <div className="mt-3">
-              *** ACA SE SUPONE VA EL DETALLE DE LO QUE VAS ELIGIENDO ***
-              {/* <Detail /> */}
+              <Detail />
             </div>
             <div className="mt-3">{children}</div>
             {pBelFlowStep > getFirstStep() && (

@@ -3,7 +3,7 @@ import { useIdleTimer } from "react-idle-timer";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 
-const timeout = 600_000; // Ten minute timeout
+const timeout = 300_000; // Five minute timeout
 const promptBeforeIdle = 10_000; // ten second countdown
 
 function IdleMonitor({ timesUp }) {
