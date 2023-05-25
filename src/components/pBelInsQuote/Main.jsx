@@ -4,10 +4,12 @@ import PBelPageNotFound from "../../routes/pBel/PBelPageNotFound";
 import { ROUTE_NOT_FOUND } from "../../routes/pBel/pBelRoutes";
 import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
 import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";
+import { useState } from "react";
 
-function Main() {
+function Main({ onAuthSuccessStarted }) {
   const pBelFlowSteps = getAllPBelFlowStepsConfig();
   const pBelPaymentFlowSteps = getAllPBelPaymentFlowStepsConfig();
+  const [debtControl, setDebtControl] = useState(onAuthSuccessStarted);
 
   let routes = [];
 
@@ -30,6 +32,14 @@ function Main() {
 
   // Routes
   const element = useRoutes(routes);
+
+  // Login
+  if (debtControl) {
+    console.log("contrlo deuda!!!!", window.location.href);
+    setDebtControl(false);
+  } else {
+    console.log("NO contrlo deuda!!!!");
+  }
 
   return <>{element}</>;
 }

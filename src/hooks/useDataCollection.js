@@ -17,7 +17,7 @@ function useDataCollection(apiUrl, secured = false) {
         {},
         {},
         {},
-        secured ? keycloak.token : {}
+        secured ? keycloak.token : ""
       );
 
       if (response.ok) {

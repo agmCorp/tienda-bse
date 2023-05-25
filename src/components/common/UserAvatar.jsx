@@ -7,6 +7,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
 import { getFirstRoute } from "../../utils/stepsHelper";
 import IdleMonitor from "../../utils/IdleMonitor";
+import { getEmail, getName } from "../../utils/userProfileHelper";
 
 function UserAvatar() {
   const { keycloak } = useKeycloak();
@@ -53,7 +54,7 @@ function UserAvatar() {
           <IdleMonitor timesUp={handleLogout} />
 
           <Menu model={items} popup ref={menu} id="popup_menu" />
-          <OverlayPanel ref={op}>{keycloak.tokenParsed?.email}</OverlayPanel>
+          <OverlayPanel ref={op}>{getEmail(keycloak.tokenParsed)}</OverlayPanel>
 
           <div
             onClick={(event) => menu.current.toggle(event)}
@@ -74,7 +75,7 @@ function UserAvatar() {
             onMouseOut={handleOnMouseOut}
           >
             <span className="md:ml-2 font-semibold text-white text-lg uppercase">
-              {keycloak.tokenParsed?.name}
+              {getName(keycloak.tokenParsed)}
             </span>
           </div>
         </div>

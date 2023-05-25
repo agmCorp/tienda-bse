@@ -71,10 +71,16 @@ function App() {
 
   let persistor = persistStore(store);
   const [keycloakReady, setKeycloakReady] = useState(false);
+  const [onAuthSuccessStarted, setOnAuthSuccessStarted] = useState(false);
 
   const onKeycloakEvent = async (event, error) => {
+    // Login
+    if (event === "onAuthSuccess") {
+      setOnAuthSuccessStarted(true);
+    }
+
     // Token expired
-    if (event && event === "onTokenExpired") {
+    if (event === "onTokenExpired") {
       try {
         // If the Access Token Lifespan on kyecloak-server is at the default value of 5 minutes, you should use a value less than 300 seconds.
         const refreshed = await keycloak.updateToken(180); // Three minutes
@@ -89,7 +95,7 @@ function App() {
     }
 
     // Keycloak ready
-    if (event && event === "onReady") {
+    if (event === "onReady") {
       setKeycloakReady(true);
     }
   };
@@ -111,7 +117,7 @@ function App() {
           <Provider store={store}>
             <PersistGate loading={<SplashScreen />} persistor={persistor}>
               <BrowserRouter basename={process.env.PUBLIC_URL}>
-                <Main />
+                <Main onAuthSuccessStarted={onAuthSuccessStarted} />
               </BrowserRouter>
             </PersistGate>
           </Provider>
