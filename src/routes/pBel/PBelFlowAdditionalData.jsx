@@ -11,11 +11,13 @@ import { clientApi } from "../../utils/clientApi";
 import { API_PBEL_DEBT_CONTROL } from "../../utils/apiUrls";
 import { getDocument, getDocumentType } from "../../utils/userProfileHelper";
 import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import Spinner from "../../utils/Spinner";
 
 function PBelFlowAdditionalData() {
   const { keycloak } = useKeycloak();
   const onAuthSuccess = useSelector(selectOnAuthSuccess);
   const selectedData = useSelector(selectPBelFlowSelectedData);
+  const [loadingDebtControl, setLoadingDebtControl] = useState(true);
   const [debtControl, setDebtControl] = useState(false);
 
   const CERTIFICATE_NUMBER = 0;
@@ -38,6 +40,7 @@ function PBelFlowAdditionalData() {
 
       if (response.ok) {
         setDebtControl(response.data.clienteConDeuda);
+        setLoadingDebtControl(false);
       }
     };
 
@@ -55,7 +58,13 @@ function PBelFlowAdditionalData() {
   return (
     <Protected>
       <PBelFlowLayout>
-        {debtControl ? <DebtMessage /> : <AdditionalData />}
+        {loadingDebtControl ? (
+          <Spinner size="small" />
+        ) : debtControl ? (
+          <DebtMessage />
+        ) : (
+          <AdditionalData />
+        )}
       </PBelFlowLayout>
     </Protected>
   );
