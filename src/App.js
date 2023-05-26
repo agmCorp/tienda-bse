@@ -71,12 +71,20 @@ function App() {
 
   let persistor = persistStore(store);
   const [keycloakReady, setKeycloakReady] = useState(false);
-  const [onAuthSuccessStarted, setOnAuthSuccessStarted] = useState(false);
+  const [onAuthSuccess, setOnAuthSuccess] = useState(false);
+  const [onAuthLogout, setOnAuthLogout] = useState(false);
 
   const onKeycloakEvent = async (event, error) => {
     // Login Success
     if (event === "onAuthSuccess") {
-      setOnAuthSuccessStarted(true);
+      setOnAuthSuccess(true);
+      setOnAuthLogout(false);
+    }
+
+    // Logout
+    if (event === "onAuthLogout") {
+      setOnAuthSuccess(false);
+      setOnAuthLogout(true);
     }
 
     // Token expired
@@ -117,7 +125,10 @@ function App() {
           <Provider store={store}>
             <PersistGate loading={<SplashScreen />} persistor={persistor}>
               <BrowserRouter basename={process.env.PUBLIC_URL}>
-                <Main onAuthSuccessStarted={onAuthSuccessStarted} />
+                <Main
+                  onAuthSuccess={onAuthSuccess}
+                  onAuthLogout={onAuthLogout}
+                />
               </BrowserRouter>
             </PersistGate>
           </Provider>

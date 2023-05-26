@@ -5,10 +5,12 @@ import storage from "redux-persist/lib/storage/session"; // sessionStorage (web)
 
 import pBelFlowReducer from "./pBel/pBelFlowSlice";
 import pBelPaymentFlowReducer from "./pBel/pBelPaymentFlowSlice";
+import userReducer from "./userSlice";
 
 const rootReducer = combineReducers({
   pBelFlow: pBelFlowReducer,
   pBelPaymentFlow: pBelPaymentFlowReducer,
+  user: userReducer,
 });
 
 const persistConfig = {
