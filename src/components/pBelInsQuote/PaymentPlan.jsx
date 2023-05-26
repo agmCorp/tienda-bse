@@ -85,14 +85,16 @@ function PaymentPlan() {
                     severity="warn"
                     className="mt-1 mb-2"
                     content={
-                      <>
+                      <div className="flex flex-column md:flex-row">
                         <img
                           alt="atención"
                           src={warning}
-                          className="ml-4 h-2rem"
+                          className="m-auto md:ml-4 h-2rem"
                         />
-                        <div className="ml-4">{warningMessage}</div>
-                      </>
+                        <div className="mt-2 md:ml-4 md:mt-0">
+                          {warningMessage}
+                        </div>
+                      </div>
                     }
                   />
                 )}

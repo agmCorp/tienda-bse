@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import Login from "./Login";
 import { selectPBelDebtControl } from "../reduxToolkit/pBel/pBelFlowSlice";
+import PBelFlowLayout from "../components/common/pBel/PBelFlowLayout";
+import DebtMessage from "../components/common/pBel/DebtMessage";
 
 function Protected({ children }) {
   const { keycloak } = useKeycloak();
@@ -10,7 +12,19 @@ function Protected({ children }) {
   const pBelDebtControl = useSelector(selectPBelDebtControl);
   console.log("TIENE DEUDA?: ", pBelDebtControl);
 
-  return keycloak.authenticated ? <>{children}</> : <Login />;
+  return keycloak.authenticated ? (
+    <>
+      {pBelDebtControl ? (
+        <PBelFlowLayout>
+          <DebtMessage />
+        </PBelFlowLayout>
+      ) : (
+        <>{children}</>
+      )}
+    </>
+  ) : (
+    <Login />
+  );
 }
 
 export default Protected;
