@@ -8,6 +8,7 @@ import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig"
 import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";
 import { isPBel } from "../../utils/productHelper";
 import { pBelDebtControl } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import GenericPageNotFound from "../../routes/GenericPageNotFound";
 
 function Main({ onAuthSuccessStarted }) {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function Main({ onAuthSuccessStarted }) {
   // Page not found (depends on the product).
   const pageNotFound = {
     path: ROUTE_NOT_FOUND,
-    element: isPBelProduct ? <PBelPageNotFound /> : <></>,
+    element: isPBelProduct ? <PBelPageNotFound /> : <GenericPageNotFound />,
   };
   routes.push(pageNotFound);
 

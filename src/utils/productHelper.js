@@ -1,20 +1,28 @@
 import { getAllPBelFlowStepsConfig } from "./pBel/pBelFlowStepsConfig";
-import { routeToStep } from "./stepsHelper";
+import { getFirstRoute } from "./stepsHelper";
 
-const getCurrentRoute = () => {
+const getProductFolder = () => {
   let result = "";
   const url = new URL(window.location.href);
   let currentUrl = url.pathname;
+
   const searchString = process.env.PUBLIC_URL;
   const index = currentUrl.indexOf(searchString);
   if (index !== -1) {
-    result = currentUrl.substring(index + searchString.length);
+    const startIndex = index + searchString.length;
+    const endIndex = currentUrl.indexOf("/", startIndex + 1);
+    if (endIndex !== -1) {
+      result = currentUrl.substring(startIndex, endIndex + 1);
+    }
   }
   return result;
 };
 
 const isPBel = () => {
-  return routeToStep(getAllPBelFlowStepsConfig(), getCurrentRoute()) > 0;
+  const productFolder = getProductFolder();
+  return productFolder !== ""
+    ? getFirstRoute(getAllPBelFlowStepsConfig()).startsWith(productFolder)
+    : false;
 };
 
 export { isPBel };
