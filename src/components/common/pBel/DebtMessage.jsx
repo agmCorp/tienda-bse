@@ -16,18 +16,18 @@ function DebtMessage() {
         href={WHATSAPP}
         target="_blank"
         rel="noreferrer"
-        className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
+        className="font-medium no-underline text-blue-500 hover:text-blue-300 cursor-pointer"
       >
-        098611998
+        <span> 098611998 </span>
       </a>
       <span>o a través de nuestro</span>
       <a
         href={CONTACT_FORM}
         target="_blank"
         rel="noreferrer"
-        className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
+        className="font-medium no-underline text-blue-500 hover:text-blue-300 cursor-pointer"
       >
-        formulario de contacto.
+        <span> formulario de contacto.</span>
       </a>
     </div>
   );
@@ -40,7 +40,7 @@ function DebtMessage() {
             severity="error"
             className="mt-1 mb-2"
             content={
-              <div className="flex flex-column md:flex-row p-4">
+              <div className="flex flex-column md:flex-row w-full p-4">
                 <img
                   alt="atención"
                   src={error}

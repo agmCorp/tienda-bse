@@ -58,9 +58,9 @@ function PaymentPlan() {
         href={MI_BSE}
         target="_blank"
         rel="noreferrer"
-        className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
+        className="font-medium no-underline text-blue-500 hover:text-blue-300 cursor-pointer"
       >
-        MiBSE
+        <span> MiBSE </span>
       </a>
       <span>o en las redes de cobranza.</span>
     </>
