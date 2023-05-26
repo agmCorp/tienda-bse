@@ -74,7 +74,7 @@ function App() {
   const [onAuthSuccessStarted, setOnAuthSuccessStarted] = useState(false);
 
   const onKeycloakEvent = async (event, error) => {
-    // Login
+    // Login Success
     if (event === "onAuthSuccess") {
       setOnAuthSuccessStarted(true);
     }

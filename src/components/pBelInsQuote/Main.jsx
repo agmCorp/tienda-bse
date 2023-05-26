@@ -1,15 +1,29 @@
 import { useRoutes } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import PBelPageNotFound from "../../routes/pBel/PBelPageNotFound";
 import { ROUTE_NOT_FOUND } from "../../routes/pBel/pBelRoutes";
 import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
 import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";
-import { useState } from "react";
+import { isPBel } from "../../utils/productHelper";
+import { pBelDebtControl } from "../../reduxToolkit/pBel/pBelFlowSlice";
 
 function Main({ onAuthSuccessStarted }) {
+  const dispatch = useDispatch();
   const pBelFlowSteps = getAllPBelFlowStepsConfig();
   const pBelPaymentFlowSteps = getAllPBelPaymentFlowStepsConfig();
-  const [debtControl, setDebtControl] = useState(onAuthSuccessStarted);
+  const [afterLoginSuccess, setAfterLoginSuccess] =
+    useState(onAuthSuccessStarted);
+  const isPBelProduct = isPBel();
+
+  const pBelAfterLoginSuccess = () => {
+    if (isPBelProduct) {
+      console.log("HAGO CONTROL DE DEUDA");
+      dispatch(pBelDebtControl(true));
+    }
+    setAfterLoginSuccess(false);
+  };
 
   let routes = [];
 
@@ -25,20 +39,19 @@ function Main({ onAuthSuccessStarted }) {
     routes.push(item);
   });
 
-  // Page not found.
-  // As we only have one product we redirect to PBel
-  const pageNotFound = { path: ROUTE_NOT_FOUND, element: <PBelPageNotFound /> };
+  // Page not found (depends on the product).
+  const pageNotFound = {
+    path: ROUTE_NOT_FOUND,
+    element: isPBelProduct ? <PBelPageNotFound /> : <></>,
+  };
   routes.push(pageNotFound);
 
   // Routes
   const element = useRoutes(routes);
 
-  // Login
-  if (debtControl) {
-    console.log("contrlo deuda!!!!", window.location.href);
-    setDebtControl(false);
-  } else {
-    console.log("NO contrlo deuda!!!!");
+  // Code to execute immediately after login success (depends on the product)
+  if (afterLoginSuccess) {
+    pBelAfterLoginSuccess();
   }
 
   return <>{element}</>;

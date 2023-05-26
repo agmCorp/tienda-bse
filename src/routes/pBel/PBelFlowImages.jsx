@@ -1,4 +1,4 @@
-import Protected from "../../utils/Protected";
+import Protected from "../../Auth/Protected";
 import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
 import Images from "../../components/pBelInsQuote/Images";
 

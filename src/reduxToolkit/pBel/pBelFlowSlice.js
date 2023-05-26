@@ -16,6 +16,7 @@ const initialState = {
   navigateTo: P_BEL_FLOW_ROUTE_BASIC_DATA,
   quoteInfo: {},
   selectedData: {},
+  debtControl: false,
 };
 
 const pBelFlowSlice = createSlice({
@@ -69,6 +70,9 @@ const pBelFlowSlice = createSlice({
     pBelAddSelectedData: (state, action) => {
       state.selectedData = { ...state.selectedData, ...action.payload };
     },
+    pBelDebtControl: (state, action) => {
+      state.debtControl = action.payload;
+    },
   },
 });
 
@@ -80,6 +84,7 @@ const {
   pBelFlowNavigate,
   pBelAddQuoteInfo,
   pBelAddSelectedData,
+  pBelDebtControl,
 } = pBelFlowSlice.actions;
 
 const pBelFlowStepCompletedThunk = (data) => (dispatch, getState) => {
@@ -103,6 +108,7 @@ const selectPBelFlowNavigate = (state) => {
 };
 const selectPBelFlowQuoteInfo = (state) => state.pBelFlow.quoteInfo;
 const selectPBelFlowSelectedData = (state) => state.pBelFlow.selectedData;
+const selectPBelDebtControl = (state) => state.pBelFlow.debtControl;
 
 export default pBelFlowSlice.reducer;
 export {
@@ -110,6 +116,7 @@ export {
   selectPBelFlowNavigate,
   selectPBelFlowQuoteInfo,
   selectPBelFlowSelectedData,
+  selectPBelDebtControl,
   pBelFlowSlice,
   pBelFlowStepCompletedThunk,
   pBelFlowGoToStep,
@@ -117,4 +124,5 @@ export {
   pBelFlowInit,
   pBelFlowNavigate,
   pBelAddQuoteInfo,
+  pBelDebtControl,
 };

@@ -1,4 +1,4 @@
-import Protected from "../../utils/Protected";
+import Protected from "../../Auth/Protected";
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
 
 function PBelPaymentFlowPolicyDetail() {
