@@ -91,7 +91,7 @@ function PaymentPlan() {
                           src={warning}
                           className="m-auto md:ml-4 h-2rem"
                         />
-                        <div className="mt-2 md:ml-4 md:mt-0">
+                        <div className="mt-2 text-center md:text-left md:ml-4 md:mt-0">
                           {warningMessage}
                         </div>
                       </div>

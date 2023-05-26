@@ -5,7 +5,7 @@ import error from "../../../images/error.png";
 
 function DebtMessage() {
   const errorMessage = (
-    <div className="text-xl">
+    <div className="text-xl text-center md:text-left">
       <span>
         No es posible continuar con la contratación de este seguro ya que, según
         nuestros registros, Ud. tiene facturas vencidas e impagas. Por más
