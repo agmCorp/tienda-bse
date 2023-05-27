@@ -160,102 +160,102 @@ function PaymentMethod() {
                   />
                 </div>
 
-                <div className="mb-4">
-                  <span className="p-float-label">
-                    {selectedPaymentMethod === DEBIT_RADIO && (
-                      <>
-                        {loadingBank &&
-                        loadingPaymentMethod &&
-                        loadingBankCreditCard ? (
-                          <Spinner size="small" />
-                        ) : (
-                          <>
-                            <Controller
-                              name={BANK_ID}
-                              control={control}
-                              rules={{ required: "Debe seleccionar un banco." }}
-                              render={({ field, fieldState }) => (
-                                <>
-                                  <Dropdown
-                                    id={field.name}
-                                    value={field.value}
-                                    optionLabel="nombre"
-                                    placeholder="Seleccione un banco"
-                                    options={getBanks(
-                                      banks,
-                                      banksCreditCards,
-                                      paymentMethods
-                                    )}
-                                    focusInputRef={field.ref}
-                                    onChange={(e) => field.onChange(e.value)}
-                                    className={classNames({
-                                      "p-invalid": fieldState.error,
-                                    })}
-                                  />
-                                  <label
-                                    htmlFor={BANK_ID}
-                                    className={classNames({
-                                      "p-error": errors[BANK_ID],
-                                    })}
-                                  >
-                                    Banco
-                                    <span className="p-error font-bold ml-1">
-                                      *
-                                    </span>
-                                  </label>
-                                </>
-                              )}
-                            />
-                            {getFormErrorMessage(BANK_ID)}
-                          </>
-                        )}
-                      </>
-                    )}
-                    {selectedPaymentMethod === CREDIT_CARD_RADIO && (
-                      <>
-                        {loadingBankCreditCard ? (
-                          <Spinner size="small" />
-                        ) : (
-                          <>
-                            <Controller
-                              name={CREDIT_CARD_ID}
-                              control={control}
-                              rules={{ required: "Debe seleccionar un banco." }}
-                              render={({ field, fieldState }) => (
-                                <>
-                                  <Dropdown
-                                    id={field.name}
-                                    value={field.value}
-                                    optionLabel="nombre"
-                                    placeholder="Seleccione una tarjeta de crédito"
-                                    options={getCreditCards(banksCreditCards)}
-                                    focusInputRef={field.ref}
-                                    onChange={(e) => field.onChange(e.value)}
-                                    className={classNames({
-                                      "p-invalid": fieldState.error,
-                                    })}
-                                  />
-                                  <label
-                                    htmlFor={CREDIT_CARD_ID}
-                                    className={classNames({
-                                      "p-error": errors[CREDIT_CARD_ID],
-                                    })}
-                                  >
-                                    Tarjeta de crédito
-                                    <span className="p-error font-bold ml-1">
-                                      *
-                                    </span>
-                                  </label>
-                                </>
-                              )}
-                            />
-                            {getFormErrorMessage(CREDIT_CARD_ID)}
-                          </>
-                        )}
-                      </>
-                    )}
-                  </span>
-                </div>
+                {selectedPaymentMethod === DEBIT_RADIO && (
+                  <div className="mb-4">
+                    <span className="p-float-label">
+                      {loadingBank &&
+                      loadingPaymentMethod &&
+                      loadingBankCreditCard ? (
+                        <Spinner size="small" />
+                      ) : (
+                        <>
+                          <Controller
+                            name={BANK_ID}
+                            control={control}
+                            rules={{ required: "Debe seleccionar un banco." }}
+                            render={({ field, fieldState }) => (
+                              <>
+                                <Dropdown
+                                  id={field.name}
+                                  value={field.value}
+                                  optionLabel="nombre"
+                                  placeholder="Seleccione un banco"
+                                  options={getBanks(
+                                    banks,
+                                    banksCreditCards,
+                                    paymentMethods
+                                  )}
+                                  focusInputRef={field.ref}
+                                  onChange={(e) => field.onChange(e.value)}
+                                  className={classNames({
+                                    "p-invalid": fieldState.error,
+                                  })}
+                                />
+                                <label
+                                  htmlFor={BANK_ID}
+                                  className={classNames({
+                                    "p-error": errors[BANK_ID],
+                                  })}
+                                >
+                                  Banco
+                                  <span className="p-error font-bold ml-1">
+                                    *
+                                  </span>
+                                </label>
+                              </>
+                            )}
+                          />
+                          {getFormErrorMessage(BANK_ID)}
+                        </>
+                      )}
+                    </span>
+                  </div>
+                )}
+                {selectedPaymentMethod === CREDIT_CARD_RADIO && (
+                  <div className="mb-4">
+                    <span className="p-float-label">
+                      {loadingBankCreditCard ? (
+                        <Spinner size="small" />
+                      ) : (
+                        <>
+                          <Controller
+                            name={CREDIT_CARD_ID}
+                            control={control}
+                            rules={{ required: "Debe seleccionar un banco." }}
+                            render={({ field, fieldState }) => (
+                              <>
+                                <Dropdown
+                                  id={field.name}
+                                  value={field.value}
+                                  optionLabel="nombre"
+                                  placeholder="Seleccione una tarjeta de crédito"
+                                  options={getCreditCards(banksCreditCards)}
+                                  focusInputRef={field.ref}
+                                  onChange={(e) => field.onChange(e.value)}
+                                  className={classNames({
+                                    "p-invalid": fieldState.error,
+                                  })}
+                                />
+                                <label
+                                  htmlFor={CREDIT_CARD_ID}
+                                  className={classNames({
+                                    "p-error": errors[CREDIT_CARD_ID],
+                                  })}
+                                >
+                                  Tarjeta de crédito
+                                  <span className="p-error font-bold ml-1">
+                                    *
+                                  </span>
+                                </label>
+                              </>
+                            )}
+                          />
+                          {getFormErrorMessage(CREDIT_CARD_ID)}
+                        </>
+                      )}
+                    </span>
+                  </div>
+                )}
 
                 {loadingBank ||
                 loadingPaymentMethod ||
