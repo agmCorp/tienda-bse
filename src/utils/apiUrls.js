@@ -8,6 +8,7 @@ const API_PBEL_DEBT_CONTROL = "control-deuda";
 const API_PBEL_BANKS = "bancos";
 const API_PBEL_BANKS_CREDIT_CARDS = "bancos-tarjetas";
 const API_PBEL_PAYMENT_METHODS = "medios-de-pago";
+const API_PBEL_ISSUE = "emision";
 
 export {
   API_P_BEL_OBJECT_TYPES,
@@ -20,4 +21,5 @@ export {
   API_PBEL_BANKS,
   API_PBEL_BANKS_CREDIT_CARDS,
   API_PBEL_PAYMENT_METHODS,
+  API_PBEL_ISSUE,
 };

@@ -74,10 +74,10 @@ function BasicData() {
   const overlayPanel = useRef(null);
   const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
-  const [loadingObjectType, objectTypes] = useDataCollection(
+  const [loadingObjectTypes, objectTypes] = useDataCollection(
     API_P_BEL_OBJECT_TYPES
   );
-  const [loadingMobilityType, mobilityTypes] = useDataCollection(
+  const [loadingMobilityTypes, mobilityTypes] = useDataCollection(
     API_P_BEL_MOBILITY_TYPES
   );
   const [loadingCoverageTypes, coverageTypes] = useDataCollection(
@@ -178,7 +178,7 @@ function BasicData() {
             <div className="card">
               <form onSubmit={handleSubmit(onSubmit)} className="p-fluid mt-2">
                 <div className="mb-4">
-                  {loadingObjectType ? (
+                  {loadingObjectTypes ? (
                     <Spinner size="small" />
                   ) : (
                     <Controller
@@ -335,7 +335,7 @@ function BasicData() {
                 </div>
 
                 <div className="mb-4">
-                  {loadingMobilityType ? (
+                  {loadingMobilityTypes ? (
                     <Spinner size="small" />
                   ) : (
                     <Controller
@@ -426,8 +426,8 @@ function BasicData() {
                   {getFormErrorMessage(INPUT_CAPTCHA_ID)}
                 </div>
 
-                {loadingObjectType ||
-                loadingMobilityType ||
+                {loadingObjectTypes ||
+                loadingMobilityTypes ||
                 loadingCoverageTypes ? (
                   <Spinner size="small" />
                 ) : (
