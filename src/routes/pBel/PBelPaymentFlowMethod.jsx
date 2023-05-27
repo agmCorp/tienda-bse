@@ -1,12 +1,12 @@
 import Protected from "../../auth/Protected";
 import PBelPaymentFlowLayout from "../../components/common/pBel/PBelPaymentFlowLayout";
+import PaymentMethod from "../../components/pBelInsQuote/PaymentMethod";
 
 function PBelPaymentFlowMethod() {
   return (
     <Protected>
       <PBelPaymentFlowLayout>
-        {/* <PaymentMethod /> */}
-        METODO DE PAGO
+        <PaymentMethod />
       </PBelPaymentFlowLayout>
     </Protected>
   );
