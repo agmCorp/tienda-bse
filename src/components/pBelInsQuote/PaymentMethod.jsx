@@ -4,6 +4,7 @@ import { classNames } from "primereact/utils";
 import { Message } from "primereact/message";
 import { RadioButton } from "primereact/radiobutton";
 import { Dropdown } from "primereact/dropdown";
+import { BlockUI } from "primereact/blockui";
 import { useState } from "react";
 import {
   API_PBEL_BANKS,
@@ -15,6 +16,7 @@ import Spinner from "../../utils/Spinner";
 import useDataCollection from "../../hooks/useDataCollection";
 
 function PaymentMethod() {
+  const [blockedDocument, setBlockedDocument] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [loadingBank, banks] = useDataCollection(API_PBEL_BANKS, true);
   const [loadingBankCreditCard, banksCreditCards] = useDataCollection(
@@ -47,9 +49,12 @@ function PaymentMethod() {
   const onSubmit = (data) => {
     // data.invoiceDate = dateToString(data.invoiceDate);
     // dispatch(pBelFlowStepCompletedThunk(data));
+
+    setBlockedDocument(true);
     console.log(data);
     setSelectedPaymentMethod("");
     reset();
+    setBlockedDocument(false);
   };
 
   const getFormErrorMessage = (name) => {
@@ -256,6 +261,12 @@ function PaymentMethod() {
                     </span>
                   </div>
                 )}
+
+                <BlockUI
+                  blocked={blockedDocument}
+                  fullScreen
+                  template={<Spinner size="big" />}
+                />
 
                 {loadingBank ||
                 loadingPaymentMethod ||
