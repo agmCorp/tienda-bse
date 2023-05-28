@@ -7,7 +7,7 @@ function Header({ bgColor, logo, heightLogo, title, init }) {
         <div className="mx-6 text-center m-auto">
           <img
             src={logo}
-            alt="bici"
+            alt="Logo"
             className={`cursor-pointer ${heightLogo}`}
             onClick={init}
           />
