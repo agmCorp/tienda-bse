@@ -93,7 +93,7 @@ const invoice = async (
   return response;
 };
 
-const detail = async (invoiceDetail, invoiceNumber, token) => {
+const detailInvoice = async (invoiceDetail, invoiceNumber, token) => {
   let response = null;
   if (invoiceDetail.mustDetail) {
     const responseInvoiceDetail = await clientApi(
@@ -117,24 +117,34 @@ const detail = async (invoiceDetail, invoiceNumber, token) => {
   return response;
 };
 
-const adhDigitalInvoice = async (branch, policy, branchOffice, token) => {
+const adhDigitalInvoice = async (
+  invoiceAdhDigital,
+  branch,
+  policy,
+  branchOffice,
+  token
+) => {
   let response = null;
-  const responseAdhDigitalInvoice = await clientApi(
-    "post",
-    API_PBEL_ADH_DIGITAL_INVOICE,
-    true,
-    {},
-    { codRamo: branch, nroPoliza: policy, sucursal: branchOffice },
-    {},
-    token
-  );
-  if (responseAdhDigitalInvoice.ok) {
-    response = { ok: true, data: responseAdhDigitalInvoice.data };
+  if (invoiceAdhDigital.mustAdhDigital) {
+    const responseAdhDigitalInvoice = await clientApi(
+      "post",
+      API_PBEL_ADH_DIGITAL_INVOICE,
+      true,
+      {},
+      { codRamo: branch, nroPoliza: policy, sucursal: branchOffice },
+      {},
+      token
+    );
+    if (responseAdhDigitalInvoice.ok) {
+      response = { ok: true, data: responseAdhDigitalInvoice.data };
+    } else {
+      console.error("*** INVOICE ERROR", responseAdhDigitalInvoice.data);
+      response = { ok: false, data: responseAdhDigitalInvoice.message };
+    }
   } else {
-    console.error("*** INVOICE ERROR", responseAdhDigitalInvoice.data);
-    response = { ok: false, data: responseAdhDigitalInvoice.message };
+    response = { ok: true, data: invoiceAdhDigital.adhDigital };
   }
   return response;
 };
 
-export { min, issue, invoice, detail, adhDigitalInvoice };
+export { min, issue, invoice, detailInvoice, adhDigitalInvoice };

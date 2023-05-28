@@ -10,6 +10,7 @@ const initialState = {
   issueInfo: {},
   invoiceInfo: {},
   invoiceDetail: {},
+  invoiceAdhDigital: {},
   selectedData: {},
   comeFromSpe: false,
 };
@@ -48,6 +49,7 @@ const pBelPaymentFlowSlice = createSlice({
       state.issueInfo = {};
       state.invoiceInfo = {};
       state.invoiceDetail = {};
+      state.invoiceAdhDigital = {};
       state.selectedData = {};
       state.comeFromSpe = false;
     },
@@ -66,6 +68,9 @@ const pBelPaymentFlowSlice = createSlice({
     pBelAddInvoiceDetail: (state, action) => {
       state.invoiceDetail = action.payload;
     },
+    pBelAddInvoiceAdhDigital: (state, action) => {
+      state.invoiceAdhDigital = action.payload;
+    },
     setComeFromSpe: (state, action) => {
       state.comeFromSpe = action.payload;
     },
@@ -80,6 +85,7 @@ const {
   pBelAddIssueInfo,
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
+  pBelAddInvoiceAdhDigital,
   setComeFromSpe,
 } = pBelPaymentFlowSlice.actions;
 
@@ -97,6 +103,8 @@ const selectPBelPaymentFlowInvoiceInfo = (state) =>
   state.pBelPaymentFlow.invoiceInfo;
 const selectPBelPaymentFlowInvoiceDetail = (state) =>
   state.pBelPaymentFlow.invoiceDetail;
+const selectPBelPaymentFlowInvoiceAdhDigital = (state) =>
+  state.pBelPaymentFlow.invoiceAdhDigital;
 const selectPBelPaymentFlowSelectedData = (state) =>
   state.pBelPaymentFlow.selectedData;
 const selectComeFromSpe = (state) => state.pBelPaymentFlow.comeFromSpe;
@@ -108,6 +116,7 @@ export {
   selectPBelPaymentFlowIssueInfo,
   selectPBelPaymentFlowInvoiceInfo,
   selectPBelPaymentFlowInvoiceDetail,
+  selectPBelPaymentFlowInvoiceAdhDigital,
   selectPBelPaymentFlowSelectedData,
   selectComeFromSpe,
   pBelPaymentFlowSlice,
@@ -118,5 +127,6 @@ export {
   pBelAddIssueInfo,
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
+  pBelAddInvoiceAdhDigital,
   setComeFromSpe,
 };
