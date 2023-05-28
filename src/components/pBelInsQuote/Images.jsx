@@ -63,7 +63,7 @@ function Images() {
     ]);
   }, [responses]);
 
-  const handleClick = () => {
+  const handleOnClick = () => {
     dispatch(pBelAddIssueInfo({ mustIssue: true, issue: {} }));
     dispatch(pBelAddInvoiceInfo({ mustInvoice: true, invoice: {} }));
     dispatch(pBelFlowStepCompletedThunk({ images: filesUploaded }));
@@ -141,7 +141,7 @@ function Images() {
             <div className="text-center mt-4">
               {MAX_FILES - filesUploaded.length <= 0 && (
                 <Button
-                  onClick={handleClick}
+                  onClick={handleOnClick}
                   label="Pagar"
                   icon="pi pi-check"
                   className="my-2 tienda-button"
