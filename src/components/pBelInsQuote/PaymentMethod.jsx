@@ -18,7 +18,7 @@ import {
 } from "../../utils/apiUrls";
 import useDataCollection from "../../hooks/useDataCollection";
 import PaymentMethodForm from "../common/PaymentMethodForm";
-import Spinner from "../../utils/Spinner";
+import Spinner from "../common/Spinner";
 import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBel/pBelFlowSlice";
 import { getDocumentType, getDocument } from "../../utils/userProfileHelper";
 import { pBelAddIssueInfo } from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";

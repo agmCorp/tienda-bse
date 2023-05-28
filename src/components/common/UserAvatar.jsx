@@ -4,9 +4,9 @@ import { Menu } from "primereact/menu";
 import { Avatar } from "primereact/avatar";
 import { useKeycloak } from "@react-keycloak/web";
 
-import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
+import { getAllPBelFlowStepsConfig } from "../../utils/pBelUtils/pBelFlowStepsConfig";
 import { getFirstRoute } from "../../utils/stepsHelper";
-import IdleMonitor from "../../utils/IdleMonitor";
+import IdleMonitor from "./IdleMonitor";
 import { getEmail, getName } from "../../utils/userProfileHelper";
 
 function UserAvatar() {

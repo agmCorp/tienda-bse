@@ -15,8 +15,8 @@ import {
   selectPBelPaymentFlowNavigate,
   selectPBelPaymentFlowStep,
 } from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";
-import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
-import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";
+import { getAllPBelFlowStepsConfig } from "../../utils/pBelUtils/pBelFlowStepsConfig";
+import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
 import useAppFlowController from "../useAppFlowController";
 
 function usePBelAppFlowController() {

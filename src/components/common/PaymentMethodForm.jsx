@@ -7,7 +7,7 @@ import { RadioButton } from "primereact/radiobutton";
 import { Dropdown } from "primereact/dropdown";
 import { BlockUI } from "primereact/blockui";
 
-import Spinner from "../../utils/Spinner";
+import Spinner from "./Spinner";
 
 // banks - empty to hide
 // creditCards - empty to hide

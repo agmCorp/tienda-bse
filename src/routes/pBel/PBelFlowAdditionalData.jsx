@@ -1,5 +1,5 @@
 import Protected from "../../auth/Protected";
-import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
+import PBelFlowLayout from "../../components/common/pBelCommon/PBelFlowLayout";
 import DebtControl from "../../components/pBelInsQuote/DebtControl";
 
 function PBelFlowAdditionalData() {

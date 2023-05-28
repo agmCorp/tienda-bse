@@ -1,4 +1,4 @@
-import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
+import PBelFlowLayout from "../../components/common/pBelCommon/PBelFlowLayout";
 import Quote from "../../components/pBelInsQuote/Quote";
 
 function PBelFlowQuote() {

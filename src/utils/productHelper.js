@@ -1,4 +1,4 @@
-import { getAllPBelFlowStepsConfig } from "./pBel/pBelFlowStepsConfig";
+import { getAllPBelPaymentFlowStepsConfig } from "./pBelUtils/pBelPaymentFlowStepsConfig";
 import { getFirstRoute } from "./stepsHelper";
 
 const getProductFolder = () => {
@@ -21,7 +21,9 @@ const getProductFolder = () => {
 const isPBel = () => {
   const productFolder = getProductFolder();
   return productFolder !== ""
-    ? getFirstRoute(getAllPBelFlowStepsConfig()).startsWith(productFolder)
+    ? getFirstRoute(getAllPBelPaymentFlowStepsConfig()).startsWith(
+        productFolder
+      )
     : false;
 };
 

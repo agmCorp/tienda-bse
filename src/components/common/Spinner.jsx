@@ -1,4 +1,4 @@
-import spinner from "../images/spinner.svg";
+import spinner from "../../images/spinner.svg";
 
 function Spinner({ size }) {
   let sizePx;

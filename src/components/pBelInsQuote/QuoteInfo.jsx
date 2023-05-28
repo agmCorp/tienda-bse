@@ -2,10 +2,10 @@ import { Button } from "primereact/button";
 import { useSelector, useDispatch } from "react-redux";
 
 import { MUST_QUOTE_PREFIX, QUOTATION_PREFIX } from "../../utils/constants";
-import { getPBelCoverageInfo } from "../../utils/pBel/pBelCoverageInfo";
+import { getPBelCoverageInfo } from "../../utils/pBelUtils/pBelCoverageInfo";
 import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
 import recommended from "../../images/recommended.png";
-import Spinner from "../../utils/Spinner";
+import Spinner from "../common/Spinner";
 import "./QuoteInfo.css";
 
 function QuoteInfo({ coverageType }) {

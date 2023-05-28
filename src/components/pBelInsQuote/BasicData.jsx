@@ -16,7 +16,7 @@ import {
   MUST_QUOTE_PREFIX,
   QUOTATION_PREFIX,
 } from "../../utils/constants";
-import Spinner from "../../utils/Spinner";
+import Spinner from "../common/Spinner";
 import {
   API_P_BEL_SITE_VERIFY,
   API_P_BEL_OBJECT_TYPES,

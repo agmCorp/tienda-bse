@@ -1,4 +1,4 @@
-import PBelFlowLayout from "../../components/common/pBel/PBelFlowLayout";
+import PBelFlowLayout from "../../components/common/pBelCommon/PBelFlowLayout";
 import PaymentPlan from "../../components/pBelInsQuote/PaymentPlan";
 
 function PBelFlowPaymentPlan() {

@@ -4,7 +4,7 @@ import {
   selectPBelFlowStep,
   pBelFlowGoToStep,
 } from "../../../reduxToolkit/pBel/pBelFlowSlice";
-import { getAllPBelFlowStepsConfig } from "../../../utils/pBel/pBelFlowStepsConfig";
+import { getAllPBelFlowStepsConfig } from "../../../utils/pBelUtils/pBelFlowStepsConfig";
 import FlowSteps from "../FlowSteps";
 
 function PBelFlowSteps() {

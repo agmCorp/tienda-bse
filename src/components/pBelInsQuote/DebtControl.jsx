@@ -7,8 +7,8 @@ import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBel/pBelFlowSlic
 import { clientApi } from "../../utils/clientApi";
 import { API_PBEL_DEBT_CONTROL } from "../../utils/apiUrls";
 import { getDocument, getDocumentType } from "../../utils/userProfileHelper";
-import Spinner from "../../utils/Spinner";
-import DebtMessage from "../common/pBel/DebtMessage";
+import Spinner from "../common/Spinner";
+import DebtMessage from "../common/DebtMessage";
 import AdditionalData from "./AdditionalData";
 
 function DebtControl() {

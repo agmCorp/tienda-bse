@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { P_BEL_FLOW_ROUTE_BASIC_DATA } from "../../routes/pBel/pBelRoutes";
-import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
+import { getAllPBelFlowStepsConfig } from "../../utils/pBelUtils/pBelFlowStepsConfig";
 import {
   getFirstRoute,
   getFirstStep,

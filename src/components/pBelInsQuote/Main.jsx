@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 
 import PBelPageNotFound from "../../routes/pBel/PBelPageNotFound";
 import { ROUTE_NOT_FOUND } from "../../routes/pBel/pBelRoutes";
-import { getAllPBelFlowStepsConfig } from "../../utils/pBel/pBelFlowStepsConfig";
-import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBel/pBelPaymentFlowStepsConfig";
+import { getAllPBelFlowStepsConfig } from "../../utils/pBelUtils/pBelFlowStepsConfig";
+import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
 import { isPBel } from "../../utils/productHelper";
 import GenericPageNotFound from "../../routes/GenericPageNotFound";
 import {

@@ -4,7 +4,7 @@ import {
   selectPBelPaymentFlowStep,
   pBelPaymentFlowGoToStep,
 } from "../../../reduxToolkit/pBel/pBelPaymentFlowSlice";
-import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBel/pBelPaymentFlowStepsConfig";
+import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
 import FlowSteps from "../FlowSteps";
 
 function PBelFlowSteps() {

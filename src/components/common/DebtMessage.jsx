@@ -1,7 +1,7 @@
 import { Message } from "primereact/message";
 
-import { WHATSAPP, CONTACT_FORM } from "../../../utils/constants";
-import error from "../../../images/error.png";
+import { WHATSAPP, CONTACT_FORM } from "../../utils/constants";
+import error from "../../images/error.png";
 
 function DebtMessage() {
   const errorMessage = (

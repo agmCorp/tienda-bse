@@ -10,7 +10,7 @@ import { API_PBEL_QUOTE, API_P_BEL_COVERAGE_TYPES } from "../../utils/apiUrls";
 import useDataCollection from "../../hooks/useDataCollection";
 import { clientApi } from "../../utils/clientApi";
 import { MUST_QUOTE_PREFIX, QUOTATION_PREFIX } from "../../utils/constants";
-import Spinner from "../../utils/Spinner";
+import Spinner from "../common/Spinner";
 import QuoteInfo from "./QuoteInfo";
 
 function Quote() {

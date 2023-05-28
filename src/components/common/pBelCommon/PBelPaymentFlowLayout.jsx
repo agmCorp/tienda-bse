@@ -7,7 +7,7 @@ import PBelPaymentFlowFooter from "./PBelPaymentFlowFooter";
 import { pBelFlowGoToFirstStep } from "../../../reduxToolkit/pBel/pBelFlowSlice";
 import { selectPBelPaymentFlowStep } from "../../../reduxToolkit/pBel/pBelPaymentFlowSlice";
 import { getLastStep } from "../../../utils/stepsHelper";
-import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBel/pBelPaymentFlowStepsConfig";
+import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
 
 function PBelPaymentFlowLayout({ children }) {
   const accessGranted = usePBelAppFlowController();
