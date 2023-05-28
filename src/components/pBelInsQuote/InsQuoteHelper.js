@@ -93,7 +93,7 @@ const invoice = async (
   return response;
 };
 
-const invoiceDetail = async (invoiceDetail, invoiceNumber, token) => {
+const detail = async (invoiceDetail, invoiceNumber, token) => {
   let response = null;
   if (invoiceDetail.mustDetail) {
     const responseInvoiceDetail = await clientApi(
@@ -137,4 +137,4 @@ const adhDigitalInvoice = async (branch, policy, branchOffice, token) => {
   return response;
 };
 
-export { min, issue, invoice, invoiceDetail, adhDigitalInvoice };
+export { min, issue, invoice, detail, adhDigitalInvoice };

@@ -27,7 +27,7 @@ import {
   min,
   issue,
   invoice,
-  invoiceDetail,
+  detail,
   adhDigitalInvoice,
 } from "./InsQuoteHelper";
 
@@ -106,7 +106,7 @@ function PaymentMethod() {
             invoice: { ...responseInvoice.data },
           })
         );
-        const responseInvoiceDetail = await invoiceDetail(
+        const responseInvoiceDetail = await detail(
           invoiceDetail,
           min(responseInvoice.data.numerosFactura),
           keycloak.token
