@@ -22,6 +22,7 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
 
   const [blockedDocument, setBlockedDocument] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [showMessage, setShowMessage] = useState("");
 
   const defaultValues = JSON.parse(
     `{"${PAYMENT_METHOD_ID}":"", "${BANK_ID}":"", "${CREDIT_CARD_ID}":""}`
@@ -46,10 +47,15 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
   };
 
   const onSubmitForm = async (data) => {
+    setShowMessage("");
     setBlockedDocument(true);
-    await onSubmit(data);
-    setSelectedPaymentMethod("");
-    reset();
+    const errorMessage = await onSubmit(data);
+    if (errorMessage) {
+      setShowMessage(errorMessage);
+    } else {
+      setSelectedPaymentMethod("");
+      reset();
+    }
     setBlockedDocument(false);
   };
 
@@ -68,6 +74,8 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
                 onSubmit={handleSubmit(onSubmitForm)}
                 className="p-fluid mt-2"
               >
+                {showMessage && <Message severity="error" text={showMessage} />}
+
                 <div className="mb-4">
                   <Controller
                     name={PAYMENT_METHOD_ID}

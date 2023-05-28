@@ -22,7 +22,13 @@ import Spinner from "../common/Spinner";
 import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { getDocumentType, getDocument } from "../../utils/userProfileHelper";
 import { pBelAddIssueInfo } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
-import { min, issue, invoice, invoiceDetail } from "./InsQuoteHelper";
+import {
+  min,
+  issue,
+  invoice,
+  invoiceDetail,
+  adhDigitalInvoice,
+} from "./InsQuoteHelper";
 
 function PaymentMethod() {
   const CREDIT_CARD_CODE = 1000;
@@ -65,6 +71,7 @@ function PaymentMethod() {
   };
 
   const onSubmit = async (data) => {
+    let errorMessage = "";
     const responseIssue = await issue(
       issueInfo,
       getDocumentType(keycloak.tokenParsed),
@@ -78,42 +85,58 @@ function PaymentMethod() {
       "S",
       keycloak.token
     );
-    if (responseIssue) {
-      dispatch(pBelAddIssueInfo({ mustIssue: false, issue: responseIssue }));
-
+    if (responseIssue.ok) {
+      dispatch(
+        pBelAddIssueInfo({ mustIssue: false, issue: responseIssue.data })
+      );
       const responseInvoice = await invoice(
         invoiceInfo,
-        responseIssue.codRamo,
-        responseIssue.nroPoliza,
+        responseIssue.data.codRamo,
+        responseIssue.data.nroPoliza,
         "N",
         "",
         keycloak.token
       );
-      if (responseInvoice) {
+      if (responseInvoice.ok) {
         dispatch(
           pBelAddInvoiceInfo({
             mustInvoice: false,
-            invoice: { ...responseInvoice },
+            invoice: { ...responseInvoice.data },
           })
         );
-
         const responseInvoiceDetail = await invoiceDetail(
-          min(responseInvoice.numerosFactura),
+          min(responseInvoice.data.numerosFactura),
           keycloak.token
         );
-        if (responseInvoiceDetail) {
-          dispatch(pBelAddInvoiceDetail({ ...responseInvoiceDetail }));
-
-          // llamar a nico
-          setSubmittedData({
-            ...data,
-            ...responseIssue,
-            ...responseInvoice,
-            ...responseInvoiceDetail,
-          });
+        if (responseInvoiceDetail.ok) {
+          dispatch(pBelAddInvoiceDetail({ ...responseInvoiceDetail.data }));
+          const responseAdhDigitalInvoice = await adhDigitalInvoice(
+            responseIssue.data.codRamo,
+            responseIssue.data.nroPoliza,
+            selectedData.insurance.sucursal,
+            keycloak.token
+          );
+          if (responseAdhDigitalInvoice.ok) {
+            setSubmittedData({
+              ...data,
+              ...responseIssue.data,
+              ...responseInvoice.data,
+              ...responseInvoiceDetail.data,
+            });
+          } else {
+            errorMessage = `Error en adhesión a facturación digital: ${responseAdhDigitalInvoice.data}`;
+          }
+        } else {
+          errorMessage = `Error al obtener factura: ${responseInvoiceDetail.data}`;
         }
+      } else {
+        errorMessage = `Error en facturación de póliza: ${responseInvoice.data}`;
       }
+    } else {
+      errorMessage =
+        "No se ha podido completar la emisión de su póliza. Llame al 1998 o contacte a su corredor de confianza.";
     }
+    return errorMessage;
   };
 
   return (

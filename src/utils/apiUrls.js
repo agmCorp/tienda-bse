@@ -11,6 +11,7 @@ const API_PBEL_PAYMENT_METHODS = "medios-de-pago";
 const API_PBEL_ISSUE = "emision";
 const API_PBEL_INVOICE = "facturacion";
 const API_PBEL_INVOICE_DETAILS = "facturas";
+const API_PBEL_ADH_DIGITAL_INVOICE = "adhesion-factura-digital";
 
 export {
   API_P_BEL_OBJECT_TYPES,
@@ -26,4 +27,5 @@ export {
   API_PBEL_ISSUE,
   API_PBEL_INVOICE,
   API_PBEL_INVOICE_DETAILS,
+  API_PBEL_ADH_DIGITAL_INVOICE,
 };

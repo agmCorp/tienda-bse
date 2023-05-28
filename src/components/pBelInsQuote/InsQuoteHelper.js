@@ -1,4 +1,5 @@
 import {
+  API_PBEL_ADH_DIGITAL_INVOICE,
   API_PBEL_INVOICE,
   API_PBEL_INVOICE_DETAILS,
   API_PBEL_ISSUE,
@@ -45,12 +46,13 @@ const issue = async (
       token
     );
     if (responseIssue.ok) {
-      response = responseIssue.data.polizaObjPersonal;
+      response = { ok: true, data: responseIssue.data.polizaObjPersonal };
     } else {
       console.error("*** ISSUE ERROR", responseIssue.data);
+      response = { ok: false, data: responseIssue.message };
     }
   } else {
-    response = issueInfo.issue;
+    response = { ok: true, data: issueInfo.issue };
   }
   return response;
 };
@@ -80,19 +82,19 @@ const invoice = async (
       token
     );
     if (responseInvoice.ok) {
-      response = responseInvoice.data;
+      response = { ok: true, data: responseInvoice.data };
     } else {
       console.error("*** INVOICE ERROR", responseInvoice.data);
+      response = { ok: false, data: responseInvoice.message };
     }
   } else {
-    response = invoiceInfo.invoice;
+    response = { ok: true, data: invoiceInfo.invoice };
   }
   return response;
 };
 
 const invoiceDetail = async (invoiceNumber, token) => {
   let response = null;
-
   const responseInvoiceDetail = await clientApi(
     "get",
     `${API_PBEL_INVOICE_DETAILS}/${invoiceNumber}`,
@@ -103,11 +105,32 @@ const invoiceDetail = async (invoiceNumber, token) => {
     token
   );
   if (responseInvoiceDetail.ok) {
-    response = responseInvoiceDetail.data;
+    response = { ok: true, data: responseInvoiceDetail.data };
   } else {
     console.error("*** INVOICE ERROR", responseInvoiceDetail.data);
+    response = { ok: false, data: responseInvoiceDetail.message };
   }
   return response;
 };
 
-export { min, issue, invoice, invoiceDetail };
+const adhDigitalInvoice = async (branch, policy, branchOffice, token) => {
+  let response = null;
+  const responseAdhDigitalInvoice = await clientApi(
+    "post",
+    API_PBEL_ADH_DIGITAL_INVOICE,
+    true,
+    {},
+    { codRamo: branch, nroPoliza: policy, sucursal: branchOffice },
+    {},
+    token
+  );
+  if (responseAdhDigitalInvoice.ok) {
+    response = { ok: true, data: responseAdhDigitalInvoice.data };
+  } else {
+    console.error("*** INVOICE ERROR", responseAdhDigitalInvoice.data);
+    response = { ok: false, data: responseAdhDigitalInvoice.message };
+  }
+  return response;
+};
+
+export { min, issue, invoice, invoiceDetail, adhDigitalInvoice };

@@ -1,12 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
-  pBelFlowGoToFirstStep,
-  pBelFlowInit,
-} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
+import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import usePBelAppFlowController from "../../hooks/pBel/usePBelAppFlowController";
-import { pBelPaymentFlowInit } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 
 function PBelPageNotFound() {
   const dispatch = useDispatch();
@@ -18,8 +14,6 @@ function PBelPageNotFound() {
   useEffect(() => {
     console.log("*** PAGE NOT FOUND", location.pathname);
     console.log("*** REDIRECTING TO FIRST STEP");
-    dispatch(pBelFlowInit());
-    dispatch(pBelPaymentFlowInit());
     dispatch(pBelFlowGoToFirstStep());
   }, [dispatch, location.pathname]);
 
