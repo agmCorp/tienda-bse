@@ -1,9 +1,14 @@
 import { Message } from "primereact/message";
+import { Button } from "primereact/button";
+import { useDispatch } from "react-redux";
 
+import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { WHATSAPP, CONTACT_FORM } from "../../utils/constants";
 import error from "../../images/error.png";
 
 function DebtMessage() {
+  const dispatch = useDispatch();
+
   const errorMessage = (
     <div className="text-xl text-center md:text-left">
       <span>
@@ -32,6 +37,10 @@ function DebtMessage() {
     </div>
   );
 
+  const handleOnClick = () => {
+    dispatch(pBelFlowGoToFirstStep());
+  };
+
   return (
     <div className="form-data">
       <div className="flex justify-content-center">
@@ -49,6 +58,12 @@ function DebtMessage() {
                 <div className="mt-2 md:ml-4 md:mt-0">{errorMessage}</div>
               </div>
             }
+          />
+          <Button
+            onClick={handleOnClick}
+            label="Volver a cotizar"
+            icon="pi pi-check"
+            className="my-2 tienda-button"
           />
         </div>
       </div>
