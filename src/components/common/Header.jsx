@@ -1,15 +1,6 @@
-import { useDispatch } from "react-redux";
-
-import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import UserAvatar from "./UserAvatar";
 
-function Header({ bgColor, logo, heightLogo, title }) {
-  const dispatch = useDispatch();
-
-  const handleOnClick = () => {
-    dispatch(pBelFlowGoToFirstStep());
-  };
-
+function Header({ bgColor, logo, heightLogo, title, init }) {
   return (
     <div className={`${bgColor} py-5 px-2`}>
       <div className="flex flex-column md:flex-row justify-content-between">
@@ -18,7 +9,7 @@ function Header({ bgColor, logo, heightLogo, title }) {
             src={logo}
             alt="bici"
             className={`cursor-pointer ${heightLogo}`}
-            onClick={handleOnClick}
+            onClick={init}
           />
         </div>
         <div className="mx-6 text-center mt-4 md:mt-auto m-auto">

@@ -23,7 +23,7 @@ function PBelPaymentFlowLayout({ children }) {
     <>
       {accessGranted && (
         <div className="bg-blue-50">
-          <PBelPaymentFlowHeader />
+          <PBelPaymentFlowHeader init={handleOnClick} />
           <div className="mx-auto my-5 shadow-4 p-4 w-11 md:w-6 border-round bg-white">
             <PBelPaymentFlowSteps />
             <div className="mt-3">{children}</div>

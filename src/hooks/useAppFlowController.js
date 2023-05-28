@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getFirstStep, routeToStep } from "../utils/stepsHelper";
+import { routeToStep } from "../utils/stepsHelper";
 
 function useAppFlowController(
   flowNavigation,

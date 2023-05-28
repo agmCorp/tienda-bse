@@ -50,6 +50,13 @@ const pBelFlowSlice = createSlice({
       state.navigate = true;
       state.navigateTo = getFirstRoute(getAllPBelFlowStepsConfig());
     },
+    pBelFlowClear: (state) => {
+      state.step = getFirstStep();
+      state.navigate = false;
+      state.navigateTo = "";
+      state.quoteInfo = {};
+      state.selectedData = {};
+    },
     pBelFlowInit: (state) => {
       state.step = 0;
       state.navigate = false;
@@ -76,6 +83,7 @@ const {
   pBelFlowStepCompleted,
   pBelFlowGoToStep,
   pBelFlowGoToFirstStep,
+  pBelFlowClear,
   pBelFlowInit,
   pBelFlowNavigate,
   pBelAddQuoteInfo,
@@ -114,6 +122,7 @@ export {
   pBelFlowStepCompletedThunk,
   pBelFlowGoToStep,
   pBelFlowGoToFirstStep,
+  pBelFlowClear,
   pBelFlowInit,
   pBelFlowNavigate,
   pBelAddQuoteInfo,
