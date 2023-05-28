@@ -93,22 +93,26 @@ const invoice = async (
   return response;
 };
 
-const invoiceDetail = async (invoiceNumber, token) => {
+const invoiceDetail = async (invoiceDetail, invoiceNumber, token) => {
   let response = null;
-  const responseInvoiceDetail = await clientApi(
-    "get",
-    `${API_PBEL_INVOICE_DETAILS}/${invoiceNumber}`,
-    true,
-    {},
-    {},
-    {},
-    token
-  );
-  if (responseInvoiceDetail.ok) {
-    response = { ok: true, data: responseInvoiceDetail.data };
+  if (invoiceDetail.mustDetail) {
+    const responseInvoiceDetail = await clientApi(
+      "get",
+      `${API_PBEL_INVOICE_DETAILS}/${invoiceNumber}`,
+      true,
+      {},
+      {},
+      {},
+      token
+    );
+    if (responseInvoiceDetail.ok) {
+      response = { ok: true, data: responseInvoiceDetail.data };
+    } else {
+      console.error("*** INVOICE ERROR", responseInvoiceDetail.data);
+      response = { ok: false, data: responseInvoiceDetail.message };
+    }
   } else {
-    console.error("*** INVOICE ERROR", responseInvoiceDetail.data);
-    response = { ok: false, data: responseInvoiceDetail.message };
+    response = { ok: true, data: invoiceDetail.detail };
   }
   return response;
 };

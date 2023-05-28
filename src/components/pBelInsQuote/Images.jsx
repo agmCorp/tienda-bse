@@ -9,6 +9,7 @@ import {
   selectPBelFlowSelectedData,
 } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import {
+  pBelAddInvoiceDetail,
   pBelAddInvoiceInfo,
   pBelAddIssueInfo,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
@@ -66,6 +67,7 @@ function Images() {
   const handleOnClick = () => {
     dispatch(pBelAddIssueInfo({ mustIssue: true, issue: {} }));
     dispatch(pBelAddInvoiceInfo({ mustInvoice: true, invoice: {} }));
+    dispatch(pBelAddInvoiceDetail({ mustDetail: true, detail: {} }));
     dispatch(pBelFlowStepCompletedThunk({ images: filesUploaded }));
   };
   return (

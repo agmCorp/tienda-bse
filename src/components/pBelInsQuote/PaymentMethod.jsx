@@ -10,6 +10,7 @@ import {
   pBelPaymentFlowStepCompleted,
   setComeFromSpe,
   pBelAddInvoiceDetail,
+  selectPBelPaymentFlowInvoiceDetail,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import {
   API_PBEL_BANKS,
@@ -46,6 +47,7 @@ function PaymentMethod() {
   );
   const issueInfo = useSelector(selectPBelPaymentFlowIssueInfo);
   const invoiceInfo = useSelector(selectPBelPaymentFlowInvoiceInfo);
+  const invoiceDetail = useSelector(selectPBelPaymentFlowInvoiceDetail);
   const selectedData = useSelector(selectPBelFlowSelectedData);
   const [submittedData, setSubmittedData] = useState(null);
 
@@ -105,11 +107,17 @@ function PaymentMethod() {
           })
         );
         const responseInvoiceDetail = await invoiceDetail(
+          invoiceDetail,
           min(responseInvoice.data.numerosFactura),
           keycloak.token
         );
         if (responseInvoiceDetail.ok) {
-          dispatch(pBelAddInvoiceDetail({ ...responseInvoiceDetail.data }));
+          dispatch(
+            pBelAddInvoiceDetail({
+              mustDetail: false,
+              detail: { ...responseInvoiceDetail.data },
+            })
+          );
           const responseAdhDigitalInvoice = await adhDigitalInvoice(
             responseIssue.data.codRamo,
             responseIssue.data.nroPoliza,
