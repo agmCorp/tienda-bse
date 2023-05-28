@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { routeToStep } from "../utils/stepsHelper";
+import { getFirstStep, routeToStep } from "../utils/stepsHelper";
 
 function useAppFlowController(
   flowNavigation,
@@ -14,9 +14,10 @@ function useAppFlowController(
   paymentFlowStep,
   paymentFlowSteps,
   paymentFlowGoToStep,
-  paymentFlowInit,
   flowNavigate,
-  paymentFlowNavigate
+  paymentFlowNavigate,
+  flowInit,
+  paymentFlowInit
 ) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,7 +57,6 @@ function useAppFlowController(
 
   useEffect(() => {
     if (!flowNavigation.navigate && !paymentFlowNavigation.navigate) {
-      // Steps that correspond to the current url
       const url = new URL(window.location.href);
       let currentUrl = url.pathname;
       let urlFlowStep = 0;
@@ -71,12 +71,14 @@ function useAppFlowController(
         urlPaymentFlowStep = routeToStep(paymentFlowSteps, currentUrl);
       }
 
+      // Steps that correspond to the current url
       if (urlFlowStep > 0 || urlPaymentFlowStep > 0) {
+        // The current url is inside the normal flow
         if (urlFlowStep > 0) {
-          // The current url is inside the normal flow
           if (paymentFlowStep > 0) {
             // It's not allowed to go from the payment flow to the normal flow.
             console.log("*** ACCESS DENIED TO", currentUrl);
+            dispatch(flowInit());
             dispatch(paymentFlowInit());
             dispatch(flowGoToFirstStep());
             setAccessGranted(false);
@@ -132,6 +134,7 @@ function useAppFlowController(
     flowGoToFirstStep,
     flowGoToStep,
     paymentFlowGoToStep,
+    flowInit,
     paymentFlowInit,
   ]);
 

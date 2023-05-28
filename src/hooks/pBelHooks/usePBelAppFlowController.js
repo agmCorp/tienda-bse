@@ -6,6 +6,7 @@ import {
   selectPBelFlowNavigate,
   pBelFlowNavigate,
   pBelFlowGoToFirstStep,
+  pBelFlowInit,
 } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import {
   pBelPaymentFlowGoToStep,
@@ -38,9 +39,10 @@ function usePBelAppFlowController() {
     pBelPaymentFlowStep,
     pBelPaymentFlowSteps,
     pBelPaymentFlowGoToStep,
-    pBelPaymentFlowInit,
     pBelFlowNavigate,
-    pBelPaymentFlowNavigate
+    pBelPaymentFlowNavigate,
+    pBelFlowInit,
+    pBelPaymentFlowInit
   );
 
   return accessGranted;
