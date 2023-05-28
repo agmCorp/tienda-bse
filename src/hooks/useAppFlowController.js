@@ -11,7 +11,6 @@ function useAppFlowController(
   flowSteps,
   flowGoToStep,
   flowGoToFirstStep,
-  flowInit,
   paymentFlowStep,
   paymentFlowSteps,
   paymentFlowGoToStep,
@@ -75,21 +74,27 @@ function useAppFlowController(
       if (urlFlowStep > 0 || urlPaymentFlowStep > 0) {
         if (urlFlowStep > 0) {
           // The current url is inside the normal flow
-          dispatch(paymentFlowInit()); // Resets payment flow
-          if (flowStep > urlFlowStep) {
-            console.log("*** ACCESS GRANTED TO", currentUrl);
-            dispatch(flowGoToStep(urlFlowStep));
-            setAccessGranted(true);
+          if (paymentFlowStep > 0) {
+            // It's not allowed to go from the payment flow to the normal flow.
+            console.log("*** ACCESS DENIED TO", currentUrl);
+            dispatch(paymentFlowInit());
+            dispatch(flowGoToFirstStep());
+            setAccessGranted(false);
           } else {
-            if (flowStep < urlFlowStep) {
-              console.log("*** ACCESS DENIED TO", currentUrl);
-              dispatch(flowInit());
-              dispatch(flowGoToFirstStep());
-              setAccessGranted(false);
-            } else {
-              // We are already there
+            if (flowStep > urlFlowStep) {
               console.log("*** ACCESS GRANTED TO", currentUrl);
+              dispatch(flowGoToStep(urlFlowStep));
               setAccessGranted(true);
+            } else {
+              if (flowStep < urlFlowStep) {
+                console.log("*** ACCESS DENIED TO", currentUrl);
+                dispatch(flowGoToFirstStep());
+                setAccessGranted(false);
+              } else {
+                // We are already there
+                console.log("*** ACCESS GRANTED TO", currentUrl);
+                setAccessGranted(true);
+              }
             }
           }
         } else {
@@ -101,8 +106,6 @@ function useAppFlowController(
           } else {
             if (paymentFlowStep < urlPaymentFlowStep) {
               console.log("*** ACCESS DENIED TO", currentUrl);
-              dispatch(flowInit());
-              dispatch(paymentFlowInit());
               dispatch(flowGoToFirstStep());
               setAccessGranted(false);
             } else {
@@ -128,7 +131,6 @@ function useAppFlowController(
     paymentFlowStep,
     flowGoToFirstStep,
     flowGoToStep,
-    flowInit,
     paymentFlowGoToStep,
     paymentFlowInit,
   ]);

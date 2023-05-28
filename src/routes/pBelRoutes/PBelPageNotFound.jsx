@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
-import usePBelAppFlowController from "../../hooks/pBel/usePBelAppFlowController";
+import usePBelAppFlowController from "../../hooks/pBelHooks/usePBelAppFlowController";
 
 function PBelPageNotFound() {
   const dispatch = useDispatch();
