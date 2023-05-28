@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import {
   selectPBelFlowSelectedData,
   selectPBelFlowStep,
-} from "../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 
 function Detail() {
   const selectedData = useSelector(selectPBelFlowSelectedData);

@@ -3,8 +3,8 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage/session"; // sessionStorage (web)
 
-import pBelFlowReducer from "./pBel/pBelFlowSlice";
-import pBelPaymentFlowReducer from "./pBel/pBelPaymentFlowSlice";
+import pBelFlowReducer from "./pBelSlices/pBelFlowSlice";
+import pBelPaymentFlowReducer from "./pBelSlices/pBelPaymentFlowSlice";
 import userReducer from "./userSlice";
 
 const rootReducer = combineReducers({

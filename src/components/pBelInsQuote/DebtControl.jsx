@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useKeycloak } from "@react-keycloak/web";
 
 import { selectOnAuthSuccess } from "../../reduxToolkit/userSlice";
-import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { clientApi } from "../../utils/clientApi";
 import { API_PBEL_DEBT_CONTROL } from "../../utils/apiUrls";
 import { getDocument, getDocumentType } from "../../utils/userProfileHelper";

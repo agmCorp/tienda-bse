@@ -1,11 +1,11 @@
-import PaymentFlowInsurance from "../../routes/pBel/PBelPaymentFlowInsurance";
-import PaymentFlowMethod from "../../routes/pBel/PBelPaymentFlowMethod";
-import PaymentFlowPolicyDetail from "../../routes/pBel/PBelPaymentFlowPolicyDetail";
+import PaymentFlowInsurance from "../../routes/pBelRoutes/PBelPaymentFlowInsurance";
+import PaymentFlowMethod from "../../routes/pBelRoutes/PBelPaymentFlowMethod";
+import PaymentFlowPolicyDetail from "../../routes/pBelRoutes/PBelPaymentFlowPolicyDetail";
 import {
   P_BEL_PAYMENT_FLOW_ROUTE_METHOD,
   P_BEL_PAYMENT_FLOW_ROUTE_POLICY_DETAIL,
   P_BEL_PAYMENT_FLOW_ROUTE_INSURANCE,
-} from "../../routes/pBel/pBelRoutes";
+} from "../../routes/pBelRoutes/pBelRoutes";
 
 const pBelPaymentFlowStepsConfig = [
   {

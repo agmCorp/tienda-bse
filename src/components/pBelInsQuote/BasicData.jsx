@@ -26,7 +26,7 @@ import {
 import {
   pBelAddQuoteInfo,
   pBelFlowStepCompletedThunk,
-} from "../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import styles from "./BasicData.module.css";
 import { clientApi } from "../../utils/clientApi";
 import lapTabIpadBlue from "../../images/lap-tab-ipad-blue.png";

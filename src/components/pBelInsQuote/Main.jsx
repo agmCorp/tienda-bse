@@ -2,8 +2,8 @@ import { useRoutes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import PBelPageNotFound from "../../routes/pBel/PBelPageNotFound";
-import { ROUTE_NOT_FOUND } from "../../routes/pBel/pBelRoutes";
+import PBelPageNotFound from "../../routes/pBelRoutes/PBelPageNotFound";
+import { ROUTE_NOT_FOUND } from "../../routes/pBelRoutes/pBelRoutes";
 import { getAllPBelFlowStepsConfig } from "../../utils/pBelUtils/pBelFlowStepsConfig";
 import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
 import { isPBel } from "../../utils/productHelper";

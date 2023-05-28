@@ -7,11 +7,11 @@ import ImageUpload from "../common/ImageUpload";
 import {
   pBelFlowStepCompletedThunk,
   selectPBelFlowSelectedData,
-} from "../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import {
   pBelAddInvoiceInfo,
   pBelAddIssueInfo,
-} from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import { API_PBEL_FILEUPLOAD } from "../../utils/apiUrls";
 
 function Images() {

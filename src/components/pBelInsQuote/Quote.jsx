@@ -5,7 +5,7 @@ import {
   pBelAddQuoteInfo,
   selectPBelFlowQuoteInfo,
   selectPBelFlowSelectedData,
-} from "../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { API_PBEL_QUOTE, API_P_BEL_COVERAGE_TYPES } from "../../utils/apiUrls";
 import useDataCollection from "../../hooks/useDataCollection";
 import { clientApi } from "../../utils/clientApi";

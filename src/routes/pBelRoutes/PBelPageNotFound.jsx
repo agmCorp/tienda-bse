@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import {
   pBelFlowGoToFirstStep,
   pBelFlowInit,
-} from "../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import usePBelAppFlowController from "../../hooks/pBel/usePBelAppFlowController";
-import { pBelPaymentFlowInit } from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";
+import { pBelPaymentFlowInit } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 
 function PBelPageNotFound() {
   const dispatch = useDispatch();

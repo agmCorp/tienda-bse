@@ -12,7 +12,7 @@ import { MI_BSE } from "../../utils/constants";
 import {
   pBelFlowStepCompletedThunk,
   selectPBelFlowSelectedData,
-} from "../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 
 function PaymentPlan() {
   const SEE_ALL_THRESHOLD = 4;

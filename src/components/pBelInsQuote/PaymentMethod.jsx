@@ -10,7 +10,7 @@ import {
   pBelPaymentFlowStepCompleted,
   setComeFromSpe,
   pBelAddInvoiceDetail,
-} from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";
+} from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import {
   API_PBEL_BANKS,
   API_PBEL_BANKS_CREDIT_CARDS,
@@ -19,10 +19,10 @@ import {
 import useDataCollection from "../../hooks/useDataCollection";
 import PaymentMethodForm from "../common/PaymentMethodForm";
 import Spinner from "../common/Spinner";
-import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { getDocumentType, getDocument } from "../../utils/userProfileHelper";
-import { pBelAddIssueInfo } from "../../reduxToolkit/pBel/pBelPaymentFlowSlice";
-import { min, issue, invoice, invoiceDetail } from "./pBelInsQuoteHelper";
+import { pBelAddIssueInfo } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
+import { min, issue, invoice, invoiceDetail } from "./InsQuoteHelper";
 
 function PaymentMethod() {
   const CREDIT_CARD_CODE = 1000;

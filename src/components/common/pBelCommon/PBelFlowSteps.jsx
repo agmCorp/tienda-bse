@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   selectPBelFlowStep,
   pBelFlowGoToStep,
-} from "../../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { getAllPBelFlowStepsConfig } from "../../../utils/pBelUtils/pBelFlowStepsConfig";
 import FlowSteps from "../FlowSteps";
 

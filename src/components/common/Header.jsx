@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import UserAvatar from "./UserAvatar";
 
 function Header({ bgColor, logo, heightLogo, title }) {

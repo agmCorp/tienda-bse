@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import PBelPaymentFlowSteps from "./PBelPaymentFlowSteps";
-import usePBelAppFlowController from "../../../hooks/pBel/usePBelAppFlowController";
+import usePBelAppFlowController from "../../../hooks/pBelHooks/usePBelAppFlowController";
 import PBelPaymentFlowHeader from "./PBelPaymentFlowHeader";
 import PBelPaymentFlowFooter from "./PBelPaymentFlowFooter";
-import { pBelFlowGoToFirstStep } from "../../../reduxToolkit/pBel/pBelFlowSlice";
-import { selectPBelPaymentFlowStep } from "../../../reduxToolkit/pBel/pBelPaymentFlowSlice";
+import { pBelFlowGoToFirstStep } from "../../../reduxToolkit/pBelSlices/pBelFlowSlice";
+import { selectPBelPaymentFlowStep } from "../../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import { getLastStep } from "../../../utils/stepsHelper";
 import { getAllPBelPaymentFlowStepsConfig } from "../../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
 

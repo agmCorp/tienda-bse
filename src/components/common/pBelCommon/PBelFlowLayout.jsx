@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import PBelFlowSteps from "./PBelFlowSteps";
-import usePBelAppFlowController from "../../../hooks/pBel/usePBelAppFlowController";
+import usePBelAppFlowController from "../../../hooks/pBelHooks/usePBelAppFlowController";
 import PBelFlowHeader from "./PBelFlowHeader";
 import PBelFlowFooter from "./PBelFlowFooter";
 import {
   pBelFlowGoToFirstStep,
   selectPBelFlowStep,
-} from "../../../reduxToolkit/pBel/pBelFlowSlice";
+} from "../../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { getFirstStep } from "../../../utils/stepsHelper";
 import Detail from "../../pBelInsQuote/Detail";
 

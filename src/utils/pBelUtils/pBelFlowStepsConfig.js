@@ -1,15 +1,15 @@
-import PBelFlowBasicData from "../../routes/pBel/PBelFlowBasicData";
-import PBelFlowQuote from "../../routes/pBel/PBelFlowQuote";
-import PBelFlowPaymentPlan from "../../routes/pBel/PBelFlowPaymentPlan";
-import PBelFlowAdditionalData from "../../routes/pBel/PBelFlowAdditionalData";
-import PBelFlowImages from "../../routes/pBel/PBelFlowImages";
+import PBelFlowBasicData from "../../routes/pBelRoutes/PBelFlowBasicData";
+import PBelFlowQuote from "../../routes/pBelRoutes/PBelFlowQuote";
+import PBelFlowPaymentPlan from "../../routes/pBelRoutes/PBelFlowPaymentPlan";
+import PBelFlowAdditionalData from "../../routes/pBelRoutes/PBelFlowAdditionalData";
+import PBelFlowImages from "../../routes/pBelRoutes/PBelFlowImages";
 import {
   P_BEL_FLOW_ROUTE_BASIC_DATA,
   P_BEL_FLOW_ROUTE_QUOTE,
   P_BEL_FLOW_ROUTE_PAYMENT_PLAN,
   P_BEL_FLOW_ROUTE_ADD_DATA,
   P_BEL_FLOW_ROUTE_IMAGES,
-} from "../../routes/pBel/pBelRoutes";
+} from "../../routes/pBelRoutes/pBelRoutes";
 
 const pBelFlowStepsConfig = [
   {

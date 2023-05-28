@@ -1,7 +1,7 @@
 import "./App.css";
 
 // PrimeReact
-import "./primereact-theme/theme.css";
+import "./primereactTheme/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";

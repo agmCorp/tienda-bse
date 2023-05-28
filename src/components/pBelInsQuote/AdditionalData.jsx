@@ -6,7 +6,7 @@ import { Message } from "primereact/message";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 
-import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { dateToString } from "../../utils/dateHelper";
 import "./AdditionalData.css";
 

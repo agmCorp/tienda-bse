@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { MUST_QUOTE_PREFIX, QUOTATION_PREFIX } from "../../utils/constants";
 import { getPBelCoverageInfo } from "../../utils/pBelUtils/pBelCoverageInfo";
-import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBel/pBelFlowSlice";
+import { pBelFlowStepCompletedThunk } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import recommended from "../../images/recommended.png";
 import Spinner from "../common/Spinner";
 import "./QuoteInfo.css";
