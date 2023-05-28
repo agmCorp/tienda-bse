@@ -31,7 +31,7 @@ function Images() {
   }, []);
 
   useEffect(() => {
-    console.log("*** FILE UPLOAD RESPONSES", responses);
+    console.log("*** File upload responses", responses);
 
     let messages = [];
     let successfulUploads = [];

@@ -43,7 +43,7 @@ function DebtControl() {
     };
 
     if (onAuthSuccess) {
-      console.log("Debt control");
+      console.log("*** Debt control");
       debtControl();
     }
   }, [

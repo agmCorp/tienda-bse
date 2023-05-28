@@ -98,7 +98,9 @@ function App() {
             : "Token is still valid"
         );
       } catch (err) {
-        console.log("Failed to refresh the token, or the session has expired");
+        console.log(
+          "*** Failed to refresh the token, or the session has expired"
+        );
       }
     }
 
@@ -110,7 +112,7 @@ function App() {
 
   // Just a log
   const onKeycloakTokens = (tokens) => {
-    console.log("onKeycloakTokens", tokens);
+    console.log("*** onKeycloakTokens", tokens);
   };
 
   return (

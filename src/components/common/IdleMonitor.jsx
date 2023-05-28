@@ -53,7 +53,7 @@ function IdleMonitor({ timesUp }) {
   const timeTillPrompt = Math.max(remaining - promptBeforeIdle / 1000, 0);
   if (timeTillPrompt > 0 && timeTillPrompt % 60 === 0) {
     console.log(
-      `Current state: ${stateMonitor}, ${timeTillPrompt} seconds until prompt`
+      `*** Current state: ${stateMonitor}, ${timeTillPrompt} seconds until prompt`
     );
   }
 
