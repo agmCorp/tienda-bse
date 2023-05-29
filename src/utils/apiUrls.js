@@ -12,6 +12,7 @@ const API_PBEL_ISSUE = "emision";
 const API_PBEL_INVOICE = "facturacion";
 const API_PBEL_INVOICE_DETAILS = "facturas";
 const API_PBEL_ADH_DIGITAL_INVOICE = "adhesion-factura-digital";
+const API_PBEL_REDIRECT = "redireccion";
 
 export {
   API_P_BEL_OBJECT_TYPES,
@@ -28,4 +29,5 @@ export {
   API_PBEL_INVOICE,
   API_PBEL_INVOICE_DETAILS,
   API_PBEL_ADH_DIGITAL_INVOICE,
+  API_PBEL_REDIRECT,
 };

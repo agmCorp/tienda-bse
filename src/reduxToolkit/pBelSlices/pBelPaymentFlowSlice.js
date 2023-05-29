@@ -12,7 +12,7 @@ const initialState = {
   invoiceDetail: {},
   invoiceAdhDigital: {},
   selectedData: {},
-  comeFromSpe: false,
+  comeFromPaymentGateway: false,
 };
 
 const pBelPaymentFlowSlice = createSlice({
@@ -51,7 +51,7 @@ const pBelPaymentFlowSlice = createSlice({
       state.invoiceDetail = {};
       state.invoiceAdhDigital = {};
       state.selectedData = {};
-      state.comeFromSpe = false;
+      state.comeFromPaymentGateway = false;
     },
     pBelPaymentFlowNavigate: (state, action) => {
       state.navigate = action.payload.navigate;
@@ -71,8 +71,8 @@ const pBelPaymentFlowSlice = createSlice({
     pBelAddInvoiceAdhDigital: (state, action) => {
       state.invoiceAdhDigital = action.payload;
     },
-    setComeFromSpe: (state, action) => {
-      state.comeFromSpe = action.payload;
+    setComeFromPaymentGateway: (state, action) => {
+      state.comeFromPaymentGateway = action.payload;
     },
   },
 });
@@ -86,7 +86,7 @@ const {
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
   pBelAddInvoiceAdhDigital,
-  setComeFromSpe,
+  setComeFromPaymentGateway,
 } = pBelPaymentFlowSlice.actions;
 
 // Selectors
@@ -107,7 +107,8 @@ const selectPBelPaymentFlowInvoiceAdhDigital = (state) =>
   state.pBelPaymentFlow.invoiceAdhDigital;
 const selectPBelPaymentFlowSelectedData = (state) =>
   state.pBelPaymentFlow.selectedData;
-const selectComeFromSpe = (state) => state.pBelPaymentFlow.comeFromSpe;
+const selectComeFromPaymentGateway = (state) =>
+  state.pBelPaymentFlow.comeFromPaymentGateway;
 
 export default pBelPaymentFlowSlice.reducer;
 export {
@@ -118,7 +119,7 @@ export {
   selectPBelPaymentFlowInvoiceDetail,
   selectPBelPaymentFlowInvoiceAdhDigital,
   selectPBelPaymentFlowSelectedData,
-  selectComeFromSpe,
+  selectComeFromPaymentGateway,
   pBelPaymentFlowSlice,
   pBelPaymentFlowStepCompleted,
   pBelPaymentFlowGoToStep,
@@ -128,5 +129,5 @@ export {
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
   pBelAddInvoiceAdhDigital,
-  setComeFromSpe,
+  setComeFromPaymentGateway,
 };

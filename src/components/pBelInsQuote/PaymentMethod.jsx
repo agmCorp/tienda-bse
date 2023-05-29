@@ -8,11 +8,11 @@ import {
   selectPBelPaymentFlowInvoiceInfo,
   pBelAddInvoiceInfo,
   pBelPaymentFlowStepCompleted,
-  setComeFromSpe,
   pBelAddInvoiceDetail,
   selectPBelPaymentFlowInvoiceDetail,
   selectPBelPaymentFlowInvoiceAdhDigital,
   pBelAddInvoiceAdhDigital,
+  setComeFromPaymentGateway,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import {
   API_PBEL_BANKS,
@@ -56,7 +56,7 @@ function PaymentMethod() {
 
   useEffect(() => {
     if (submittedData) {
-      dispatch(setComeFromSpe(false));
+      dispatch(setComeFromPaymentGateway(false));
       dispatch(pBelPaymentFlowStepCompleted(submittedData));
     }
   }, [submittedData, dispatch]);
