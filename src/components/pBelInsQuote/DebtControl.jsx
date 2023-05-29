@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useKeycloak } from "@react-keycloak/web";
+import { useDispatch } from "react-redux";
 
 import { selectOnAuthSuccess } from "../../reduxToolkit/userSlice";
-import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
+import {
+  pBelFlowGoToFirstStep,
+  selectPBelFlowSelectedData,
+} from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { clientApi } from "../../utils/clientApi";
 import { API_PBEL_DEBT_CONTROL } from "../../utils/apiUrls";
 import { getDocument, getDocumentType } from "../../utils/userProfileHelper";
@@ -13,6 +17,7 @@ import AdditionalData from "./AdditionalData";
 
 function DebtControl() {
   const { keycloak } = useKeycloak();
+  const dispatch = useDispatch();
   const onAuthSuccess = useSelector(selectOnAuthSuccess);
   const selectedData = useSelector(selectPBelFlowSelectedData);
   const [loadingDebtControl, setLoadingDebtControl] = useState(true);
@@ -53,12 +58,16 @@ function DebtControl() {
     selectedData.insurance.nroCotizacion,
   ]);
 
+  const handleOnClick = () => {
+    dispatch(pBelFlowGoToFirstStep());
+  };
+
   return (
     <>
       {loadingDebtControl ? (
         <Spinner size="small" />
       ) : debtControl ? (
-        <DebtMessage />
+        <DebtMessage init={handleOnClick} />
       ) : (
         <AdditionalData />
       )}
