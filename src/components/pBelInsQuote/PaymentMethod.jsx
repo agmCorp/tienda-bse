@@ -15,8 +15,7 @@ import {
   setComeFromPaymentGateway,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import {
-  API_PBEL_BANKS,
-  API_PBEL_BANKS_CREDIT_CARDS,
+  API_PBEL_PAYMENT_METHODS_POLICY,
   API_PBEL_PAYMENT_METHODS,
 } from "../../utils/apiUrls";
 import useDataCollection from "../../hooks/useDataCollection";
@@ -38,9 +37,8 @@ function PaymentMethod() {
 
   const dispatch = useDispatch();
   const { keycloak } = useKeycloak();
-  const [loadingBanks, banks] = useDataCollection(API_PBEL_BANKS, true);
-  const [loadingBanksCreditCards, banksCreditCards] = useDataCollection(
-    API_PBEL_BANKS_CREDIT_CARDS,
+  const [loadingPaymentMethodsPolicy, paymentMethodsPolicy] = useDataCollection(
+    API_PBEL_PAYMENT_METHODS_POLICY,
     true
   );
   const [loadingPaymentMethods, paymentMethods] = useDataCollection(
@@ -61,18 +59,17 @@ function PaymentMethod() {
     }
   }, [submittedData, dispatch]);
 
-  const getBanks = (banks, banksCreditCards, paymentMethods) => {
-    const banksCodes = banks.map((bank) => bank.codigoBCU);
-    const missingBanks = banksCreditCards.filter(
-      (bankCreditCard) =>
-        bankCreditCard.codigoBCU < CREDIT_CARD_CODE &&
-        !banksCodes.includes(bankCreditCard.codigoBCU)
+  const getBanks = (paymentMethodsPolicy, paymentMethods) => {
+    const banks = paymentMethodsPolicy.filter(
+      (bank) => bank.codigoBCU < CREDIT_CARD_CODE
     );
-    return [...banks, ...missingBanks, ...paymentMethods];
+    return [...banks, ...paymentMethods];
   };
 
-  const getCreditCards = (banksCreditCards) => {
-    return banksCreditCards.filter((card) => card.codigoBCU > CREDIT_CARD_CODE);
+  const getCreditCards = (financialInstitutions) => {
+    return financialInstitutions.filter(
+      (card) => card.codigoBCU > CREDIT_CARD_CODE
+    );
   };
 
   const onSubmit = async (data) => {
@@ -160,13 +157,13 @@ function PaymentMethod() {
 
   return (
     <>
-      {loadingBanks || loadingBanksCreditCards || loadingPaymentMethods ? (
+      {loadingPaymentMethodsPolicy || loadingPaymentMethods ? (
         <Spinner size="small" />
       ) : (
         <PaymentMethodForm
           onSubmit={onSubmit}
-          banks={getBanks(banks, banksCreditCards, paymentMethods)}
-          creditCards={getCreditCards(banksCreditCards)}
+          banks={getBanks(paymentMethodsPolicy, paymentMethods)}
+          creditCards={getCreditCards(paymentMethodsPolicy)}
           showNetworks={false}
         />
       )}
