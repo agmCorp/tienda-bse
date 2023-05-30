@@ -1,37 +1,42 @@
-import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { setComeFromPaymentGateway } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
+// import { useEffect, useRef } from "react";
+// import { useDispatch } from "react-redux";
 
-function FormBanred({ post, timeOut, selectedData }) {
-  const dispatch = useDispatch();
+function FormBanred({
+  post,
+  timeOut,
+  selectedData,
+  apiUrlRedirect,
+  handlePaymentSent,
+}) {
+  // const dispatch = useDispatch();
 
-  const buttonRef = useRef(null);
+  // const buttonRef = useRef(null);
 
-  useEffect(() => {
-    let timer;
-    if (post) {
-      timer = setTimeout(() => {
-        alert("agendo timer para hacer post a Banred");
-        dispatch(setComeFromPaymentGateway(true));
-        buttonRef.current.click();
-      }, timeOut);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [post, dispatch, timeOut]);
+  // useEffect(() => {
+  //   let timer;
+  //   if (post) {
+  //     timer = setTimeout(() => {
+  //       alert("agendo timer para hacer post a Banred");
+  //       dispatch(setComeFromPaymentGateway(true)); <--cambio esto
+  //       buttonRef.current.click();
+  //     }, timeOut);
+  //   }
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, [post, dispatch, timeOut]);
 
   return (
     <>
-      {post && (
+      {/* {post && (
         <form
           id="spe"
           //   action={SISTARBANC_URL}
           action="http://localhost:8080/ApiTiendaWebServices/api/objPersonal/public/redireccion?referrer=http://localhost/aplicaciones/tiendaBSE/objPersonal/detalleDePoliza"
           method="get"
           style={{ display: "none" }}
-        >
-          {/* <input
+        > */}
+      {/* <input
             id="idBanco"
             name="idBanco"
             value={
@@ -110,11 +115,11 @@ function FormBanred({ post, timeOut, selectedData }) {
             readOnly
           /> */}
 
-          <button type="submit" ref={buttonRef}>
+      {/* <button type="submit" ref={buttonRef}>
             Submit
           </button>
         </form>
-      )}
+      )} */}
     </>
   );
 }

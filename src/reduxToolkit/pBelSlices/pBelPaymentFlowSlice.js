@@ -12,7 +12,7 @@ const initialState = {
   invoiceDetail: {},
   invoiceAdhDigital: {},
   selectedData: {},
-  comeFromPaymentGateway: false,
+  paymentSent: false,
 };
 
 const pBelPaymentFlowSlice = createSlice({
@@ -51,7 +51,7 @@ const pBelPaymentFlowSlice = createSlice({
       state.invoiceDetail = {};
       state.invoiceAdhDigital = {};
       state.selectedData = {};
-      state.comeFromPaymentGateway = false;
+      state.paymentSent = false;
     },
     pBelPaymentFlowNavigate: (state, action) => {
       state.navigate = action.payload.navigate;
@@ -71,8 +71,8 @@ const pBelPaymentFlowSlice = createSlice({
     pBelAddInvoiceAdhDigital: (state, action) => {
       state.invoiceAdhDigital = action.payload;
     },
-    setComeFromPaymentGateway: (state, action) => {
-      state.comeFromPaymentGateway = action.payload;
+    pBelPaymentSent: (state, action) => {
+      state.paymentSent = action.payload;
     },
   },
 });
@@ -86,7 +86,7 @@ const {
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
   pBelAddInvoiceAdhDigital,
-  setComeFromPaymentGateway,
+  pBelPaymentSent,
 } = pBelPaymentFlowSlice.actions;
 
 // Selectors
@@ -107,8 +107,7 @@ const selectPBelPaymentFlowInvoiceAdhDigital = (state) =>
   state.pBelPaymentFlow.invoiceAdhDigital;
 const selectPBelPaymentFlowSelectedData = (state) =>
   state.pBelPaymentFlow.selectedData;
-const selectComeFromPaymentGateway = (state) =>
-  state.pBelPaymentFlow.comeFromPaymentGateway;
+const selectPBelPaymentSent = (state) => state.pBelPaymentFlow.paymentSent;
 
 export default pBelPaymentFlowSlice.reducer;
 export {
@@ -119,7 +118,7 @@ export {
   selectPBelPaymentFlowInvoiceDetail,
   selectPBelPaymentFlowInvoiceAdhDigital,
   selectPBelPaymentFlowSelectedData,
-  selectComeFromPaymentGateway,
+  selectPBelPaymentSent,
   pBelPaymentFlowSlice,
   pBelPaymentFlowStepCompleted,
   pBelPaymentFlowGoToStep,
@@ -129,5 +128,5 @@ export {
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
   pBelAddInvoiceAdhDigital,
-  setComeFromPaymentGateway,
+  pBelPaymentSent,
 };

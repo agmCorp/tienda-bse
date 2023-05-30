@@ -1,13 +1,18 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { setComeFromPaymentGateway } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import {
   API_BASE_URL,
   PUBLIC_SUBDIRECTORY,
   SISTARBANC_URL,
 } from "../../utils/constants";
 
-function FormSpe({ post, timeOut, selectedData, apiUrl }) {
+function FormSpe({
+  post,
+  timeOut,
+  selectedData,
+  apiUrlRedirect,
+  handlePaymentSent,
+}) {
   const kk = 6;
 
   const dispatch = useDispatch();
@@ -19,8 +24,8 @@ function FormSpe({ post, timeOut, selectedData, apiUrl }) {
     let timer;
     if (post) {
       timer = setTimeout(() => {
-        alert("agendo timer para hacer post a spe");
-        dispatch(setComeFromPaymentGateway(true));
+        alert("Agendo timer para hacer post a spe");
+        handlePaymentSent();
         buttonRef.current.click();
         console.log("*** SPE", formRef.current.outerHTML);
       }, timeOut);
@@ -28,7 +33,7 @@ function FormSpe({ post, timeOut, selectedData, apiUrl }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [post, dispatch, timeOut]);
+  }, [post, dispatch, timeOut, handlePaymentSent]);
 
   const formatNumber = (num) => {
     return parseFloat(num)
@@ -136,7 +141,7 @@ function FormSpe({ post, timeOut, selectedData, apiUrl }) {
           <input
             id="urlVuelta"
             name="urlVuelta"
-            value={`${API_BASE_URL}/${PUBLIC_SUBDIRECTORY}/${apiUrl}?referrer=${window.location.href}`}
+            value={`${API_BASE_URL}/${PUBLIC_SUBDIRECTORY}/${apiUrlRedirect}?referrer=${window.location.href}`}
             readOnly
           />
 

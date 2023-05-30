@@ -5,12 +5,15 @@ import { useDispatch } from "react-redux";
 import Spinner from "./Spinner";
 import FormSpe from "./FormSpe";
 import FormBanred from "./FormBanred";
+import Networks from "./Networks";
 import { Button } from "primereact/button";
 
 function PolicyDetailForm({
   selectedData,
-  comeFromPaymentGateway,
-  apiUrl,
+  paymentSent,
+  handlePaymentSent,
+  apiUrlRedirect,
+  apiUrlPaymentNetworks,
   paymentFlowStepCompleted,
 }) {
   const TIME_OUT = 5000; // Just to display a text message (Procesando...) for a while.
@@ -19,10 +22,11 @@ function PolicyDetailForm({
 
   const [postToSpe, setPostToSpe] = useState(false);
   const [postToBanred, setPostToBanred] = useState(false);
+  const [networks, setNetworks] = useState(false);
 
   useEffect(() => {
     let timer;
-    if (comeFromPaymentGateway) {
+    if (paymentSent) {
       timer = setTimeout(() => {
         dispatch(paymentFlowStepCompleted()); // No need to add more data to the store.
       }, TIME_OUT);
@@ -30,10 +34,11 @@ function PolicyDetailForm({
     return () => {
       clearTimeout(timer);
     };
-  }, [dispatch, paymentFlowStepCompleted, comeFromPaymentGateway]);
+  }, [dispatch, paymentFlowStepCompleted, paymentSent]);
 
   const onSubmit = () => {
     if (selectedData.paymentMethod === "networks") {
+      setNetworks(true);
       dispatch(paymentFlowStepCompleted()); // No need to add more data to the store.
     } else {
       if (selectedData.paymentMethod === "debit") {
@@ -50,20 +55,28 @@ function PolicyDetailForm({
 
   return (
     <>
-      {comeFromPaymentGateway || postToSpe || postToBanred ? (
+      {paymentSent || postToSpe || postToBanred || networks ? (
         <>
           <span>Soy una pantalla linda que dice PROCESANDO</span>
           <FormSpe
             post={postToSpe}
             timeOut={TIME_OUT}
             selectedData={selectedData}
-            apiUrl={apiUrl}
+            apiUrlRedirect={apiUrlRedirect}
+            handlePaymentSent={handlePaymentSent}
           />
           <FormBanred
             post={postToBanred}
             timeOut={TIME_OUT}
             selectedData={selectedData}
-            apiUrl={apiUrl}
+            apiUrlRedirect={apiUrlRedirect}
+            handlePaymentSent={handlePaymentSent}
+          />
+          <Networks
+            networks={networks}
+            selectedData={selectedData}
+            apiUrlPaymentNetworks={apiUrlPaymentNetworks}
+            handlePaymentSent={handlePaymentSent}
           />
           <BlockUI
             blocked={true}
