@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PolicyDetailForm from "../common/PolicyDetailForm";
 import {
   pBelPaymentFlowStepCompleted,
+  pBelPaymentSent,
   selectPBelPaymentFlowSelectedData,
   selectPBelPaymentSent,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
@@ -13,7 +14,7 @@ import {
 function PolicyDetail() {
   const dispatch = useDispatch();
   const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
-  const pBelPaymentSent = useSelector(selectPBelPaymentSent);
+  const paymentSent = useSelector(selectPBelPaymentSent);
   const pBelHandlePaymentSent = () => {
     dispatch(pBelPaymentSent(true));
   };
@@ -21,7 +22,7 @@ function PolicyDetail() {
   return (
     <PolicyDetailForm
       selectedData={selectedData}
-      paymentSent={pBelPaymentSent}
+      paymentSent={paymentSent}
       handlePaymentSent={pBelHandlePaymentSent}
       apiUrlRedirect={API_PBEL_REDIRECT}
       apiUrlPaymentNetworks={API_PBLE_PAYMENT_NETWORKS}

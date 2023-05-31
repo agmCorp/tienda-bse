@@ -20,12 +20,12 @@ function Networks({
         {
           apellidos: selectedData.apellidos,
           certificado: "1",
-          codProducto: selectedData.insurance.producto,
+          codProducto: selectedData.codProducto,
           codRamo: selectedData.codRamo,
           descProducto: selectedData.descProducto,
           descRamo: selectedData.descRamo,
           documentId: selectedData.documentId,
-          idTransaccion: "",
+          idTransaccion: "", // hacer que lo calcule adentro el servicio java
           nombres: selectedData.nombres,
           nroDocumento: selectedData.nroDocumento,
           numPoliza: selectedData.nroPoliza,
@@ -49,7 +49,7 @@ function Networks({
     keycloak.token,
     networks,
     selectedData.apellidos,
-    selectedData.insurance.producto,
+    selectedData.codProducto,
     selectedData.codRamo,
     selectedData.descProducto,
     selectedData.descRamo,

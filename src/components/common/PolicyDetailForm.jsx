@@ -39,7 +39,6 @@ function PolicyDetailForm({
   const onSubmit = () => {
     if (selectedData.paymentMethod === "networks") {
       setNetworks(true);
-      dispatch(paymentFlowStepCompleted()); // No need to add more data to the store.
     } else {
       if (selectedData.paymentMethod === "debit") {
         if (selectedData.bank.codigo === "BANRED") {

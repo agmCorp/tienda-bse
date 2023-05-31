@@ -164,7 +164,7 @@ function PaymentMethod() {
           onSubmit={onSubmit}
           banks={getBanks(paymentMethodsPolicy, paymentMethods)}
           creditCards={getCreditCards(paymentMethodsPolicy)}
-          showNetworks={false}
+          showNetworks={true}
         />
       )}
     </>

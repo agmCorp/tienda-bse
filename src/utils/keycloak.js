@@ -1,11 +1,9 @@
 import Keycloak from "keycloak-js";
 
-// BSE configuration url: "https://sso-test.bse.com.uy/auth/"
-// Local configuration url: "http://localhost:8180/auth",
 const keycloak = new Keycloak({
-  url: "http://localhost:8180/auth",
-  realm: "MiBSE",
-  clientId: "tienda-bse",
+  url: process.env.REACT_APP_KEYCLOAK_URL,
+  realm: process.env.REACT_APP_KEYCLOAK_REALM,
+  clientId: process.env.REACT_APP_KEYCLOAK_CLIENTID,
 });
 
 export default keycloak;
