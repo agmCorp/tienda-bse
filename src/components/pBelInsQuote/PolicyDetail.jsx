@@ -15,6 +15,7 @@ function PolicyDetail() {
   const dispatch = useDispatch();
   const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
   const paymentSent = useSelector(selectPBelPaymentSent);
+
   const pBelHandlePaymentSent = () => {
     dispatch(pBelPaymentSent(true));
   };

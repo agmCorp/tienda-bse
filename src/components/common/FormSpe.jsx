@@ -13,10 +13,7 @@ function FormSpe({
   apiUrlRedirect,
   handlePaymentSent,
 }) {
-  const kk = 6;
-
   const dispatch = useDispatch();
-
   const buttonRef = useRef(null);
   const formRef = useRef(null);
 
@@ -24,7 +21,6 @@ function FormSpe({
     let timer;
     if (post) {
       timer = setTimeout(() => {
-        alert("Agendo timer para hacer post a spe");
         handlePaymentSent();
         buttonRef.current.click();
         console.log("*** SPE", formRef.current.outerHTML);
@@ -79,7 +75,7 @@ function FormSpe({
           <input
             id="idTransaccion"
             name="idTransaccion"
-            value={`2${kk}2305291326005230009049372855`} // ALVARO ver pc_pagoelectronico linea 391
+            value={`22305291326005230009049372855`} // ALVARO ver pc_pagoelectronico linea 391
             readOnly
           />
           <input id="idOrganismo" name="idOrganismo" value="BSE" readOnly />
@@ -93,7 +89,7 @@ function FormSpe({
           <input
             id="idFactura"
             name="idFactura"
-            value={selectedData.numeroFactura + kk}
+            value={selectedData.numeroFactura}
             readOnly
           />
           <input

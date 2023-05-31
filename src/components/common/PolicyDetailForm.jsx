@@ -58,21 +58,21 @@ function PolicyDetailForm({
         <>
           <span>Soy una pantalla linda que dice PROCESANDO</span>
           <FormSpe
-            post={postToSpe}
+            post={postToSpe && !paymentSent}
             timeOut={TIME_OUT}
             selectedData={selectedData}
             apiUrlRedirect={apiUrlRedirect}
             handlePaymentSent={handlePaymentSent}
           />
           <FormBanred
-            post={postToBanred}
+            post={postToBanred && !paymentSent}
             timeOut={TIME_OUT}
             selectedData={selectedData}
             apiUrlRedirect={apiUrlRedirect}
             handlePaymentSent={handlePaymentSent}
           />
           <Networks
-            networks={networks}
+            networks={networks && !paymentSent}
             selectedData={selectedData}
             apiUrlPaymentNetworks={apiUrlPaymentNetworks}
             handlePaymentSent={handlePaymentSent}

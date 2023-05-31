@@ -37,11 +37,13 @@ function Networks({
       );
 
       if (response.ok) {
+        console.log("LA INVOCACION RETORNO OK, SETO PAGO ENVIADO");
         handlePaymentSent();
       }
     };
 
     if (networks) {
+      console.log("INVOCO");
       networksPayment();
     }
   }, [
