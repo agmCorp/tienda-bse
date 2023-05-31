@@ -1,10 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useKeycloak } from "@react-keycloak/web";
+
 import {
   API_BASE_URL,
   PUBLIC_SUBDIRECTORY,
   SISTARBANC_URL,
 } from "../../utils/constants";
+import { clientApi } from "../../utils/clientApi";
 
 function FormSpe({
   post,
@@ -13,23 +16,63 @@ function FormSpe({
   apiUrlRedirect,
   handlePaymentSent,
 }) {
+  const { keycloak } = useKeycloak();
   const dispatch = useDispatch();
   const buttonRef = useRef(null);
   const formRef = useRef(null);
+  const [idTrn, setIdTrn] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    const getIdTrn = async () => {
+      let response = null;
+      const responseIdTrn = await clientApi(
+        "get",
+        "NECESITO LA URL",
+        true,
+        {},
+        {
+          medioDePago: selectedData.bank.codigo,
+          nroFactura: selectedData.numeroFactura,
+        },
+        {},
+        keycloak.token
+      );
+
+      if (responseIdTrn.ok) {
+        response = { ok: true, data: responseIdTrn.data };
+      } else {
+        console.error("*** GETIDTRN ERROR", responseIdTrn.data);
+        response = { ok: false, data: responseIdTrn.message };
+      }
+      return response;
+    };
+
     let timer;
     if (post) {
       timer = setTimeout(() => {
-        handlePaymentSent();
-        buttonRef.current.click();
-        console.log("*** SPE", formRef.current.outerHTML);
+        const response = getIdTrn();
+        if (response.ok) {
+          handlePaymentSent();
+          buttonRef.current.click();
+          console.log("*** SPE", formRef.current.outerHTML);
+        } else {
+          setErrorMessage("No se ha podido completar el pago de su póliza.");
+        }
       }, timeOut);
     }
     return () => {
       clearTimeout(timer);
     };
-  }, [post, dispatch, timeOut, handlePaymentSent]);
+  }, [
+    post,
+    dispatch,
+    timeOut,
+    handlePaymentSent,
+    selectedData.bank.codigo,
+    selectedData.numeroFactura,
+    keycloak.token,
+  ]);
 
   const formatNumber = (num) => {
     return parseFloat(num)
@@ -53,6 +96,8 @@ function FormSpe({
 
   return (
     <>
+      {errorMessage && <>HUBO ERROR ${errorMessage}</>}
+
       {post && (
         <form
           id="spe"

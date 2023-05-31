@@ -108,7 +108,7 @@ const detailInvoice = async (invoiceDetail, invoiceNumber, token) => {
     if (responseInvoiceDetail.ok) {
       response = { ok: true, data: responseInvoiceDetail.data };
     } else {
-      console.error("*** INVOICE ERROR", responseInvoiceDetail.data);
+      console.error("*** DETAILINVOICE ERROR", responseInvoiceDetail.data);
       response = { ok: false, data: responseInvoiceDetail.message };
     }
   } else {
@@ -138,7 +138,10 @@ const adhDigitalInvoice = async (
     if (responseAdhDigitalInvoice.ok) {
       response = { ok: true, data: responseAdhDigitalInvoice.data };
     } else {
-      console.error("*** INVOICE ERROR", responseAdhDigitalInvoice.data);
+      console.error(
+        "*** ADHDIGITALINVOICE ERROR",
+        responseAdhDigitalInvoice.data
+      );
       response = { ok: false, data: responseAdhDigitalInvoice.message };
     }
   } else {
