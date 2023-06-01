@@ -37,7 +37,9 @@ function Networks({
       );
 
       if (response.ok) {
-        handlePaymentSent();
+        handlePaymentSent({ ok: true, data: "" });
+      } else {
+        handlePaymentSent({ ok: true, data: response.data });
       }
     };
 

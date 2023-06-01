@@ -12,7 +12,7 @@ const initialState = {
   invoiceDetail: {},
   invoiceAdhDigital: {},
   selectedData: {},
-  paymentSent: false,
+  paymentSent: {},
 };
 
 const pBelPaymentFlowSlice = createSlice({
@@ -51,7 +51,7 @@ const pBelPaymentFlowSlice = createSlice({
       state.invoiceDetail = {};
       state.invoiceAdhDigital = {};
       state.selectedData = {};
-      state.paymentSent = false;
+      state.paymentSent = {};
     },
     pBelPaymentFlowNavigate: (state, action) => {
       state.navigate = action.payload.navigate;

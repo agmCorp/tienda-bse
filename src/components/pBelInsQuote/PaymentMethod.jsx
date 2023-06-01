@@ -54,7 +54,7 @@ function PaymentMethod() {
 
   useEffect(() => {
     if (submittedData) {
-      dispatch(pBelPaymentSent(false));
+      dispatch(pBelPaymentSent({ ok: false, data: "" }));
       dispatch(pBelPaymentFlowStepCompleted(submittedData));
     }
   }, [submittedData, dispatch]);

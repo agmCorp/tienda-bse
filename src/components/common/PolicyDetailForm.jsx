@@ -1,9 +1,8 @@
 import { BlockUI } from "primereact/blockui";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
 import Spinner from "./Spinner";
-import FormSpe from "./FormSpe";
+import FormSistarbanc from "./FormSistarbanc";
 import FormBanred from "./FormBanred";
 import Networks from "./Networks";
 import { Button } from "primereact/button";
@@ -12,29 +11,27 @@ function PolicyDetailForm({
   selectedData,
   paymentSent,
   handlePaymentSent,
+  apiUrlIdTrnSistarbanc,
   apiUrlRedirect,
   apiUrlPaymentNetworks,
-  paymentFlowStepCompleted,
 }) {
   const TIME_OUT = 5000; // Just to display a text message (Procesando...) for a while.
 
-  const dispatch = useDispatch();
-
-  const [postToSpe, setPostToSpe] = useState(false);
+  const [postToSistarbanc, setPostToSistarbanc] = useState(false);
   const [postToBanred, setPostToBanred] = useState(false);
   const [networks, setNetworks] = useState(false);
 
   useEffect(() => {
     let timer;
-    if (paymentSent) {
+    if (paymentSent.ok) {
       timer = setTimeout(() => {
-        dispatch(paymentFlowStepCompleted()); // No need to add more data to the store.
+        handlePaymentSent();
       }, TIME_OUT);
     }
     return () => {
       clearTimeout(timer);
     };
-  }, [dispatch, paymentFlowStepCompleted, paymentSent]);
+  }, [handlePaymentSent, paymentSent.ok]);
 
   const onSubmit = () => {
     if (selectedData.paymentMethod === "networks") {
@@ -44,35 +41,37 @@ function PolicyDetailForm({
         if (selectedData.bank.codigo === "BANRED") {
           setPostToBanred(true);
         } else {
-          setPostToSpe(true);
+          setPostToSistarbanc(true);
         }
       } else {
-        setPostToSpe(true);
+        setPostToSistarbanc(true);
       }
     }
   };
 
   return (
     <>
-      {paymentSent || postToSpe || postToBanred || networks ? (
+      {paymentSent.ok || postToSistarbanc || postToBanred || networks ? (
         <>
           <span>Soy una pantalla linda que dice PROCESANDO</span>
-          <FormSpe
-            post={postToSpe && !paymentSent}
+          <FormSistarbanc
+            post={postToSistarbanc}
+            handlePost={setPostToSistarbanc}
             timeOut={TIME_OUT}
             selectedData={selectedData}
+            apiUrlIdTrn={apiUrlIdTrnSistarbanc}
             apiUrlRedirect={apiUrlRedirect}
             handlePaymentSent={handlePaymentSent}
           />
           <FormBanred
-            post={postToBanred && !paymentSent}
+            post={postToBanred}
             timeOut={TIME_OUT}
             selectedData={selectedData}
             apiUrlRedirect={apiUrlRedirect}
             handlePaymentSent={handlePaymentSent}
           />
           <Networks
-            networks={networks && !paymentSent}
+            networks={networks}
             selectedData={selectedData}
             apiUrlPaymentNetworks={apiUrlPaymentNetworks}
             handlePaymentSent={handlePaymentSent}
@@ -88,6 +87,9 @@ function PolicyDetailForm({
           <span>
             Acá muestro resumen de póliza comprada y términos particulares
           </span>
+          {!paymentSent.ok && paymentSent.data && (
+            <>ERROR: {paymentSent.data}</>
+          )}
           <Button
             type="button"
             label="Soy un boton provisorio que dice Pagar"
