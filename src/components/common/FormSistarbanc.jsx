@@ -48,7 +48,6 @@ function FormSistarbanc({
       if (responseIdTrn.ok) {
         response = { ok: true, data: responseIdTrn.data };
       } else {
-        console.error("*** GETIDTRN ERROR", responseIdTrn.data);
         response = { ok: false, data: responseIdTrn.message };
       }
       return response;

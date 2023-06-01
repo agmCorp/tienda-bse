@@ -4,6 +4,7 @@ import { useKeycloak } from "@react-keycloak/web";
 
 function Networks({
   networks,
+  handleNetworks,
   selectedData,
   apiUrlPaymentNetworks,
   handlePaymentSent,
@@ -12,7 +13,8 @@ function Networks({
 
   useEffect(() => {
     const networksPayment = async () => {
-      const response = await clientApi(
+      let response = null;
+      const responseNetworks = await clientApi(
         "post",
         apiUrlPaymentNetworks,
         true,
@@ -36,18 +38,33 @@ function Networks({
         keycloak.token
       );
 
-      if (response.ok) {
-        handlePaymentSent({ ok: true, data: "" });
+      if (responseNetworks.ok) {
+        response = { ok: true, data: responseNetworks.data };
       } else {
-        handlePaymentSent({ ok: true, data: response.data });
+        response = { ok: false, data: responseNetworks.message };
+      }
+      return response;
+    };
+
+    const networksPaymentCaller = async () => {
+      if (networks) {
+        const response = await networksPayment();
+        if (response.ok) {
+          handlePaymentSent({ ok: true, data: "" });
+        } else {
+          handlePaymentSent({
+            ok: false,
+            data: "No se ha podido completar el pago de su póliza.",
+          });
+        }
+        handleNetworks(false);
       }
     };
 
-    if (networks) {
-      networksPayment();
-    }
+    networksPaymentCaller();
   }, [
     apiUrlPaymentNetworks,
+    handleNetworks,
     handlePaymentSent,
     keycloak.token,
     networks,

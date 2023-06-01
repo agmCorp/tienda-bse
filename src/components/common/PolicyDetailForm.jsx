@@ -54,28 +54,38 @@ function PolicyDetailForm({
       {paymentSent.ok || postToSistarbanc || postToBanred || networks ? (
         <>
           <span>Soy una pantalla linda que dice PROCESANDO</span>
-          <FormSistarbanc
-            post={postToSistarbanc}
-            handlePost={setPostToSistarbanc}
-            timeOut={TIME_OUT}
-            selectedData={selectedData}
-            apiUrlIdTrn={apiUrlIdTrnSistarbanc}
-            apiUrlRedirect={apiUrlRedirect}
-            handlePaymentSent={handlePaymentSent}
-          />
-          <FormBanred
-            post={postToBanred}
-            timeOut={TIME_OUT}
-            selectedData={selectedData}
-            apiUrlRedirect={apiUrlRedirect}
-            handlePaymentSent={handlePaymentSent}
-          />
-          <Networks
-            networks={networks}
-            selectedData={selectedData}
-            apiUrlPaymentNetworks={apiUrlPaymentNetworks}
-            handlePaymentSent={handlePaymentSent}
-          />
+          {postToSistarbanc && (
+            <FormSistarbanc
+              post={postToSistarbanc}
+              handlePost={setPostToSistarbanc}
+              timeOut={TIME_OUT}
+              selectedData={selectedData}
+              apiUrlIdTrn={apiUrlIdTrnSistarbanc}
+              apiUrlRedirect={apiUrlRedirect}
+              handlePaymentSent={handlePaymentSent}
+            />
+          )}
+
+          {postToBanred && (
+            <FormBanred
+              post={postToBanred}
+              timeOut={TIME_OUT}
+              selectedData={selectedData}
+              apiUrlRedirect={apiUrlRedirect}
+              handlePaymentSent={handlePaymentSent}
+            />
+          )}
+
+          {networks && (
+            <Networks
+              networks={networks}
+              handleNetworks={setNetworks}
+              selectedData={selectedData}
+              apiUrlPaymentNetworks={apiUrlPaymentNetworks}
+              handlePaymentSent={handlePaymentSent}
+            />
+          )}
+
           <BlockUI
             blocked={true}
             fullScreen
