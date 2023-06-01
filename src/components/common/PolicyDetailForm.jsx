@@ -34,7 +34,7 @@ function PolicyDetailForm({
     };
   }, [handlePaymentSent, paymentSent.ok]);
 
-  const onSubmit = () => {
+  const onSubmitForm = () => {
     if (selectedData.paymentMethod === "networks") {
       setNetworks(true);
     } else {
@@ -93,12 +93,12 @@ function PolicyDetailForm({
             Acá muestro resumen de póliza comprada y términos particulares
           </span>
           {!paymentSent.ok && paymentSent.data && (
-            <>ERROR: {paymentSent.data}</>
+            <p>ERROR: {paymentSent.data}</p>
           )}
           <Button
             type="button"
             label="Soy un boton provisorio que dice Pagar"
-            onClick={onSubmit}
+            onClick={onSubmitForm}
             className="p-button-info mt-2"
           />
         </>
