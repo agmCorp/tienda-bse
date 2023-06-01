@@ -1,11 +1,12 @@
 import { BlockUI } from "primereact/blockui";
 import { useEffect, useState } from "react";
+import { Button } from "primereact/button";
+import { Message } from "primereact/message";
 
 import Spinner from "./Spinner";
 import FormSistarbanc from "./FormSistarbanc";
 import FormBanred from "./FormBanred";
 import Networks from "./Networks";
-import { Button } from "primereact/button";
 
 function PolicyDetailForm({
   selectedData,
@@ -16,7 +17,7 @@ function PolicyDetailForm({
   apiUrlRedirect,
   apiUrlPaymentNetworks,
 }) {
-  const TIME_OUT = 5000; // Just to display a text message (Procesando...) for a while.
+  const TIME_OUT = 5_000; // Waiting time until the payment gateway confirms the transaction
 
   const [postToSistarbanc, setPostToSistarbanc] = useState(false);
   const [postToBanred, setPostToBanred] = useState(false);
@@ -54,7 +55,15 @@ function PolicyDetailForm({
     <>
       {paymentSent.ok || postToSistarbanc || postToBanred || networks ? (
         <>
-          <span>Soy una pantalla linda que dice PROCESANDO</span>
+          <div className="flex flex-column justify-content-center align-items-center h-10rem">
+            <span className="text-900 font-bold text-3xl text-primary">
+              PROCESANDO
+            </span>
+            <span className="text-700 text-xl text-center line-height-3">
+              Por favor espera unos segundos...
+            </span>
+          </div>
+
           <FormSistarbanc
             post={postToSistarbanc}
             handlePost={setPostToSistarbanc}
@@ -93,7 +102,7 @@ function PolicyDetailForm({
             Acá muestro resumen de póliza comprada y términos particulares
           </span>
           {!paymentSent.ok && paymentSent.data && (
-            <p>ERROR: {paymentSent.data}</p>
+            <Message severity="error" text={paymentSent.data} />
           )}
           <Button
             type="button"
