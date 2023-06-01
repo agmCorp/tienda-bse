@@ -99,7 +99,8 @@ function PolicyDetailForm({
             type="button"
             label="Soy un boton provisorio que dice Pagar"
             onClick={onSubmitForm}
-            className="p-button-info mt-2"
+            className="my-2 tienda-button"
+            icon="pi pi-check"
           />
         </>
       )}
