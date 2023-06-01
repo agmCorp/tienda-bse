@@ -11,7 +11,6 @@ import { clientApi } from "../../utils/clientApi";
 function FormSistarbanc({
   post,
   handlePost,
-  timeOut,
   selectedData,
   apiUrlIdTrn,
   apiUrlRedirect,
@@ -24,10 +23,11 @@ function FormSistarbanc({
 
   useEffect(() => {
     if (idTrn) {
+      handlePost(false);
       buttonRef.current.click();
       console.log("*** SPE", formRef.current.outerHTML);
     }
-  }, [idTrn]);
+  }, [idTrn, handlePost]);
 
   useEffect(() => {
     const getIdTrn = async () => {
@@ -53,9 +53,8 @@ function FormSistarbanc({
       return response;
     };
 
-    let timer;
-    if (post) {
-      timer = setTimeout(async () => {
+    const getIdTrnCaller = async () => {
+      if (post) {
         const response = await getIdTrn();
         if (response.ok) {
           handlePaymentSent({ ok: true, data: "" });
@@ -65,22 +64,20 @@ function FormSistarbanc({
             ok: false,
             data: "No se ha podido completar el pago de su póliza.",
           });
+          handlePost(false);
         }
-        handlePost(false);
-      }, timeOut);
-    }
-    return () => {
-      clearTimeout(timer);
+      }
     };
+
+    getIdTrnCaller();
   }, [
     post,
     apiUrlIdTrn,
     handlePost,
-    timeOut,
-    handlePaymentSent,
     selectedData.bank.codigo,
     selectedData.numeroFactura,
     keycloak.token,
+    handlePaymentSent,
   ]);
 
   const formatNumber = (num) => {
@@ -105,92 +102,99 @@ function FormSistarbanc({
 
   return (
     <>
-      <form
-        id="sistarbanc"
-        action={SISTARBANC_URL}
-        method="post"
-        style={{ display: "none" }}
-        ref={formRef}
-      >
-        <input
-          id="idBanco"
-          name="idBanco"
-          value={leftZeros(
-            selectedData.bank
-              ? selectedData.bank.codigo
-              : selectedData.creditCard.codigo,
-            3
-          )}
-          readOnly
-        />
-        <input id="idTransaccion" name="idTransaccion" value={idTrn} readOnly />
-        <input id="idOrganismo" name="idOrganismo" value="BSE" readOnly />
-        <input id="tipoServicio" name="tipoServicio" value="SEG" readOnly />
-        <input
-          id="idCuenta"
-          name="idCuenta"
-          value={removeBlanks(selectedData.codigoAdhesion)}
-          readOnly
-        />
-        <input
-          id="idFactura"
-          name="idFactura"
-          value={selectedData.numeroFactura}
-          readOnly
-        />
-        <input
-          id="importe"
-          name="importe"
-          value={formatNumber(selectedData.importePagar)}
-          readOnly
-        />
-        <input
-          id="importeGravado"
-          name="importeGravado"
-          value={formatNumber(selectedData.importeGravado)}
-          readOnly
-        />
-        <input
-          id="consumidorFinal"
-          name="consumidorFinal"
-          value={selectedData.consumoFinal === "S" ? "1" : "0"}
-          readOnly
-        />
-        <input
-          id="moneda"
-          name="moneda"
-          value={selectedData.moneda === "USD" ? "USD" : "UYU"}
-          readOnly
-        />
-        <input
-          id="fechaVenc"
-          name="fechaVenc"
-          value={removeHyphens(selectedData.fechaVto1)}
-          readOnly
-        />
-        <input
-          id="fechaLimitePago"
-          name="fechaLimitePago"
-          value={removeHyphens(selectedData.fechaVto2)}
-          readOnly
-        />
-        <input
-          id="otroDato"
-          name="otroDato"
-          value="PASARELA DE PAGOS MIBSE"
-          readOnly
-        />
-        <input
-          id="urlVuelta"
-          name="urlVuelta"
-          value={`${API_BASE_URL}/${PUBLIC_SUBDIRECTORY}/${apiUrlRedirect}?referrer=${window.location.href}`}
-          readOnly
-        />
+      {post && (
+        <form
+          id="sistarbanc"
+          action={SISTARBANC_URL}
+          method="post"
+          style={{ display: "none" }}
+          ref={formRef}
+        >
+          <input
+            id="idBanco"
+            name="idBanco"
+            value={leftZeros(
+              selectedData.bank
+                ? selectedData.bank.codigo
+                : selectedData.creditCard.codigo,
+              3
+            )}
+            readOnly
+          />
+          <input
+            id="idTransaccion"
+            name="idTransaccion"
+            value={idTrn}
+            readOnly
+          />
+          <input id="idOrganismo" name="idOrganismo" value="BSE" readOnly />
+          <input id="tipoServicio" name="tipoServicio" value="SEG" readOnly />
+          <input
+            id="idCuenta"
+            name="idCuenta"
+            value={removeBlanks(selectedData.codigoAdhesion)}
+            readOnly
+          />
+          <input
+            id="idFactura"
+            name="idFactura"
+            value={selectedData.numeroFactura}
+            readOnly
+          />
+          <input
+            id="importe"
+            name="importe"
+            value={formatNumber(selectedData.importePagar)}
+            readOnly
+          />
+          <input
+            id="importeGravado"
+            name="importeGravado"
+            value={formatNumber(selectedData.importeGravado)}
+            readOnly
+          />
+          <input
+            id="consumidorFinal"
+            name="consumidorFinal"
+            value={selectedData.consumoFinal === "S" ? "1" : "0"}
+            readOnly
+          />
+          <input
+            id="moneda"
+            name="moneda"
+            value={selectedData.moneda === "USD" ? "USD" : "UYU"}
+            readOnly
+          />
+          <input
+            id="fechaVenc"
+            name="fechaVenc"
+            value={removeHyphens(selectedData.fechaVto1)}
+            readOnly
+          />
+          <input
+            id="fechaLimitePago"
+            name="fechaLimitePago"
+            value={removeHyphens(selectedData.fechaVto2)}
+            readOnly
+          />
+          <input
+            id="otroDato"
+            name="otroDato"
+            value="PASARELA DE PAGOS MIBSE"
+            readOnly
+          />
+          <input
+            id="urlVuelta"
+            name="urlVuelta"
+            value={`${API_BASE_URL}/${PUBLIC_SUBDIRECTORY}/${apiUrlRedirect}?referrer=${window.location.href}`}
+            readOnly
+          />
 
-        <button type="submit" ref={buttonRef}>
-          Submit
-        </button>
-      </form>
+          <button type="submit" ref={buttonRef}>
+            Submit
+          </button>
+        </form>
+      )}
     </>
   );
 }

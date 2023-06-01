@@ -1,4 +1,6 @@
+import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import PolicyDetailForm from "../common/PolicyDetailForm";
 import {
   pBelPaymentFlowStepCompleted,
@@ -7,6 +9,7 @@ import {
   selectPBelPaymentSent,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import {
+  API_PBEL_IDTRN_BANRED,
   API_PBEL_IDTRN_SISTARBANC,
   API_PBEL_REDIRECT,
   API_PBLE_PAYMENT_NETWORKS,
@@ -17,14 +20,17 @@ function PolicyDetail() {
   const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
   const paymentSent = useSelector(selectPBelPaymentSent);
 
-  const pBelHandlePaymentSent = (paymentSent) => {
-    if (paymentSent) {
-      dispatch(pBelPaymentSent(paymentSent));
-    } else {
-      // No need to add more data to the store.
-      dispatch(pBelPaymentFlowStepCompleted());
-    }
-  };
+  const pBelHandlePaymentSent = useCallback(
+    (paymentSent) => {
+      if (paymentSent) {
+        dispatch(pBelPaymentSent(paymentSent));
+      } else {
+        // No need to add more data to the store.
+        dispatch(pBelPaymentFlowStepCompleted());
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <>
@@ -33,6 +39,7 @@ function PolicyDetail() {
         paymentSent={paymentSent}
         handlePaymentSent={pBelHandlePaymentSent}
         apiUrlIdTrnSistarbanc={API_PBEL_IDTRN_SISTARBANC}
+        apiUrlIdTrnBanred={API_PBEL_IDTRN_BANRED}
         apiUrlRedirect={API_PBEL_REDIRECT}
         apiUrlPaymentNetworks={API_PBLE_PAYMENT_NETWORKS}
       />

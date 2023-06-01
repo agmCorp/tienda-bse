@@ -12,6 +12,7 @@ const API_PBEL_INVOICE = "facturacion";
 const API_PBEL_INVOICE_DETAILS = "facturas";
 const API_PBEL_ADH_DIGITAL_INVOICE = "adhesion-factura-digital";
 const API_PBEL_IDTRN_SISTARBANC = "id-trn-sistarbanc";
+const API_PBEL_IDTRN_BANRED = "id-trn-banred";
 const API_PBEL_REDIRECT = "redireccion";
 const API_PBLE_PAYMENT_NETWORKS = "pago-en-redes";
 
@@ -30,6 +31,7 @@ export {
   API_PBEL_INVOICE_DETAILS,
   API_PBEL_ADH_DIGITAL_INVOICE,
   API_PBEL_IDTRN_SISTARBANC,
+  API_PBEL_IDTRN_BANRED,
   API_PBEL_REDIRECT,
   API_PBLE_PAYMENT_NETWORKS,
 };

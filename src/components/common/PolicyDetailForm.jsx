@@ -12,6 +12,7 @@ function PolicyDetailForm({
   paymentSent,
   handlePaymentSent,
   apiUrlIdTrnSistarbanc,
+  apiUrlIdTrnBanred,
   apiUrlRedirect,
   apiUrlPaymentNetworks,
 }) {
@@ -54,37 +55,31 @@ function PolicyDetailForm({
       {paymentSent.ok || postToSistarbanc || postToBanred || networks ? (
         <>
           <span>Soy una pantalla linda que dice PROCESANDO</span>
-          {postToSistarbanc && (
-            <FormSistarbanc
-              post={postToSistarbanc}
-              handlePost={setPostToSistarbanc}
-              timeOut={TIME_OUT}
-              selectedData={selectedData}
-              apiUrlIdTrn={apiUrlIdTrnSistarbanc}
-              apiUrlRedirect={apiUrlRedirect}
-              handlePaymentSent={handlePaymentSent}
-            />
-          )}
+          <FormSistarbanc
+            post={postToSistarbanc}
+            handlePost={setPostToSistarbanc}
+            selectedData={selectedData}
+            apiUrlIdTrn={apiUrlIdTrnSistarbanc}
+            apiUrlRedirect={apiUrlRedirect}
+            handlePaymentSent={handlePaymentSent}
+          />
 
-          {postToBanred && (
-            <FormBanred
-              post={postToBanred}
-              timeOut={TIME_OUT}
-              selectedData={selectedData}
-              apiUrlRedirect={apiUrlRedirect}
-              handlePaymentSent={handlePaymentSent}
-            />
-          )}
+          <FormBanred
+            post={postToBanred}
+            handlePost={setPostToBanred}
+            selectedData={selectedData}
+            apiUrlIdTrn={apiUrlIdTrnBanred}
+            apiUrlRedirect={apiUrlRedirect}
+            handlePaymentSent={handlePaymentSent}
+          />
 
-          {networks && (
-            <Networks
-              networks={networks}
-              handleNetworks={setNetworks}
-              selectedData={selectedData}
-              apiUrlPaymentNetworks={apiUrlPaymentNetworks}
-              handlePaymentSent={handlePaymentSent}
-            />
-          )}
+          <Networks
+            networks={networks}
+            handleNetworks={setNetworks}
+            selectedData={selectedData}
+            apiUrlPaymentNetworks={apiUrlPaymentNetworks}
+            handlePaymentSent={handlePaymentSent}
+          />
 
           <BlockUI
             blocked={true}

@@ -3,8 +3,9 @@
 
 function FormBanred({
   post,
-  timeOut,
+  handlePost,
   selectedData,
+  apiUrlIdTrn,
   apiUrlRedirect,
   handlePaymentSent,
 }) {
