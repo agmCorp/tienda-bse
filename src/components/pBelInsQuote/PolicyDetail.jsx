@@ -21,9 +21,36 @@ function PolicyDetail() {
   const paymentSent = useSelector(selectPBelPaymentSent);
 
   const terms = [
-    { id: 1, name: "term1", text: "texto del termino 1" },
-    { id: 2, name: "term2", text: "texto del termino 2" },
-    { id: 3, name: "term3", text: "texto del termino 3" },
+    {
+      id: 1,
+      name: "term1",
+      element: (
+        <span>
+          Acepto los Términos y condiciones de la póliza que se presentan
+          <a
+            href="https://www.bse.com.uy/documentos/condiciones-generales-objetos-varios.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
+          >
+            aquí.
+          </a>
+        </span>
+      ),
+    },
+    {
+      id: 2,
+      name: "term2",
+      element: (
+        <span>
+          Para que el seguro entre en vigencia y el usuario pueda hacer uso de
+          la cobertura, se deberá efectuar un pago en línea al momento de la
+          contratación. Si el plan de pago es contado se deberá abonar la
+          totalidad del costo del seguro; si el plan es financiado se deberá
+          abonar la primer cuota.
+        </span>
+      ),
+    },
   ];
 
   // useCallback returns a memoized callback function.

@@ -43,7 +43,7 @@ function Terms({ terms, control, errors }) {
               "p-error": errors[term.name],
             })}
           >
-            {term.text}
+            {term.element}
           </label>
         </div>
       ))}
