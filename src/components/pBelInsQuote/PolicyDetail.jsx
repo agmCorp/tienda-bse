@@ -14,10 +14,14 @@ import {
   API_PBEL_REDIRECT,
   API_PBLE_PAYMENT_NETWORKS,
 } from "../../utils/apiUrls";
+import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 
 function PolicyDetail() {
   const dispatch = useDispatch();
-  const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
+  const selectedData = useSelector(selectPBelFlowSelectedData);
+  const paymentFlowSelectedData = useSelector(
+    selectPBelPaymentFlowSelectedData
+  );
   const paymentSent = useSelector(selectPBelPaymentSent);
 
   const terms = [
@@ -33,7 +37,7 @@ function PolicyDetail() {
             rel="noreferrer"
             className="font-medium no-underline mx-1 text-blue-500 hover:text-blue-300 cursor-pointer"
           >
-            aquí.
+            aquí <span className="pi pi-file-pdf" />
           </a>
         </span>
       ),
@@ -72,7 +76,8 @@ function PolicyDetail() {
   return (
     <>
       <PolicyDetailForm
-        paymentData={selectedData}
+        selectedData={selectedData}
+        paymentData={paymentFlowSelectedData}
         paymentSent={paymentSent}
         handlePaymentSent={pBelHandlePaymentSent}
         apiUrlIdTrnSistarbanc={API_PBEL_IDTRN_SISTARBANC}

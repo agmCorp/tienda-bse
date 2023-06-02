@@ -12,6 +12,7 @@ import Terms from "./Terms";
 import PurchaseSummary from "./PurchaseSummary";
 
 function PolicyDetailForm({
+  selectedData,
   paymentData,
   paymentSent,
   handlePaymentSent,
@@ -123,19 +124,28 @@ function PolicyDetailForm({
             RESUMEN DE COMPRA
           </div>
 
-          <PurchaseSummary />
-
-          <div className="form-data">
+          <div className="form-data mt-4">
             <div className="flex justify-content-center">
               <div className="card">
                 <form
                   onSubmit={handleSubmit(onSubmitForm)}
-                  className="p-fluid mt-5"
+                  className="p-fluid mt-2"
                 >
+                  <div className="mb-4">
+                    <PurchaseSummary
+                      selectedData={selectedData}
+                      paymentData={paymentData}
+                    />
+                  </div>
+
                   <Terms terms={terms} control={control} errors={errors} />
 
                   {!paymentSent.ok && paymentSent.data && (
-                    <Message severity="error" text={paymentSent.data} />
+                    <Message
+                      className="mt-2"
+                      severity="error"
+                      text={paymentSent.data}
+                    />
                   )}
 
                   <Button
