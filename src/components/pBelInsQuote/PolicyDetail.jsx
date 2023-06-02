@@ -21,9 +21,9 @@ function PolicyDetail() {
   const paymentSent = useSelector(selectPBelPaymentSent);
 
   const terms = [
-    { name: "term1", text: "texto del termino 1" },
-    { name: "term2", text: "texto del termino 2" },
-    { name: "term3", text: "texto del termino 3" },
+    { id: 1, name: "term1", text: "texto del termino 1" },
+    { id: 2, name: "term2", text: "texto del termino 2" },
+    { id: 3, name: "term3", text: "texto del termino 3" },
   ];
 
   // useCallback returns a memoized callback function.

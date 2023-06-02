@@ -46,7 +46,7 @@ function PolicyDetailForm({
     }, {});
   };
 
-  const defaultValues = JSON.parse(emptyValues(terms));
+  const defaultValues = emptyValues(terms);
 
   const {
     control,
@@ -70,12 +70,6 @@ function PolicyDetailForm({
       }
     }
     reset();
-  };
-
-  const getFormErrorMessage = (name) => {
-    return (
-      errors[name] && <Message severity="error" text={errors[name].message} />
-    );
   };
 
   return (
@@ -138,7 +132,7 @@ function PolicyDetailForm({
                   onSubmit={handleSubmit(onSubmitForm)}
                   className="p-fluid mt-5"
                 >
-                  <Terms terms={terms} control={control} />
+                  <Terms terms={terms} control={control} errors={errors} />
 
                   {!paymentSent.ok && paymentSent.data && (
                     <Message severity="error" text={paymentSent.data} />
