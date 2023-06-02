@@ -11,7 +11,7 @@ import { clientApi } from "../../utils/clientApi";
 function FormSistarbanc({
   post,
   handlePost,
-  selectedData,
+  paymentData,
   apiUrlIdTrn,
   apiUrlRedirect,
   handlePaymentSent,
@@ -38,8 +38,10 @@ function FormSistarbanc({
         true,
         {},
         {
-          medioDePago: selectedData.bank.codigo,
-          nroFactura: selectedData.numeroFactura,
+          medioDePago: paymentData.bank
+            ? paymentData.bank.codigo
+            : paymentData.creditCard.codigo,
+          nroFactura: paymentData.numeroFactura,
         },
         {},
         keycloak.token
@@ -74,14 +76,15 @@ function FormSistarbanc({
     post,
     apiUrlIdTrn,
     handlePost,
-    selectedData.bank.codigo,
-    selectedData.numeroFactura,
+    paymentData.bank,
+    paymentData.creditCard.codigo,
+    paymentData.numeroFactura,
     keycloak.token,
     handlePaymentSent,
   ]);
 
   const formatNumber = (num) => {
-    return parseFloat(num)
+    return parseFloat(String(num))
       .toFixed(2)
       .toString()
       .replace(/\./g, "")
@@ -89,15 +92,15 @@ function FormSistarbanc({
   };
 
   const removeBlanks = (str) => {
-    return str.replace(/\s/g, "");
+    return String(str).replace(/\s/g, "");
   };
 
   const removeHyphens = (str) => {
-    return str.replace(/-/g, "");
+    return String(str).replace(/-/g, "");
   };
 
   function leftZeros(str, length) {
-    return str.padStart(length, "0");
+    return String(str).padStart(length, "0");
   }
 
   return (
@@ -114,9 +117,9 @@ function FormSistarbanc({
             id="idBanco"
             name="idBanco"
             value={leftZeros(
-              selectedData.bank
-                ? selectedData.bank.codigo
-                : selectedData.creditCard.codigo,
+              paymentData.bank
+                ? paymentData.bank.codigo
+                : paymentData.creditCard.codigo,
               3
             )}
             readOnly
@@ -132,49 +135,49 @@ function FormSistarbanc({
           <input
             id="idCuenta"
             name="idCuenta"
-            value={removeBlanks(selectedData.codigoAdhesion)}
+            value={removeBlanks(paymentData.codigoAdhesion)}
             readOnly
           />
           <input
             id="idFactura"
             name="idFactura"
-            value={selectedData.numeroFactura}
+            value={paymentData.numeroFactura}
             readOnly
           />
           <input
             id="importe"
             name="importe"
-            value={formatNumber(selectedData.importePagar)}
+            value={formatNumber(paymentData.importePagar)}
             readOnly
           />
           <input
             id="importeGravado"
             name="importeGravado"
-            value={formatNumber(selectedData.importeGravado)}
+            value={formatNumber(paymentData.importeGravado)}
             readOnly
           />
           <input
             id="consumidorFinal"
             name="consumidorFinal"
-            value={selectedData.consumoFinal === "S" ? "1" : "0"}
+            value={paymentData.consumoFinal === "S" ? "1" : "0"}
             readOnly
           />
           <input
             id="moneda"
             name="moneda"
-            value={selectedData.moneda === "USD" ? "USD" : "UYU"}
+            value={paymentData.moneda === "USD" ? "USD" : "UYU"}
             readOnly
           />
           <input
             id="fechaVenc"
             name="fechaVenc"
-            value={removeHyphens(selectedData.fechaVto1)}
+            value={removeHyphens(paymentData.fechaVto1)}
             readOnly
           />
           <input
             id="fechaLimitePago"
             name="fechaLimitePago"
-            value={removeHyphens(selectedData.fechaVto2)}
+            value={removeHyphens(paymentData.fechaVto2)}
             readOnly
           />
           <input

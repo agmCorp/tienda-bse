@@ -20,6 +20,10 @@ function PolicyDetail() {
   const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
   const paymentSent = useSelector(selectPBelPaymentSent);
 
+  // useCallback returns a memoized callback function.
+  // Every time this component re-renders, its functions get recreated. Because of this, the pBelHandlePaymentSent function has actually changed
+  // and could triggers useEffects in PolicyDetailForm.
+  // To fix this, we use the useCallback hook to prevent the function from being recreated unless necessary.
   const pBelHandlePaymentSent = useCallback(
     (paymentSent) => {
       if (paymentSent) {
@@ -35,7 +39,7 @@ function PolicyDetail() {
   return (
     <>
       <PolicyDetailForm
-        selectedData={selectedData}
+        paymentData={selectedData}
         paymentSent={paymentSent}
         handlePaymentSent={pBelHandlePaymentSent}
         apiUrlIdTrnSistarbanc={API_PBEL_IDTRN_SISTARBANC}

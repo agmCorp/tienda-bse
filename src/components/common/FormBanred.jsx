@@ -4,7 +4,7 @@
 function FormBanred({
   post,
   handlePost,
-  selectedData,
+  paymentData,
   apiUrlIdTrn,
   apiUrlRedirect,
   handlePaymentSent,

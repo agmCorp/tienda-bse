@@ -9,7 +9,7 @@ import FormBanred from "./FormBanred";
 import Networks from "./Networks";
 
 function PolicyDetailForm({
-  selectedData,
+  paymentData,
   paymentSent,
   handlePaymentSent,
   apiUrlIdTrnSistarbanc,
@@ -36,11 +36,11 @@ function PolicyDetailForm({
   }, [handlePaymentSent, paymentSent.ok]);
 
   const onSubmitForm = () => {
-    if (selectedData.paymentMethod === "networks") {
+    if (paymentData.paymentMethod === "networks") {
       setNetworks(true);
     } else {
-      if (selectedData.paymentMethod === "debit") {
-        if (selectedData.bank.codigo === "BANRED") {
+      if (paymentData.paymentMethod === "debit") {
+        if (paymentData.bank.codigo === "BANRED") {
           setPostToBanred(true);
         } else {
           setPostToSistarbanc(true);
@@ -67,7 +67,7 @@ function PolicyDetailForm({
           <FormSistarbanc
             post={postToSistarbanc}
             handlePost={setPostToSistarbanc}
-            selectedData={selectedData}
+            paymentData={paymentData}
             apiUrlIdTrn={apiUrlIdTrnSistarbanc}
             apiUrlRedirect={apiUrlRedirect}
             handlePaymentSent={handlePaymentSent}
@@ -76,7 +76,7 @@ function PolicyDetailForm({
           <FormBanred
             post={postToBanred}
             handlePost={setPostToBanred}
-            selectedData={selectedData}
+            paymentData={paymentData}
             apiUrlIdTrn={apiUrlIdTrnBanred}
             apiUrlRedirect={apiUrlRedirect}
             handlePaymentSent={handlePaymentSent}
@@ -85,7 +85,7 @@ function PolicyDetailForm({
           <Networks
             networks={networks}
             handleNetworks={setNetworks}
-            selectedData={selectedData}
+            paymentData={paymentData}
             apiUrlPaymentNetworks={apiUrlPaymentNetworks}
             handlePaymentSent={handlePaymentSent}
           />
