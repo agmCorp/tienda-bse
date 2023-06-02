@@ -183,7 +183,7 @@ function FormSistarbanc({
           <input
             id="otroDato"
             name="otroDato"
-            value="PASARELA DE PAGOS MIBSE"
+            value="PASARELA DE PAGOS TIENDA BSE"
             readOnly
           />
           <input

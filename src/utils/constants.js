@@ -14,6 +14,7 @@ const INSTAGRAM_LINK = "https://www.instagram.com/bseuruguay/";
 const LINKEDIN_LINK =
   "https://www.linkedin.com/company/banco-de-seguros-del-estado";
 const SISTARBANC_URL = process.env.REACT_APP_SISTARBANC_URL;
+const BANRED_URL = process.env.REACT_APP_BANRED_URL;
 
 export {
   API_BASE_URL,
@@ -31,4 +32,5 @@ export {
   INSTAGRAM_LINK,
   LINKEDIN_LINK,
   SISTARBANC_URL,
+  BANRED_URL,
 };
