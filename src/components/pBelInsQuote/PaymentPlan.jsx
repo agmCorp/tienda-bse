@@ -17,11 +17,12 @@ import {
 function PaymentPlan() {
   const SEE_ALL_THRESHOLD = 4;
   const PAYMENT_PLAN_ID = "paymentPlan";
-  const defaultValues = JSON.parse(`{"${PAYMENT_PLAN_ID}":""}`);
 
   const selectedData = useSelector(selectPBelFlowSelectedData);
   const dispatch = useDispatch();
   const [seeAll, setSeeAll] = useState(false);
+
+  const defaultValues = JSON.parse(`{"${PAYMENT_PLAN_ID}":""}`);
 
   const {
     control,

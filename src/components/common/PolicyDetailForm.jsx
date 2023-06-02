@@ -2,11 +2,14 @@ import { BlockUI } from "primereact/blockui";
 import { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { Message } from "primereact/message";
+import { useForm } from "react-hook-form";
 
 import Spinner from "./Spinner";
 import FormSistarbanc from "./FormSistarbanc";
 import FormBanred from "./FormBanred";
 import Networks from "./Networks";
+import Terms from "./Terms";
+import PurchaseSummary from "./PurchaseSummary";
 
 function PolicyDetailForm({
   paymentData,
@@ -16,6 +19,7 @@ function PolicyDetailForm({
   apiUrlIdTrnBanred,
   apiUrlRedirect,
   apiUrlPaymentNetworks,
+  terms,
 }) {
   const TIME_OUT = 5_000; // Waiting time until the payment gateway confirms the transaction
 
@@ -35,6 +39,22 @@ function PolicyDetailForm({
     };
   }, [handlePaymentSent, paymentSent.ok]);
 
+  const emptyValues = (terms) => {
+    return terms.reduce((obj, term) => {
+      obj[term.name] = "";
+      return obj;
+    }, {});
+  };
+
+  const defaultValues = JSON.parse(emptyValues(terms));
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({ defaultValues });
+
   const onSubmitForm = () => {
     if (paymentData.paymentMethod === "networks") {
       setNetworks(true);
@@ -49,6 +69,13 @@ function PolicyDetailForm({
         setPostToSistarbanc(true);
       }
     }
+    reset();
+  };
+
+  const getFormErrorMessage = (name) => {
+    return (
+      errors[name] && <Message severity="error" text={errors[name].message} />
+    );
   };
 
   return (
@@ -98,19 +125,35 @@ function PolicyDetailForm({
         </>
       ) : (
         <>
-          <span>
-            Acá muestro resumen de póliza comprada y términos particulares
-          </span>
-          {!paymentSent.ok && paymentSent.data && (
-            <Message severity="error" text={paymentSent.data} />
-          )}
-          <Button
-            type="button"
-            label="Soy un boton provisorio que dice Pagar"
-            onClick={onSubmitForm}
-            className="my-2 tienda-button"
-            icon="pi pi-check"
-          />
+          <div className="text-900 font-bold text-3xl text-center text-primary mb-4 mt-5">
+            RESUMEN DE COMPRA
+          </div>
+
+          <PurchaseSummary />
+
+          <div className="form-data">
+            <div className="flex justify-content-center">
+              <div className="card">
+                <form
+                  onSubmit={handleSubmit(onSubmitForm)}
+                  className="p-fluid mt-5"
+                >
+                  <Terms terms={terms} control={control} />
+
+                  {!paymentSent.ok && paymentSent.data && (
+                    <Message severity="error" text={paymentSent.data} />
+                  )}
+
+                  <Button
+                    type="submit"
+                    label="Pagar"
+                    icon="pi pi-check"
+                    className="mt-2 tienda-button"
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>
