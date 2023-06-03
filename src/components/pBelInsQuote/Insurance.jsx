@@ -12,6 +12,7 @@ import { Message } from "primereact/message";
 import error from "../../images/error.png";
 import info from "../../images/thumbs-up.png";
 import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
+import { NETWORKS } from "../../utils/constants";
 
 function Insurance() {
   const dispatch = useDispatch();
@@ -91,7 +92,7 @@ function Insurance() {
             </div>
           </div>
 
-          {selectedData.paymentMethod !== "networks" && !confirmedTrn && (
+          {selectedData.paymentMethod !== NETWORKS && !confirmedTrn && (
             <Message
               severity="error"
               content={
@@ -107,7 +108,7 @@ function Insurance() {
             />
           )}
 
-          {(selectedData.paymentMethod === "networks" || confirmedTrn) && (
+          {(selectedData.paymentMethod === NETWORKS || confirmedTrn) && (
             <Message
               severity="info"
               content={

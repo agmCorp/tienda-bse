@@ -8,13 +8,14 @@ import { Dropdown } from "primereact/dropdown";
 import { BlockUI } from "primereact/blockui";
 
 import Spinner from "./Spinner";
+import { CREDIT_CARD, DEBIT, NETWORKS } from "../../utils/constants";
 
 // banks - empty to hide
 // creditCards - empty to hide
 function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
-  const DEBIT_RADIO = "debit";
-  const CREDIT_CARD_RADIO = "creditCard";
-  const NETWORKS_RADIO = "networks";
+  const DEBIT_RADIO = DEBIT;
+  const CREDIT_CARD_RADIO = CREDIT_CARD;
+  const NETWORKS_RADIO = NETWORKS;
 
   const PAYMENT_METHOD_ID = "paymentMethod";
   const BANK_ID = "bank";

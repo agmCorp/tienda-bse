@@ -1,5 +1,7 @@
 import { useKeycloak } from "@react-keycloak/web";
+
 import { getName } from "../../utils/userProfileHelper";
+import { NETWORKS } from "../../utils/constants";
 
 function PurchaseSummary({ selectedData, paymentData }) {
   const { keycloak } = useKeycloak();
@@ -48,7 +50,7 @@ function PurchaseSummary({ selectedData, paymentData }) {
         <div className="text-700 text-xl">
           <span>{paymentData.bank?.nombre}</span>
           <span>{paymentData.creditCard?.nombre}</span>
-          {paymentData.paymentMethod === "networks" && (
+          {paymentData.paymentMethod === NETWORKS && (
             <span>Abitab / Redpagos</span>
           )}
         </div>

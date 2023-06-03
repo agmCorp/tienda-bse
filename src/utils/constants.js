@@ -4,6 +4,10 @@ const PUBLIC_SUBDIRECTORY = "public";
 const RECAPTCHA_SITE_KEY = "6Ld0z8IlAAAAAPJd_DnQdxvVYor9ERjxAcRdkQNW";
 const MUST_QUOTE_PREFIX = "mustQuote_";
 const QUOTATION_PREFIX = "quotation_";
+const DEBIT = "debit";
+const CREDIT_CARD = "creditCard";
+const NETWORKS = "networks";
+const BANRED_CODE = "BANRED";
 const WHATSAPP = "https://api.whatsapp.com/send?phone=59898611998";
 const MI_BSE = "https://mibse.bse.com.uy/wps/portal/mi-bse";
 const CONTACT_FORM = "https://www.bse.com.uy/portal-comercial/contacto/";
@@ -23,6 +27,10 @@ export {
   RECAPTCHA_SITE_KEY,
   MUST_QUOTE_PREFIX,
   QUOTATION_PREFIX,
+  DEBIT,
+  CREDIT_CARD,
+  NETWORKS,
+  BANRED_CODE,
   WHATSAPP,
   MI_BSE,
   CONTACT_FORM,

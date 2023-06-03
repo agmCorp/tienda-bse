@@ -10,6 +10,7 @@ import FormBanred from "./FormBanred";
 import Networks from "./Networks";
 import Terms from "./Terms";
 import PurchaseSummary from "./PurchaseSummary";
+import { BANRED_CODE, DEBIT, NETWORKS } from "../../utils/constants";
 
 function PolicyDetailForm({
   selectedData,
@@ -57,11 +58,11 @@ function PolicyDetailForm({
   } = useForm({ defaultValues });
 
   const onSubmitForm = () => {
-    if (paymentData.paymentMethod === "networks") {
+    if (paymentData.paymentMethod === NETWORKS) {
       setNetworks(true);
     } else {
-      if (paymentData.paymentMethod === "debit") {
-        if (paymentData.bank.codigo === "BANRED") {
+      if (paymentData.paymentMethod === DEBIT) {
+        if (paymentData.bank.codigo === BANRED_CODE) {
           setPostToBanred(true);
         } else {
           setPostToSistarbanc(true);
