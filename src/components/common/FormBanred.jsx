@@ -60,7 +60,7 @@ function FormBanred({
       if (post) {
         const response = await getIdTrn();
         if (response.ok) {
-          handlePaymentSent({ ok: true, data: "" });
+          handlePaymentSent({ ok: true, data: response.data.idTrn });
           setIdTrn(response.data.idTrn);
           setIdTrnFirmado(response.data.idTrnFirmado);
         } else {

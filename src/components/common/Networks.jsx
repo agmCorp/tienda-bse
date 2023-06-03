@@ -50,7 +50,7 @@ function Networks({
       if (networks) {
         const response = await networksPayment();
         if (response.ok) {
-          handlePaymentSent({ ok: true, data: "" });
+          handlePaymentSent({ ok: true, data: response.data.idTrn });
         } else {
           handlePaymentSent({
             ok: false,
