@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useKeycloak } from "@react-keycloak/web";
 import { Button } from "primereact/button";
@@ -17,6 +18,7 @@ function Insurance() {
   const { keycloak } = useKeycloak();
   const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
   const paymentSent = useSelector(selectPBelPaymentSent);
+  const [confirmedTrn, setConfirmedTrn] = useState(false);
 
   const splitIdTrn = (idTrn) => {
     return idTrn
@@ -89,33 +91,37 @@ function Insurance() {
             </div>
           </div>
 
-          <Message
-            severity="error"
-            content={
-              <div className="flex flex-column md:flex-row w-full p-4">
-                <img
-                  alt="atención"
-                  src={error}
-                  className="m-auto md:ml-4 h-2rem"
-                />
-                <div className="mt-2 md:ml-4 md:mt-0">{errorMessage}</div>
-              </div>
-            }
-          />
+          {selectedData.paymentMethod !== "networks" && !confirmedTrn && (
+            <Message
+              severity="error"
+              content={
+                <div className="flex flex-column md:flex-row w-full p-4">
+                  <img
+                    alt="atención"
+                    src={error}
+                    className="m-auto md:ml-4 h-2rem"
+                  />
+                  <div className="mt-2 md:ml-4 md:mt-0">{errorMessage}</div>
+                </div>
+              }
+            />
+          )}
 
-          <Message
-            severity="info"
-            content={
-              <div className="flex flex-column md:flex-row w-full p-4">
-                <img
-                  alt="atención"
-                  src={info}
-                  className="m-auto md:ml-4 h-2rem"
-                />
-                <div className="mt-2 md:ml-4 md:mt-0">{infoMessage}</div>
-              </div>
-            }
-          />
+          {(selectedData.paymentMethod === "networks" || confirmedTrn) && (
+            <Message
+              severity="info"
+              content={
+                <div className="flex flex-column md:flex-row w-full p-4">
+                  <img
+                    alt="atención"
+                    src={info}
+                    className="m-auto md:ml-4 h-2rem"
+                  />
+                  <div className="mt-2 md:ml-4 md:mt-0">{infoMessage}</div>
+                </div>
+              }
+            />
+          )}
 
           <Button
             label="Volver a cotizar"
