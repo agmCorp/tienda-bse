@@ -12,7 +12,6 @@ import { pBelPaymentFlowStepCompleted } from "./pBelPaymentFlowSlice";
 
 const initialState = {
   step: 1,
-  navigate: true,
   navigateTo: P_BEL_FLOW_ROUTE_BASIC_DATA,
   quoteInfo: {},
   selectedData: {},
@@ -26,11 +25,9 @@ const pBelFlowSlice = createSlice({
       const steps = getAllPBelFlowStepsConfig();
       if (state.step < steps.length) {
         state.step += 1;
-        state.navigate = true;
         state.navigateTo = stepToRoute(steps, state.step);
         state.selectedData = { ...state.selectedData, ...action.payload };
       } else {
-        state.navigate = false;
         state.navigateTo = "";
       }
     },
@@ -38,37 +35,29 @@ const pBelFlowSlice = createSlice({
       const steps = getAllPBelFlowStepsConfig();
       if (0 < action.payload && action.payload <= steps.length) {
         state.step = action.payload;
-        state.navigate = true;
         state.navigateTo = stepToRoute(steps, state.step);
       } else {
-        state.navigate = false;
         state.navigateTo = "";
       }
     },
     pBelFlowGoToFirstStep: (state) => {
       state.step = getFirstStep();
-      state.navigate = true;
       state.navigateTo = getFirstRoute(getAllPBelFlowStepsConfig());
     },
     pBelFlowClear: (state) => {
       state.step = getFirstStep();
-      state.navigate = false;
       state.navigateTo = "";
       state.quoteInfo = {};
       state.selectedData = {};
     },
     pBelFlowInit: (state) => {
       state.step = 0;
-      state.navigate = false;
       state.navigateTo = "";
       state.quoteInfo = {};
       state.selectedData = {};
     },
-    pBelFlowNavigate: (state, action) => {
-      state.navigate = action.payload.navigate;
-      state.navigateTo = action.payload.navigate
-        ? action.payload.navigateTo
-        : "";
+    pBelFlowNavigateTo: (state, action) => {
+      state.navigateTo = action.payload.navigateTo;
     },
     pBelAddQuoteInfo: (state, action) => {
       state.quoteInfo = { ...state.quoteInfo, ...action.payload };
@@ -85,7 +74,7 @@ const {
   pBelFlowGoToFirstStep,
   pBelFlowClear,
   pBelFlowInit,
-  pBelFlowNavigate,
+  pBelFlowNavigateTo,
   pBelAddQuoteInfo,
   pBelAddSelectedData,
 } = pBelFlowSlice.actions;
@@ -103,19 +92,14 @@ const pBelFlowStepCompletedThunk = (data) => (dispatch, getState) => {
 
 // Selectors
 const selectPBelFlowStep = (state) => state.pBelFlow.step;
-const selectPBelFlowNavigate = (state) => {
-  return {
-    navigate: state.pBelFlow.navigate,
-    navigateTo: state.pBelFlow.navigateTo,
-  };
-};
+const selectPBelFlowNavigateTo = (state) => state.pBelFlow.navigateTo;
 const selectPBelFlowQuoteInfo = (state) => state.pBelFlow.quoteInfo;
 const selectPBelFlowSelectedData = (state) => state.pBelFlow.selectedData;
 
 export default pBelFlowSlice.reducer;
 export {
   selectPBelFlowStep,
-  selectPBelFlowNavigate,
+  selectPBelFlowNavigateTo,
   selectPBelFlowQuoteInfo,
   selectPBelFlowSelectedData,
   pBelFlowSlice,
@@ -124,6 +108,6 @@ export {
   pBelFlowGoToFirstStep,
   pBelFlowClear,
   pBelFlowInit,
-  pBelFlowNavigate,
+  pBelFlowNavigateTo,
   pBelAddQuoteInfo,
 };

@@ -5,7 +5,6 @@ import { stepToRoute } from "../../utils/stepsHelper";
 
 const initialState = {
   step: 0,
-  navigate: false,
   navigateTo: "",
   issueInfo: {},
   invoiceInfo: {},
@@ -23,11 +22,9 @@ const pBelPaymentFlowSlice = createSlice({
       const steps = getAllPBelPaymentFlowStepsConfig();
       if (state.step < steps.length) {
         state.step += 1;
-        state.navigate = true;
         state.navigateTo = stepToRoute(steps, state.step);
         state.selectedData = { ...state.selectedData, ...action.payload };
       } else {
-        state.navigate = false;
         state.navigateTo = "";
       }
     },
@@ -35,16 +32,13 @@ const pBelPaymentFlowSlice = createSlice({
       const steps = getAllPBelPaymentFlowStepsConfig();
       if (0 < action.payload && action.payload <= steps.length) {
         state.step = action.payload;
-        state.navigate = true;
         state.navigateTo = stepToRoute(steps, state.step);
       } else {
-        state.navigate = false;
         state.navigateTo = "";
       }
     },
     pBelPaymentFlowInit: (state) => {
       state.step = 0;
-      state.navigate = false;
       state.navigateTo = "";
       state.issueInfo = {};
       state.invoiceInfo = {};
@@ -53,11 +47,8 @@ const pBelPaymentFlowSlice = createSlice({
       state.selectedData = {};
       state.paymentSent = {};
     },
-    pBelPaymentFlowNavigate: (state, action) => {
-      state.navigate = action.payload.navigate;
-      state.navigateTo = action.payload.navigate
-        ? action.payload.navigateTo
-        : "";
+    pBelPaymentFlowNavigateTo: (state, action) => {
+      state.navigateTo = action.payload.navigateTo;
     },
     pBelAddIssueInfo: (state, action) => {
       state.issueInfo = action.payload;
@@ -81,7 +72,7 @@ const {
   pBelPaymentFlowStepCompleted,
   pBelPaymentFlowGoToStep,
   pBelPaymentFlowInit,
-  pBelPaymentFlowNavigate,
+  pBelPaymentFlowNavigateTo,
   pBelAddIssueInfo,
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
@@ -91,12 +82,8 @@ const {
 
 // Selectors
 const selectPBelPaymentFlowStep = (state) => state.pBelPaymentFlow.step;
-const selectPBelPaymentFlowNavigate = (state) => {
-  return {
-    navigate: state.pBelPaymentFlow.navigate,
-    navigateTo: state.pBelPaymentFlow.navigateTo,
-  };
-};
+const selectPBelPaymentFlowNavigateTo = (state) =>
+  state.pBelPaymentFlow.navigateTo;
 const selectPBelPaymentFlowIssueInfo = (state) =>
   state.pBelPaymentFlow.issueInfo;
 const selectPBelPaymentFlowInvoiceInfo = (state) =>
@@ -112,7 +99,7 @@ const selectPBelPaymentSent = (state) => state.pBelPaymentFlow.paymentSent;
 export default pBelPaymentFlowSlice.reducer;
 export {
   selectPBelPaymentFlowStep,
-  selectPBelPaymentFlowNavigate,
+  selectPBelPaymentFlowNavigateTo,
   selectPBelPaymentFlowIssueInfo,
   selectPBelPaymentFlowInvoiceInfo,
   selectPBelPaymentFlowInvoiceDetail,
@@ -123,7 +110,7 @@ export {
   pBelPaymentFlowStepCompleted,
   pBelPaymentFlowGoToStep,
   pBelPaymentFlowInit,
-  pBelPaymentFlowNavigate,
+  pBelPaymentFlowNavigateTo,
   pBelAddIssueInfo,
   pBelAddInvoiceInfo,
   pBelAddInvoiceDetail,
