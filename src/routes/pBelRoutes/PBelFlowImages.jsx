@@ -1,14 +1,14 @@
-import Protected from "../../auth/Protected";
+import PBelProtected from "../../components/common/pBelCommon/PBelProtected";
 import PBelFlowLayout from "../../components/common/pBelCommon/PBelFlowLayout";
 import Images from "../../components/pBelInsQuote/Images";
 
 function PBelFlowImages() {
   return (
-    <Protected>
+    <PBelProtected>
       <PBelFlowLayout>
         <Images />
       </PBelFlowLayout>
-    </Protected>
+    </PBelProtected>
   );
 }
 

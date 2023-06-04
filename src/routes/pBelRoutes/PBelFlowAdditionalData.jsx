@@ -1,14 +1,14 @@
-import Protected from "../../auth/Protected";
+import PBelProtected from "../../components/common/pBelCommon/PBelProtected";
 import PBelFlowLayout from "../../components/common/pBelCommon/PBelFlowLayout";
 import DebtControl from "../../components/pBelInsQuote/DebtControl";
 
 function PBelFlowAdditionalData() {
   return (
-    <Protected>
+    <PBelProtected>
       <PBelFlowLayout>
         <DebtControl />
       </PBelFlowLayout>
-    </Protected>
+    </PBelProtected>
   );
 }
 
