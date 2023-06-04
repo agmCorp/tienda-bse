@@ -123,15 +123,18 @@ function App() {
       LoadingComponent={<SplashScreen />}
     >
       {keycloakReady && (
-        // <StrictMode>
-        <Provider store={store}>
-          <PersistGate loading={<SplashScreen />} persistor={persistor}>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
-              <Main onAuthSuccess={onAuthSuccess} onAuthLogout={onAuthLogout} />
-            </BrowserRouter>
-          </PersistGate>
-        </Provider>
-        // </StrictMode>
+        <StrictMode>
+          <Provider store={store}>
+            <PersistGate loading={<SplashScreen />} persistor={persistor}>
+              <BrowserRouter basename={process.env.PUBLIC_URL}>
+                <Main
+                  onAuthSuccess={onAuthSuccess}
+                  onAuthLogout={onAuthLogout}
+                />
+              </BrowserRouter>
+            </PersistGate>
+          </Provider>
+        </StrictMode>
       )}
     </ReactKeycloakProvider>
   );

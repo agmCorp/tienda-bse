@@ -52,9 +52,7 @@ function Insurance() {
   }, [keycloak.token, paymentSent.data, selectedData.paymentMethod]);
 
   const splitIdTrn = (idTrn) => {
-    return idTrn
-      ? [idTrn.substr(0, idTrn.length / 2), idTrn.substr(idTrn.length / 2)]
-      : ["", ""];
+    return [idTrn.substr(0, idTrn.length / 2), idTrn.substr(idTrn.length / 2)];
   };
 
   const handleOnClick = () => {
