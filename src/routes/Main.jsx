@@ -2,16 +2,16 @@ import { useRoutes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import PBelPageNotFound from "../../routes/pBelRoutes/PBelPageNotFound";
-import { ROUTE_NOT_FOUND } from "../../routes/pBelRoutes/pBelRoutes";
-import { getAllPBelFlowStepsConfig } from "../../utils/pBelUtils/pBelFlowStepsConfig";
-import { getAllPBelPaymentFlowStepsConfig } from "../../utils/pBelUtils/pBelPaymentFlowStepsConfig";
-import { isPBel } from "../../utils/productHelper";
-import GenericPageNotFound from "../../routes/GenericPageNotFound";
+import PBelPageNotFound from "./pBelRoutes/PBelPageNotFound";
+import { ROUTE_NOT_FOUND } from "./pBelRoutes/pBelRoutes";
+import { getAllPBelFlowStepsConfig } from "../utils/pBelUtils/pBelFlowStepsConfig";
+import { getAllPBelPaymentFlowStepsConfig } from "../utils/pBelUtils/pBelPaymentFlowStepsConfig";
+import { isPBel } from "../utils/productHelper";
+import GenericPageNotFound from "./GenericPageNotFound";
 import {
   eventOnAuthLogout,
   eventOnAuthSuccess,
-} from "../../reduxToolkit/userSlice";
+} from "../reduxToolkit/userSlice";
 
 function Main({ onAuthSuccess, onAuthLogout }) {
   const dispatch = useDispatch();

@@ -12,7 +12,7 @@ import {
   API_PBEL_IDTRN_BANRED,
   API_PBEL_IDTRN_SISTARBANC,
   API_PBEL_REDIRECT,
-  API_PBLE_PAYMENT_NETWORKS,
+  API_PBEL_PAYMENT_NETWORKS,
 } from "../../utils/apiUrls";
 import { selectPBelFlowSelectedData } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 
@@ -83,7 +83,7 @@ function PolicyDetail() {
         apiUrlIdTrnSistarbanc={API_PBEL_IDTRN_SISTARBANC}
         apiUrlIdTrnBanred={API_PBEL_IDTRN_BANRED}
         apiUrlRedirect={API_PBEL_REDIRECT}
-        apiUrlPaymentNetworks={API_PBLE_PAYMENT_NETWORKS}
+        apiUrlPaymentNetworks={API_PBEL_PAYMENT_NETWORKS}
         terms={terms}
       />
     </>

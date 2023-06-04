@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useKeycloak } from "@react-keycloak/web";
 import { Button } from "primereact/button";
@@ -13,13 +13,43 @@ import error from "../../images/error.png";
 import info from "../../images/thumbs-up.png";
 import { pBelFlowGoToFirstStep } from "../../reduxToolkit/pBelSlices/pBelFlowSlice";
 import { NETWORKS } from "../../utils/constants";
+import { clientApi } from "../../utils/clientApi";
+import { API_PBEL_TRN_STATE } from "../../utils/apiUrls";
+import Spinner from "../common/Spinner";
 
 function Insurance() {
   const dispatch = useDispatch();
   const { keycloak } = useKeycloak();
   const selectedData = useSelector(selectPBelPaymentFlowSelectedData);
   const paymentSent = useSelector(selectPBelPaymentSent);
+  const [loadingTrnState, setLoadingTrnState] = useState(true);
   const [confirmedTrn, setConfirmedTrn] = useState(false);
+
+  useEffect(() => {
+    const trnState = async () => {
+      const responseTrnState = await clientApi(
+        "get",
+        `${API_PBEL_TRN_STATE}/${paymentSent.data}`,
+        true,
+        {},
+        {},
+        {},
+        keycloak.token
+      );
+
+      if (responseTrnState.ok) {
+        setConfirmedTrn(responseTrnState.data.codigoErrorBanco === "00");
+        setLoadingTrnState(false);
+      }
+    };
+
+    if (selectedData.paymentMethod === NETWORKS) {
+      setConfirmedTrn(true);
+      setLoadingTrnState(false);
+    } else {
+      trnState();
+    }
+  }, [keycloak.token, paymentSent.data, selectedData.paymentMethod]);
 
   const splitIdTrn = (idTrn) => {
     return idTrn
@@ -92,45 +122,48 @@ function Insurance() {
             </div>
           </div>
 
-          {selectedData.paymentMethod !== NETWORKS && !confirmedTrn && (
-            <Message
-              severity="error"
-              content={
-                <div className="flex flex-column md:flex-row w-full p-4">
-                  <img
-                    alt="atención"
-                    src={error}
-                    className="m-auto md:ml-4 h-2rem"
-                  />
-                  <div className="mt-2 md:ml-4 md:mt-0">{errorMessage}</div>
-                </div>
-              }
-            />
+          {loadingTrnState ? (
+            <Spinner size="small" />
+          ) : (
+            <>
+              {confirmedTrn ? (
+                <Message
+                  severity="info"
+                  content={
+                    <div className="flex flex-column md:flex-row w-full p-4">
+                      <img
+                        alt="atención"
+                        src={info}
+                        className="m-auto md:ml-4 h-2rem"
+                      />
+                      <div className="mt-2 md:ml-4 md:mt-0">{infoMessage}</div>
+                    </div>
+                  }
+                />
+              ) : (
+                <Message
+                  severity="error"
+                  content={
+                    <div className="flex flex-column md:flex-row w-full p-4">
+                      <img
+                        alt="atención"
+                        src={error}
+                        className="m-auto md:ml-4 h-2rem"
+                      />
+                      <div className="mt-2 md:ml-4 md:mt-0">{errorMessage}</div>
+                    </div>
+                  }
+                />
+              )}
+              <Button
+                label="Volver a cotizar"
+                icon="pi pi-check"
+                onClick={handleOnClick}
+                className="my-4 tienda-button"
+                outlined
+              />
+            </>
           )}
-
-          {(selectedData.paymentMethod === NETWORKS || confirmedTrn) && (
-            <Message
-              severity="info"
-              content={
-                <div className="flex flex-column md:flex-row w-full p-4">
-                  <img
-                    alt="atención"
-                    src={info}
-                    className="m-auto md:ml-4 h-2rem"
-                  />
-                  <div className="mt-2 md:ml-4 md:mt-0">{infoMessage}</div>
-                </div>
-              }
-            />
-          )}
-
-          <Button
-            label="Volver a cotizar"
-            icon="pi pi-check"
-            onClick={handleOnClick}
-            className="my-4 tienda-button"
-            outlined
-          />
         </div>
       </div>
     </div>

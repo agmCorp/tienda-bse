@@ -20,8 +20,8 @@ import keycloak from "./utils/keycloak";
 import { BrowserRouter } from "react-router-dom";
 import { StrictMode, useState } from "react";
 
-import Main from "./components/pBelInsQuote/Main";
 import SplashScreen from "./components/common/SplashScreen";
+import Main from "./routes/Main";
 
 function App() {
   addLocale("es", {
