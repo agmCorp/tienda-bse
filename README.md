@@ -18,7 +18,8 @@ This project uses the following technologies:
   npm install react-hook-form
 
 - keycloak-js: Open Source Identity and Access Management solution.  
-  npm install keycloak-js@^15.0.2  
+  ~~npm install keycloak-js@^15.0.2~~  
+  npm install keycloak-js@^9.0.2  
   npm install @react-keycloak/web@^3.4.0
 
 - primeReact: collection of open source UI components and icons for React.  
@@ -38,4 +39,4 @@ This project uses the following technologies:
 The API Rest apiTiendaWS must be running beforehand.
 
 _For running execute the following command: npm start_  
-_amorales@bse.com.uy April 2023_
+_amorales@bse.com.uy April 2023\_
