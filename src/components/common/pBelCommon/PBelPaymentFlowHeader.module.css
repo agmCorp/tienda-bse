@@ -1,5 +1,5 @@
 .bg-color-header-primary {
-  background: #008bd0;
+  background: var(--blue-800);
 }
 
 .bg-color-header-secondary {

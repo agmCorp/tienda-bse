@@ -5,7 +5,8 @@ import styles from "./PBelFlowFooter.module.css";
 function PBelFlowFooter() {
   return (
     <Footer
-      bgColor={styles["bg-color-footer"]}
+      bgColorPrimary={styles["bg-color-footer-primary"]}
+      bgColorSecondary={styles["bg-color-footer-secondary"]}
       logo={logoBSE}
       heightLogo="h-2rem"
       hoverTextColor="text-primary"

@@ -7,7 +7,13 @@ import {
   YOUTUBE_LINK,
 } from "../../utils/constants";
 
-function Footer({ bgColor, logo, heightLogo, hoverTextColor }) {
+function Footer({
+  bgColorPrimary,
+  bgColorSecondary,
+  logo,
+  heightLogo,
+  hoverTextColor,
+}) {
   const resourceLink = (text, href, title) => {
     return (
       <a target="_blank" rel="noreferrer" href={href} className="no-underline">
@@ -33,33 +39,36 @@ function Footer({ bgColor, logo, heightLogo, hoverTextColor }) {
   };
 
   return (
-    <div className={`text-center ${bgColor} py-5`}>
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={CONTACT_FORM}
-        className="no-underline"
-      >
-        <img
-          src={logo}
-          alt="bse"
-          className={heightLogo}
-          title="FORMULARIO DE CONTACTO"
-        />
-      </a>
-      {resourceLink(
-        "En Uruguay nadie te da más seguridad.",
-        CONTACT_FORM,
-        "FORMULARIO DE CONTACTO"
-      )}
-      <div className="my-2">
-        {socialMediaLink("youtube", YOUTUBE_LINK)}
-        {socialMediaLink("facebook", FACEBOOK_LINK)}
-        {socialMediaLink("twitter", TWITTER_LINK)}
-        {socialMediaLink("instagram", INSTAGRAM_LINK)}
-        {socialMediaLink("linkedin", LINKEDIN_LINK)}
+    <>
+      <div className={`${bgColorSecondary} py-1`} />
+      <div className={`text-center ${bgColorPrimary} py-5`}>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={CONTACT_FORM}
+          className="no-underline"
+        >
+          <img
+            src={logo}
+            alt="bse"
+            className={heightLogo}
+            title="FORMULARIO DE CONTACTO"
+          />
+        </a>
+        {resourceLink(
+          "En Uruguay nadie te da más seguridad.",
+          CONTACT_FORM,
+          "FORMULARIO DE CONTACTO"
+        )}
+        <div className="my-2">
+          {socialMediaLink("youtube", YOUTUBE_LINK)}
+          {socialMediaLink("facebook", FACEBOOK_LINK)}
+          {socialMediaLink("twitter", TWITTER_LINK)}
+          {socialMediaLink("instagram", INSTAGRAM_LINK)}
+          {socialMediaLink("linkedin", LINKEDIN_LINK)}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
