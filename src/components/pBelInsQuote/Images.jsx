@@ -94,7 +94,8 @@ function Images() {
 
       <div className="flex align-items-center flex-column text-700 text-xl text-center line-height-3">
         <span>
-          Por último necesitamos que nos subas tres imágenes de un máximo de 5MB
+          Por último necesitamos que nos subas{" "}
+          <span className="font-bold">tres</span> imágenes de un máximo de 5MB
           cada una.
         </span>
         <div className="text-left m-4">
