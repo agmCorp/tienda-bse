@@ -9,6 +9,8 @@ import { BlockUI } from "primereact/blockui";
 
 import Spinner from "./Spinner";
 import { CREDIT_CARD, DEBIT, NETWORKS } from "../../utils/constants";
+import { getBankImage } from "./bankImages";
+import { getCreditCardImage } from "./creditCardImages";
 
 // banks - empty to hide
 // creditCards - empty to hide
@@ -24,6 +26,8 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
   const [blockedDocument, setBlockedDocument] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [showMessage, setShowMessage] = useState("");
+  const [selectedBank, setSelectedBank] = useState(null);
+  const [selectedCreditCard, setSelectedCreditCard] = useState(null);
 
   const defaultValues = JSON.parse(
     `{"${PAYMENT_METHOD_ID}":"", "${BANK_ID}":"", "${CREDIT_CARD_ID}":""}`
@@ -33,6 +37,7 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
     control,
     formState: { errors },
     handleSubmit,
+    resetField,
     reset,
   } = useForm({ defaultValues });
 
@@ -42,9 +47,115 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
     );
   };
 
-  const handleOnChange = (value, field) => {
+  const selectedBankTemplate = (option, props) => {
+    let template = <span>{props.placeholder}</span>;
+    if (option) {
+      template = (
+        <div className="flex flex-column align-items-center">
+          <img
+            alt={option.nombre}
+            src={getBankImage(option.codigo)}
+            style={{ width: "120px" }}
+          />
+          <div className="text-base text-lg">{option.nombre}</div>
+        </div>
+      );
+    }
+
+    return template;
+  };
+
+  const selectedCreditCardTemplate = (option, props) => {
+    let template = <span>{props.placeholder}</span>;
+    if (option) {
+      template = (
+        <div className="flex flex-column align-items-center">
+          <img
+            alt={option.nombre}
+            src={getCreditCardImage(option.codigo)}
+            style={{ width: "120px" }}
+          />
+          <div className="text-base text-lg">{option.nombre}</div>
+        </div>
+      );
+    }
+
+    return template;
+  };
+
+  const bankOptionTemplate = (option) => {
+    return (
+      <div className="flex flex flex-column align-items-center">
+        <img
+          alt={option.nombre}
+          src={getBankImage(option.codigo)}
+          style={{ width: "120px" }}
+        />
+        <div className="text-base text-lg">{option.nombre}</div>
+      </div>
+    );
+  };
+
+  const creditCardOptionTemplate = (option) => {
+    return (
+      <div className="flex flex flex-column align-items-center">
+        <img
+          alt={option.nombre}
+          src={getCreditCardImage(option.codigo)}
+          style={{ width: "120px" }}
+        />
+        <div className="text-base text-lg">{option.nombre}</div>
+      </div>
+    );
+  };
+
+  const panelBankFooterTemplate = () => {
+    return (
+      <div className="py-2 px-3">
+        {selectedBank ? (
+          <span>
+            <span className="font-bold mr-1">{selectedBank.nombre}</span>
+            seleccionado.
+          </span>
+        ) : (
+          "Ningún banco seleccionado."
+        )}
+      </div>
+    );
+  };
+
+  const panelCreditCardFooterTemplate = () => {
+    return (
+      <div className="py-2 px-3">
+        {selectedCreditCard ? (
+          <span>
+            <span className="font-bold mr-1">{selectedCreditCard.nombre}</span>
+            seleccionado.
+          </span>
+        ) : (
+          "Ninguna tarjeta seleccionada."
+        )}
+      </div>
+    );
+  };
+
+  const handleOnChangeBank = (value, field) => {
+    setSelectedBank(value);
+    field.onChange(value);
+  };
+
+  const handleOnChangeCreditCard = (value, field) => {
+    setSelectedCreditCard(value);
+    field.onChange(value);
+  };
+
+  const handleOnChangeRadio = (value, field) => {
     setSelectedPaymentMethod(value);
     field.onChange(value);
+    resetField(BANK_ID);
+    setSelectedBank("");
+    resetField(CREDIT_CARD_ID);
+    setSelectedCreditCard("");
   };
 
   const onSubmitForm = async (data) => {
@@ -55,6 +166,8 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
       setShowMessage(errorMessage);
     } else {
       setSelectedPaymentMethod("");
+      setSelectedBank("");
+      setSelectedCreditCard("");
       reset();
     }
     setBlockedDocument(false);
@@ -102,7 +215,7 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
                                 inputRef={field.ref}
                                 value={DEBIT_RADIO}
                                 onChange={(e) => {
-                                  handleOnChange(e.value, field);
+                                  handleOnChangeRadio(e.value, field);
                                 }}
                                 checked={field.value === DEBIT_RADIO}
                                 className={`mr-1 ${classNames({
@@ -128,7 +241,7 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
                                 inputRef={field.ref}
                                 value={CREDIT_CARD_RADIO}
                                 onChange={(e) => {
-                                  handleOnChange(e.value, field);
+                                  handleOnChangeRadio(e.value, field);
                                 }}
                                 checked={field.value === CREDIT_CARD_RADIO}
                                 className={`mr-1 ${classNames({
@@ -154,7 +267,7 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
                                 inputRef={field.ref}
                                 value={NETWORKS_RADIO}
                                 onChange={(e) => {
-                                  handleOnChange(e.value, field);
+                                  handleOnChangeRadio(e.value, field);
                                 }}
                                 checked={field.value === NETWORKS_RADIO}
                                 className={`mr-1 ${classNames({
@@ -194,10 +307,15 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
                               placeholder="Seleccione un banco"
                               options={banks}
                               focusInputRef={field.ref}
-                              onChange={(e) => field.onChange(e.value)}
+                              onChange={(e) => {
+                                handleOnChangeBank(e.value, field);
+                              }}
                               className={classNames({
                                 "p-invalid": fieldState.error,
                               })}
+                              valueTemplate={selectedBankTemplate}
+                              itemTemplate={bankOptionTemplate}
+                              panelFooterTemplate={panelBankFooterTemplate}
                             />
                             <label
                               htmlFor={BANK_ID}
@@ -233,10 +351,17 @@ function PaymentMethodForm({ onSubmit, banks, creditCards, showNetworks }) {
                               placeholder="Seleccione una tarjeta de crédito"
                               options={creditCards}
                               focusInputRef={field.ref}
-                              onChange={(e) => field.onChange(e.value)}
+                              onChange={(e) => {
+                                handleOnChangeCreditCard(e.value, field);
+                              }}
                               className={classNames({
                                 "p-invalid": fieldState.error,
                               })}
+                              valueTemplate={selectedCreditCardTemplate}
+                              itemTemplate={creditCardOptionTemplate}
+                              panelFooterTemplate={
+                                panelCreditCardFooterTemplate
+                              }
                             />
                             <label
                               htmlFor={CREDIT_CARD_ID}
