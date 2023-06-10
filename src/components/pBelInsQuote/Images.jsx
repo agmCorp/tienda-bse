@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Messages } from "primereact/messages";
 import { Button } from "primereact/button";
+import { OverlayPanel } from "primereact/overlaypanel";
 
 import ImageUpload from "../common/ImageUpload";
 import {
@@ -15,12 +16,17 @@ import {
   pBelAddIssueInfo,
 } from "../../reduxToolkit/pBelSlices/pBelPaymentFlowSlice";
 import { API_PBEL_FILEUPLOAD } from "../../utils/apiUrls";
+import sharp from "../../images/sharp.png";
+import framed from "../../images/framed.png";
+import cut from "../../images/cut.png";
+import obstructed from "../../images/obstructed.png";
 
 function Images() {
   const selectedData = useSelector(selectPBelFlowSelectedData);
   const dispatch = useDispatch();
   const topRef = useRef(null);
   const msgs = useRef(null);
+  const overlayPanel = useRef(null);
   const [responses, setResponses] = useState([]);
   const [filesUploaded, setFilesUploaded] = useState([]);
 
@@ -114,11 +120,79 @@ function Images() {
           <div className="p-fluid card">
             <Messages ref={msgs} />
             {MAX_FILES - filesUploaded.length > 0 && (
-              <ImageUpload
-                maxFiles={MAX_FILES - filesUploaded.length}
-                onResponses={setResponses}
-                apiFileUpload={`${API_PBEL_FILEUPLOAD}/${selectedData.insurance.nroCotizacion}`}
-              />
+              <>
+                <label
+                  className="cursor-pointer text-primary hover:text-color-secondary"
+                  onClick={(e) => overlayPanel.current.toggle(e)}
+                >
+                  <i
+                    className="pi pi-bell mr-2"
+                    aria-haspopup
+                    aria-controls="overlayPanel"
+                  ></i>
+                  <span
+                    className="text-xs"
+                    aria-haspopup
+                    aria-controls="overlayPanel"
+                  >
+                    ¿Qué requisitos debe cumplir la foto que voy a subir?
+                  </span>
+                </label>
+
+                <OverlayPanel
+                  ref={overlayPanel}
+                  showCloseIcon
+                  id="overlayPanel"
+                  className="w-16rem md:w-30rem"
+                >
+                  <div className="grid grid-nogutter border-top-1 border-bottom-1 border-primary py-2">
+                    <div className="col-12 md:col-6 p-3">
+                      <div className="flex flex-column text-center">
+                        <img
+                          alt="sharp"
+                          src={sharp}
+                          className="w-8rem m-auto"
+                        />
+                        <span className="mt-2">La imagen debe ser nítida</span>
+                      </div>
+                    </div>
+                    <div className="col-12 md:col-6 p-3">
+                      <div className="flex flex-column text-center">
+                        <img alt="cut" src={cut} className="w-8rem m-auto" />
+                        <span className="mt-2">No debe verse cortada</span>
+                      </div>
+                    </div>
+                    <div className="col-12 md:col-6 p-3">
+                      <div className="flex flex-column text-center">
+                        <img
+                          alt="framed"
+                          src={framed}
+                          className="w-8rem m-auto"
+                        />
+                        <span className="mt-2">
+                          Debe estar encuadrada en su totalidad
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-12 md:col-6 p-3">
+                      <div className="flex flex-column text-center">
+                        <img
+                          alt="obstructed"
+                          src={obstructed}
+                          className="w-8rem m-auto"
+                        />
+                        <span className="mt-2">No debe verse obstruida</span>
+                      </div>
+                    </div>
+                  </div>
+                </OverlayPanel>
+
+                <ImageUpload
+                  maxFiles={MAX_FILES - filesUploaded.length}
+                  onResponses={setResponses}
+                  apiFileUpload={`${API_PBEL_FILEUPLOAD}/${selectedData.insurance.nroCotizacion}`}
+                />
+              </>
             )}
 
             {filesUploaded.length > 0 && (
