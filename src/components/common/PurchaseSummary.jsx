@@ -56,25 +56,27 @@ function PurchaseSummary({ selectedData, paymentData }) {
         </div>
       </div>
 
-      <div className="col-12 p-3">
-        <div className="text-primary text-xl mb-3">Imágenes recibidas</div>
+      {selectedData.images && (
+        <div className="col-12 p-3">
+          <div className="text-primary text-xl mb-3">Imágenes recibidas</div>
 
-        {selectedData.images.map((file, index) => {
-          return (
-            <div
-              key={index}
-              className={`flex flex-column md:flex-row md:align-items-center md:justify-content-between ${
-                index === 0 ? "border-top-1" : ""
-              } border-bottom-1 surface-border p-1`}
-            >
-              <div className="flex align-items-center">
-                <span className="block pi pi-file mr-2"></span>
-                <span className="text-700">{file}</span>
+          {selectedData.images.map((file, index) => {
+            return (
+              <div
+                key={index}
+                className={`flex flex-column md:flex-row md:align-items-center md:justify-content-between ${
+                  index === 0 ? "border-top-1" : ""
+                } border-bottom-1 surface-border p-1`}
+              >
+                <div className="flex align-items-center">
+                  <span className="block pi pi-file mr-2"></span>
+                  <span className="text-700">{file}</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
