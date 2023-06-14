@@ -31,6 +31,7 @@ import {
   detailInvoice,
   adhDigitalInvoice,
 } from "./InsQuoteHelper";
+import Detail from "./Detail";
 
 function PaymentMethod() {
   const CREDIT_CARD_CODE = 1000;
@@ -160,12 +161,15 @@ function PaymentMethod() {
       {loadingPaymentMethodsPolicy || loadingPaymentMethods ? (
         <Spinner size="small" />
       ) : (
-        <PaymentMethodForm
-          onSubmit={onSubmit}
-          banks={getBanks(paymentMethodsPolicy, paymentMethods)}
-          creditCards={getCreditCards(paymentMethodsPolicy)}
-          showNetworks={true}
-        />
+        <>
+          <Detail />
+          <PaymentMethodForm
+            onSubmit={onSubmit}
+            banks={getBanks(paymentMethodsPolicy, paymentMethods)}
+            creditCards={getCreditCards(paymentMethodsPolicy)}
+            showNetworks={true}
+          />
+        </>
       )}
     </>
   );
