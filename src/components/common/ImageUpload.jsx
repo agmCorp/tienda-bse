@@ -6,6 +6,7 @@ import { Tag } from "primereact/tag";
 import { useKeycloak } from "@react-keycloak/web";
 
 import { clientApi } from "../../utils/clientApi";
+import errorThumbnail from "../../images/error-thumbnail.png";
 import "./ImageUpload.css";
 
 function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
@@ -15,7 +16,7 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
   const [isUploading, setIsUploading] = useState(false);
   const [controllers, setControllers] = useState(null);
 
-  const fileExtensions = ["gif", "jpg", "png", "jpeg"];
+  const fileExtensions = ["jpg", "png", "jpeg"];
 
   const getAccept = () =>
     "." +
@@ -238,7 +239,7 @@ function ImageUpload({ maxFiles, onResponses, apiFileUpload }) {
           <img
             alt={file.name}
             role="presentation"
-            src={file.objectURL}
+            src={file.objectURL ? file.objectURL : errorThumbnail}
             className="w-7rem"
           />
           <span className="flex flex-column text-left md:ml-3">
