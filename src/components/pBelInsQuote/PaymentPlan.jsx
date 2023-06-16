@@ -69,7 +69,7 @@ function PaymentPlan() {
 
   return (
     <>
-      <div className="text-900 font-bold text-3xl text-center text-primary mb-4 mt-5">
+      <div className="font-bold text-3xl text-center mb-4 mt-5 title">
         PLANES DE PAGO
       </div>
       <div className="flex flex-column text-700 text-xl text-center line-height-3 mb-4">

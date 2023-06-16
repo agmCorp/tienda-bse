@@ -4,6 +4,7 @@
 }
 
 .tienda-button {
+  border-radius: 2rem !important;
   text-transform: uppercase;
   letter-spacing: 10px;
   text-indent: 5px;
@@ -20,6 +21,10 @@
 .tienda-button:active {
   transition: 0.3s all;
   transform: translateY(10px);
+}
+
+.title {
+  color: #008bd0;
 }
 
 .step-button:hover {

@@ -73,10 +73,7 @@ function Quote() {
       <a style={{ display: "none" }} href="#top" ref={topRef}>
         Link hidden
       </a>
-      <div
-        id="top"
-        className="text-900 font-bold text-3xl mb-4 text-center text-primary"
-      >
+      <div id="top" className="font-bold text-3xl mb-4 text-center title">
         PLANES DE COBERTURA
       </div>
       <div className="text-700 text-xl mb-4 text-center line-height-3">

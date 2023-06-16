@@ -85,10 +85,7 @@ function Images() {
       <a style={{ display: "none" }} href="#top" ref={topRef}>
         Link hidden
       </a>
-      <div
-        id="top"
-        className="text-900 font-bold text-3xl text-center text-primary mb-4 mt-5"
-      >
+      <div id="top" className="font-bold text-3xl text-center mb-4 mt-5 title">
         IMÁGENES
       </div>
 
@@ -101,15 +98,15 @@ function Images() {
         <div className="text-left m-4">
           <ul className="list-none m-0 p-0">
             <li>
-              <i className="pi pi-image text-primary mr-3" />
+              <i className="pi pi-image title mr-3" />
               Una imagen de tu objeto personal
             </li>
             <li>
-              <i className="pi pi-image text-primary mr-3" />
+              <i className="pi pi-image title mr-3" />
               Una imagen de la factura de compra
             </li>
             <li>
-              <i className="pi pi-image text-primary mr-3" />
+              <i className="pi pi-image title mr-3" />
               Una imagen en donde se vea el número de serie
             </li>
           </ul>

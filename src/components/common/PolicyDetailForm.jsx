@@ -79,9 +79,7 @@ function PolicyDetailForm({
       {paymentSent.ok || postToSistarbanc || postToBanred || networks ? (
         <>
           <div className="flex flex-column justify-content-center align-items-center h-10rem">
-            <span className="text-900 font-bold text-3xl text-primary">
-              PROCESANDO
-            </span>
+            <span className="font-bold text-3xl title">PROCESANDO</span>
             <span className="text-700 text-xl text-center line-height-3">
               Por favor espera unos segundos...
             </span>
@@ -121,7 +119,7 @@ function PolicyDetailForm({
         </>
       ) : (
         <>
-          <div className="text-900 font-bold text-3xl text-center text-primary mb-4 mt-5">
+          <div className="font-bold text-3xl text-center mb-4 mt-5 title">
             RESUMEN DE COMPRA
           </div>
 
