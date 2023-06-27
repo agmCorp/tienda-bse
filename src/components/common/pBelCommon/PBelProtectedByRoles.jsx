@@ -1,13 +1,13 @@
 import ProtectedByRoles from "../../../auth/ProtectedByRoles";
 import usePBelAppFlowController from "../../../hooks/pBelHooks/usePBelAppFlowController";
 
-function PBelProtectedByRoles({ roles, children }) {
+function PBelProtectedByRoles({ children }) {
   const accessGranted = usePBelAppFlowController();
 
   return (
     <>
       {accessGranted && (
-        <ProtectedByRoles roles={roles}>
+        <ProtectedByRoles roles={["user"]}>
           <>{children}</>
         </ProtectedByRoles>
       )}

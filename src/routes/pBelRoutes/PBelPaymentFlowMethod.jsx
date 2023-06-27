@@ -1,14 +1,14 @@
-import PBelProtected from "../../components/common/pBelCommon/PBelProtected";
+import PBelProtectedByRoles from "../../components/common/pBelCommon/PBelProtectedByRoles";
 import PBelPaymentFlowLayout from "../../components/common/pBelCommon/PBelPaymentFlowLayout";
 import PaymentMethod from "../../components/pBelInsQuote/PaymentMethod";
 
 function PBelPaymentFlowMethod() {
   return (
-    <PBelProtected>
+    <PBelProtectedByRoles>
       <PBelPaymentFlowLayout>
         <PaymentMethod />
       </PBelPaymentFlowLayout>
-    </PBelProtected>
+    </PBelProtectedByRoles>
   );
 }
 
